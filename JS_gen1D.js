@@ -58,8 +58,23 @@ function is_modified(state=true)
 }
 async function submit_speed()
 {
+	let old_animation=animation;//verify this work tomorrow
 	animation=document.getElementById("type_animation").value;
-	if(animation=="manual")return;
+	if(old_animation!=animation && animation_flag=="red")
+	{
+		animation=old_animation;
+		document.getElementById("type_animation").value=old_animation;
+		if(old_animation=="manual")document.getElementById("speed").style.visibility="hidden";
+		else document.getElementById("speed").style.visibility="visible";
+		alert("nu puteti schimba tipul de animatie cat timp are loc un proces")
+		return;
+	}
+	if(animation=="manual")
+	{
+		document.getElementById("codeHbutton").style.visibility="inherit";
+		return;
+	}
+	document.getElementById("codeHbutton").style.visibility="hidden";
 	speed=document.getElementById("speed").value;
 	await cancelWait();
 	//await wait(timect/speed);
@@ -203,7 +218,7 @@ function draw_body(n_value)
 		let s=Math.min(yl/2.5,xl)+"px ";
 		ctx.font=s+"Arial";
 		ctx.fillStyle = base_color;
-		ctx.fillText(String(aib[i]),xstart+boxwidth/2,ystart+boxheight/1.5,boxwidth/1.2);
+		ctx.fillText(String(FPAfix(aib[i])),xstart+boxwidth/2,ystart+boxheight/1.5,boxwidth/1.2);
 		ctx.fillText("["+String(i-(i&-i)+1)+","+String(i)+"]",xstart+boxwidth/2,ystart-yH/4,2*boxwidth);
 		/*ctx.fillText("Σ["+String(i-(i&-i)+1)+", "+String(i)+"]",xstart+boxwidth/2,ystart-yH/4,boxwidth);*/
 		pos_text[i]={font:ctx.font, col:base_color, fT1:String(aib[i]), fT2:xstart+boxwidth/2, fT3:ystart+boxheight/1.5, fT4:boxwidth/1.2, align_:"center"};
@@ -220,7 +235,13 @@ function draw_body(n_value)
 	return;
 }
 
-
+function FPAfix(nr)
+{
+	nr=nr*1e9;
+	nr=Math.round(nr);
+	nr/=1e9;
+	return nr;
+}
 function debugging()
 {
 	alert("MicaTicaRicaLicaPicaKicaNicaVicaZicaXicaHicaFicaMicuSHICA");
@@ -309,11 +330,13 @@ function write_text(word)//referrering to the bottom text
 }
 async function update(pos,value,showanimation=1)
 {
+	value=FPAfix(value);
 	if(showanimation==0)
 	{
 		for(let i=pos;i<=n;i+=(i&-i) )
 		{
 			aib[i]+=value;
+			aib[i]=FPAfix(aib[i]);
 		}
 		/*v[pos]+=value;*/
 		return;
@@ -328,8 +351,8 @@ async function update(pos,value,showanimation=1)
 		queue_operations.enqueue([0,"Update(" + String(pos) + "," + String(value) + ")"]);
 		queue_operations.enqueue([1,pos,2,pos,0,"Indexul curent este "+String(pos)]);
 		//aib[pos]+=value;
-		queue_operations.enqueue([0,"Incrementam valoarea din aib["+String(pos)+"] cu "+String(value),3,pos,String(aib[pos]+value),4,pos,value]);
-		queue_operations.enqueue([-3,pos,String(aib[pos]+value),0,"Parintele pozitiei "+String(pos)+" este "+String(pos)+"+ (-"+String(pos)+"&"+String(pos)+")="+String(pos+(pos&-pos))]);
+		queue_operations.enqueue([0,"Incrementam valoarea din aib["+String(pos)+"] cu "+String(value),3,pos,String(FPAfix(aib[pos]+value)),4,pos,value]);
+		queue_operations.enqueue([-3,pos,String(FPAfix(aib[pos]+value)),0,"Parintele pozitiei "+String(pos)+" este "+String(pos)+"+ (-"+String(pos)+"&"+String(pos)+")="+String(pos+(pos&-pos))]);
 		let i=pos;
 		while(i<=n)
 		{
@@ -342,8 +365,8 @@ async function update(pos,value,showanimation=1)
 			}
 			queue_operations.enqueue([0,"Indexul curent este "+String(i),-1,prev_i,-2,prev_i,1,i,2,i]);
 			//aib[i]+=value; asta fac in functia de progress
-			queue_operations.enqueue([0,"Incrementam valoarea din aib["+String(i)+"] cu "+String(value),3,i,String(aib[i]+value),4,i,value]);
-			queue_operations.enqueue([-3,i,String(aib[i]+value),0,"Parintele pozitiei "+String(i)+" este "+String(i)+"+ (-"+String(i)+"&"+String(i)+")="+String(i+(i&-i))]);
+			queue_operations.enqueue([0,"Incrementam valoarea din aib["+String(i)+"] cu "+String(value),3,i,String(FPAfix(aib[i]+value)),4,i,value]);
+			queue_operations.enqueue([-3,i,String(FPAfix(aib[i]+value)),0,"Parintele pozitiei "+String(i)+" este "+String(i)+"+ (-"+String(i)+"&"+String(i)+")="+String(i+(i&-i))]);
 		}
 		queue_operations.enqueue([0,"Actualizam vectorul original",7777777,pos,value]);
 		queue_operations.enqueue([0,"",-7777777]);
@@ -360,6 +383,7 @@ async function update(pos,value,showanimation=1)
 		//aici poza cu int i=ind
 		await wait(timect/speed);
 		aib[pos]+=value;
+		aib[pos]=FPAfix(aib[pos]);
 		write_text("Incrementam valoarea din aib["+String(pos)+"] cu "+String(value));
 		highlight_text(pos,String(aib[pos]));
 		//await wait(timect/speed);
@@ -392,18 +416,23 @@ async function update(pos,value,showanimation=1)
 			await wait(timect/speed);
 			write_text("Incrementam valoarea din aib["+String(i)+"] cu "+String(value));
 			aib[i]+=value;
+			aib[i]=FPAfix(aib[i]);
 			highlight_text(i,String(aib[i]));
 			await wait(timect/speed);
 			highlight_text(i,String(aib[i]),1);
 			write_text("Parintele pozitiei "+String(i)+" este "+String(i)+"+ (-"+String(i)+"&"+String(i)+")="+String(i+(i&-i)));
 		}
 		v[pos]+=value;
+		v[pos]=FPAfix(v[pos]);
 		let s="v";
 		s+=pos;
 		document.getElementById(s).value=v[pos];
 		write_text("Actualizam vectorul original");
 		await wait(timect/speed);
 		write_text("");
+		document.getElementById("Hdiv").style.visibility="hidden";
+
+
 		animation_flag="green";
 	}
 	/*for(let i=pos;i<=n;i+=(i&-i) )
@@ -421,18 +450,161 @@ function set_value(pos,value)
 	update(pos,value-v[pos],0);
 	return;
 }
-function query(pos)/*return sum of elements in [1,pos]*/
+async function query(pos)/*return sum of elements in [1,pos]*/
 {
-	let sum=0;
+	animation_flag="red";
+	if(animation=="manual")
+	{
+		//op4: (4,oldsum,val){sum=oldsum+val} posibil sa nu folosesc
+		queue_operations.enqueue([0,"Query("+String(pos)+")"]);
+		queue_operations.enqueue([0,"Initializam suma cu 0",4,0,0]);
+		let sum=0;
+		if(pos<=0)queue_operations.enqueue([0,"Indexul curent este "+String(pos)]);
+		else queue_operations.enqueue([0,"Indexul curent este "+String(pos),1,pos,2,pos]);
+		if(pos==0)
+		{
+			queue_operations.enqueue([0,String(pos)+" este <=0"]);
+			queue_operations.enqueue([0,"Query("+String(pos)+")=0"]);
+			return 0;
+		}
+		queue_operations.enqueue([0,"Sum: "+String(sum)+" -> "+String(sum+aib[pos]),3,pos,String(aib[pos]),4,FPAfix(sum),FPAfix(sum+aib[pos])]);
+		sum=FPAfix(sum+aib[pos]);
+		queue_operations.enqueue([-3,pos,String(aib[pos]),0,"Fratele stang pozitiei "+String(pos)+" este "+String(pos)+"- (-"+String(pos)+"&"+String(pos)+")="+String(pos-(pos&-pos))]);
+		let i=pos;
+		while(i>0)
+		{
+			let prev_i=i;
+			i-=(i&-i);
+			if(i<=0)
+			{
+				queue_operations.enqueue([0,String(i)+" este <=0",-1,prev_i,-2,prev_i]);
+				break;
+			}
+			queue_operations.enqueue([0,"Indexul curent este "+String(i),-1,prev_i,-2,prev_i,1,i,2,i]);
+			queue_operations.enqueue([0,"Sum: "+String(sum)+" -> "+String(sum+aib[i]),3,i,String(aib[i]),4,FPAfix(sum),FPAfix(sum+aib[i])]);
+			sum=FPAfix(sum+aib[i]);
+			queue_operations.enqueue([0,"Fratele stang pozitiei "+String(i)+" este "+String(i)+"- (-"+String(i)+"&"+String(i)+")="+String(i-(i&-i)),-3,i,String(aib[i])]);
+		}
+		queue_operations.enqueue([0,"Query("+String(pos)+")="+String(sum)]);
+		//queue_operations.enqueue([0,""]);
+		return sum;
+	}
+	else if(animation=="automatic")
+	{
+		write_text("Query("+String(pos)+")");
+		await wait(timect/speed);
+		write_text("Initializam suma cu 0");
+		let sum=0;
+		await wait(timect/speed);
+		write_text("Indexul curent este "+String(pos));
+		if(pos>0)
+		{
+			highlight_index(pos);
+			highlight_r(pos);
+		}
+		//aici poza cu i=ind;
+		await wait(timect/speed);
+		if(pos==0)
+		{
+			write_text(String(pos)+" este <=0");
+			await wait(timect/speed);
+			write_text("Query("+String(pos)+")=0");
+			return 0;
+		}
+		write_text("Sum: "+String(sum)+" -> "+String(sum+aib[pos]));
+		highlight_text(pos,aib[pos]);
+		sum+=aib[pos];
+		sum=FPAfix(sum);
+		await wait(timect/speed);
+		highlight_text(pos,aib[pos],1);
+		write_text("Fratele stang pozitiei "+String(pos)+" este "+String(pos)+"- (-"+String(pos)+"&"+String(pos)+")="+String(pos-(pos&-pos)));
+		let i=pos;
+		while(i>0)
+		{
+			let prev_i=i;
+			i-=(i&-i);
+			if(i<=0)
+			{
+				await wait(timect/speed);
+				write_text(String(i)+" este <=0");
+				highlight_r(prev_i,1);
+				highlight_index(prev_i,1);
+				await wait(timect/speed);
+				break;
+			}
+			await wait(timect/speed);
+			write_text("Indexul curent este "+String(i));
+			//aici poza cu comentariul
+			highlight_index(prev_i,1);
+			highlight_r(prev_i,1);
+			highlight_index(i);
+			highlight_r(i);
+			
+			await wait(timect/speed);
+			write_text("Sum: "+String(sum)+" -> "+String(sum+aib[i]));
+			sum+=aib[i];
+			sum=FPAfix(sum);
+			highlight_text(i,String(aib[i]));
+			await wait(timect/speed);
+			highlight_text(i,String(aib[i]),1);
+			write_text("Fratele stang pozitiei "+String(i)+" este "+String(i)+"- (-"+String(i)+"&"+String(i)+")="+String(i-(i&-i)));
+		}
+		write_text("Query("+String(pos)+")="+String(sum));
+		await wait(timect/speed);
+		write_text("");
+		//animation_flag="green";
+		return sum;
+	}
+	return;//nu ajunge aici btw
+	/*let sum=0;
 	for(let i=pos;i>=1;i-=(i&-i) )
 	{
+		//we are in node i
 		sum+=aib[i];
 	}
-	return sum;
+	return sum;*/
 }
-function range_query(pos1,pos2)/*return sum of elements in [pos1,pos2], pos1<pos2 and pos1,pos2 in [1,32]*/
+async function range_query(pos1,pos2)/*return sum of elements in [pos1,pos2], pos1<pos2 and pos1,pos2 in [1,32]*/
 {
-	return query(pos2)-query(pos1-1);
+	animation_flag="red";
+	if(animation=="manual")
+	{
+		write_text("Apasati butonul de continuare adiacent pozei");
+		queue_operations.enqueue([0,"Σ("+String(pos1)+","+String(pos2)+")=query("+String(pos2)+")-query("+String(pos1-1)+")"]);
+		//queue_operations.enqueue([0,"Calculam valoarea query("+String(pos2)+")"]);
+		let s1= await query(pos2);//why does await fix it??? im not promising on that branch???
+		//queue_operations.enqueue([0,"Calculam valoarea query("+String(pos1-1)+")"])
+		let s2=await query(pos1-1);
+		queue_operations.enqueue([0,"Σ("+String(pos1)+","+String(pos2)+")=("+String(s1)+")-("+String(s2)+")="+String(FPAfix(s1-s2))]);
+		queue_operations.enqueue([0,"",-7777777,FPAfix(s1-s2)]);
+		/*document.getElementById("Qresult").innerHTML=String(FPAfix(s1-s2));
+		document.getElementById("Qresult").style.visibility="visible";
+		animation_flag="green";*/
+	}
+	else if(animation=="automatic")
+	{
+		write_text("Σ("+String(pos1)+","+String(pos2)+")=query("+String(pos2)+")-query("+String(pos1-1)+")");
+		await wait(timect/speed);
+		//write_text("Calculam valoarea query("+String(pos2)+")");
+		await wait(timect/speed);
+		let s1= await query(pos2);
+		
+		//await wait(timect/speed);
+		
+		//write_text("Calculam valoarea query("+String(pos1-1)+")");
+		await wait(timect/speed);
+		let s2=await query(pos1-1);
+		
+		write_text("Σ("+String(pos1)+","+String(pos2)+")=("+String(s1)+")-("+String(s2)+")="+String(FPAfix(s1-s2)));
+		await wait(timect/speed);
+		write_text("");
+		document.getElementById("Qresult").innerHTML=String(FPAfix(s1-s2));
+		document.getElementById("Qresult").style.visibility="visible";
+		document.getElementById("Hdiv").style.visibility="hidden";
+		animation_flag="green";
+	}
+	return;
+	//return query(pos2)-query(pos1-1);
 }
 function build()
 {
@@ -488,6 +660,7 @@ function converter(stringin,canbefloat=0) {
 
 function make_v()
 {
+	document.getElementById("Qresult").innerHTML="";
 	let error_string="";
 	if(animation_flag=="red")
 	{
@@ -514,6 +687,7 @@ function make_v()
 		let crt_s=s+i;
 		let aux=document.getElementById(crt_s).value;/*string*/
 		v[i]=converter(aux,1);/*number*/
+		v[i]=FPAfix(v[i]);
 		document.getElementById(crt_s).value=v[i];
 	}
 	for(let i=n+1;i<=32;i++)
@@ -531,6 +705,7 @@ function make_v()
 function make_upd()
 {
 	/*validate both inputs*/
+	document.getElementById("Qresult").innerHTML="";
 	let error_string="";
 	if(animation_flag=="red")
 	{
@@ -542,7 +717,7 @@ function make_upd()
 	let error_object=document.getElementById("upd_error_feedback");
 	if(given_pos<=0 || given_pos>n || typeof n === 'undefined')
 	{
-		error_string+="*pos trebuie sa fie un numar natural intre 1 si n\n";/*momentan va fi o singura eroare posibila dar la query vor fi 2*/
+		error_string+="*pos trebuie sa fie un numar natural intre 1 si n";
 		given_pos=0;
 	}
 	upd_object.value=given_pos;
@@ -555,7 +730,7 @@ function make_upd()
 	if(error_string!="")
 	{
 		error_object.style.display="block";
-		error_object.innerHTML=error_string;
+		error_object.innerHTML=error_string.replace(/\n/g, "<br>");;
 		return;
 	}
 	
@@ -568,10 +743,57 @@ function make_upd()
 }
 function make_query()
 {
+	document.getElementById("Qresult").innerHTML="";
+	/*validate both inputs*/
 	
+	let error_string="";
+	if(animation_flag=="red")
+	{
+		error_string+="*trebuie finalizat procesul început\n";
+	}
+	let upd_object=document.getElementById("query_pos1");
+	let given_pos1=upd_object.value;
+	given_pos1=converter(given_pos1);
+	let c1=given_pos1;
+	let error_object=document.getElementById("qry_error_feedback");
+	if(given_pos1<=0 || given_pos1>n || typeof n === 'undefined')
+	{
+		error_string+="*pos1 trebuie sa fie un numar natural intre 1 si n\n";
+		given_pos1=0;
+	}
+	upd_object.value=given_pos1;
 	
+	upd_object=document.getElementById("query_pos2");
+	let given_pos2=upd_object.value;
+	given_pos2=converter(given_pos2);
+	let c2=given_pos2;
+	if(given_pos2<=0 || given_pos2>n || typeof n === 'undefined')
+	{
+		error_string+="*pos2 trebuie sa fie un numar natural intre 1 si n\n";
+		given_pos2=0;
+	}
+	upd_object.value=given_pos2;
+	if(c1>c2)
+	{
+		error_string+="*pos1 trebuie sa fie mai mic sau egal decat pos2";
+		given_pos1=0;
+		given_pos2=0;
+		document.getElementById("query_pos1").value=0;
+		document.getElementById("query_pos2").value=0;
+	}
+		
+	if(error_string!="")
+	{
+		error_object.style.display="block";
+		error_object.innerHTML=error_string.replace(/\n/g, "<br>");
+		return;
+	}
+	
+	error_object.style.display="none";
+	error_object.innerHTML="";
+	document.getElementById("Hdiv").style.visibility="visible";
 	crtop="qry";
-	
+	range_query(given_pos1,given_pos2);
 	return;
 }
 function progress()
@@ -646,6 +868,7 @@ function progress()
 			{
 				j++;let pos=op_vector[j];j++;let value=op_vector[j];
 				v[pos]+=value;
+				v[pos]=FPAfix(v[pos]);
 				let s="v";
 				s+=pos;
 				document.getElementById(s).value=v[pos];
@@ -654,12 +877,83 @@ function progress()
 			else if(op_vector[j]==-7777777)///animation_flag="green";
 			{
 				animation_flag="green";
+				document.getElementById("Hdiv").style.visibility="hidden";
 			}
 		}
 	}
 	else if(crtop=="qry")
 	{
-		
+		if(queue_operations.isEmpty()==true)
+		{
+			//alert("this too is a bug");//maybe it isn't though?
+			return;
+		}
+		let op_vector=queue_operations.dequeue();
+		let m=op_vector.length;
+		for(let j=0;j<m;j++)
+		{
+			if(op_vector[j]==0)//write_text(string)
+			{
+				j++;
+				let s=op_vector[j];
+				write_text(s);
+			}
+			else if(op_vector[j]==1)//highlight_index(pos)
+			{
+				j++;
+				let ind=op_vector[j];
+				highlight_index(ind);
+			}
+			else if(op_vector[j]==-1)//highlight_index(pos,1)
+			{
+				j++;
+				let ind=op_vector[j];
+				highlight_index(ind,1);
+			}
+			else if(op_vector[j]==2)//highlight_r(pos)
+			{
+				j++;
+				let ind=op_vector[j];
+				highlight_r(ind);
+			}
+			else if(op_vector[j]==-2)//highlight_r(pos,1)
+			{
+				j++;
+				let ind=op_vector[j];
+				highlight_r(ind,1);
+			}
+			else if(op_vector[j]==3)//highlight_text(pos,string)
+			{
+				j++;
+				let ind=op_vector[j];
+				j++;
+				let s=op_vector[j];
+				highlight_text(ind,s);
+			}
+			else if(op_vector[j]==-3)//highlight_text(pos,string,1)
+			{
+				j++;
+				let ind=op_vector[j];
+				j++;
+				let s=op_vector[j];
+				highlight_text(ind,s,1);
+			}
+			else if(op_vector[j]==4)
+			{
+				j++;
+				/*placeholder*/
+				j++;
+			}
+			else if(op_vector[j]==-7777777)
+			{
+				j++;
+				let result=FPAfix(op_vector[j]);
+				document.getElementById("Qresult").innerHTML=String(result);
+				document.getElementById("Qresult").style.visibility="visible";
+				animation_flag="green";
+				document.getElementById("Hdiv").style.visibility="hidden";
+			}
+		}
 	}
 	return;
 }
@@ -674,4 +968,7 @@ note5: I sorta fixed note3 by incrementing v[pos] by value at the end, so the up
 note6: fa codul prezentat prezentabil (rocket science i know) i.e. aibsize->aib_size sau aibSize
 note7: reminder de poze cu codul, poti pune in mai multe painturi aceeasi poza si adaugi dreptunghiuri sa inconjori sau o sageata la linie
 note8: TE ROG FOLOSESTE GIT HUB TE IMPLORRR
+bug2: poti schimba animatia din manuala in automatica cat timp lucrezi, trebuie sa existe un if care te impiedica in functia de change_speed sau cum se cheama
+bug3: butonul de continue apare langa cod chiar daca animatia este atomatica, schimba vizibilitatea
+note9: momentan trebuie sa folosesc FPAfix peste tot ca nu stiu ce problema au numerele reale in js de nu vor sa coopereze, nu uita cand scrii manual query sa adaugi, ar fi totusi frumos daca nu as avea nevoie
 */
