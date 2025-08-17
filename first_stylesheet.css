@@ -164,11 +164,12 @@ table, th, td {
 	border: 1px solid var(--frame_color);
 	border-collapse: collapse;
 }
+
 .button {
   background-color: var(--secondary_color);
   border: 2px solid var(--frame_color); 
   color: black;
-  padding: 15px 32px;
+  padding: 10px;/*old setup was 15px 32px;*/
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -185,7 +186,7 @@ table, th, td {
 	border:none;
 }
 
-.code_H{
+#code_H{
 	padding:0px;
 	width:100%;
 	float:none;
@@ -251,4 +252,17 @@ table, th, td {
 #speed
 {
 	visibility:hidden;
+}
+#above_canvas{
+	width:100%;
+	padding:10px;
+	background-color: var(--white);
+	font-size:18px;
+	display: block;
+	/*border: 1px solid var(--frame_color);*/
+	border:none;
+	margin-right:20px;
+	margin-left:50px;
+	margin-bottom:20px;
+	text-align:center;
 }

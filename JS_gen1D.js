@@ -50,6 +50,7 @@ const upd = [];// la afisare voi colora cu rosu elementele vectorului nou updata
 let n;
 let animation_flag="green";
 let crtop="none";
+const code_obj=document.getElementById("code_H");
 function is_modified(state=true)
 {
 	if(state==true)document.getElementById("instructions").innerHTML="Data is modified!";
@@ -328,6 +329,11 @@ function write_text(word)//referrering to the bottom text
 	ctx.fillText(word,canvas.width / 2,canvas.height-yH);
 	return;
 }
+function H_update(code)
+{
+	let s="codeH_pictures/update_"+String(code);
+	code_obj.src=s+".png";
+}
 async function update(pos,value,showanimation=1)
 {
 	value=FPAfix(value);
@@ -348,11 +354,12 @@ async function update(pos,value,showanimation=1)
 	if(animation=="manual")
 	{
 		write_text("Apasati butonul de continuare adiacent pozei");
-		queue_operations.enqueue([0,"Update(" + String(pos) + "," + String(value) + ")"]);
-		queue_operations.enqueue([1,pos,2,pos,0,"Indexul curent este "+String(pos)]);
+		H_update(0);//nu vreau sa apara poza placeholder in niciun moment
+		queue_operations.enqueue([0,"Update(" + String(pos) + "," + String(value) + ")",5,1]);
+		queue_operations.enqueue([1,pos,2,pos,0,"Indexul curent este "+String(pos),5,2]);
 		//aib[pos]+=value;
-		queue_operations.enqueue([0,"Incrementam valoarea din aib["+String(pos)+"] cu "+String(value),3,pos,String(FPAfix(aib[pos]+value)),4,pos,value]);
-		queue_operations.enqueue([-3,pos,String(FPAfix(aib[pos]+value)),0,"Parintele pozitiei "+String(pos)+" este "+String(pos)+"+ (-"+String(pos)+"&"+String(pos)+")="+String(pos+(pos&-pos))]);
+		queue_operations.enqueue([0,"Incrementam valoarea din aib["+String(pos)+"] cu "+String(value),3,pos,String(FPAfix(aib[pos]+value)),4,pos,value,5,4]);
+		queue_operations.enqueue([-3,pos,String(FPAfix(aib[pos]+value)),0,"Parintele pozitiei "+String(pos)+" este "+String(pos)+"+ (-"+String(pos)+"&"+String(pos)+")="+String(pos+(pos&-pos)),5,5]);
 		let i=pos;
 		while(i<=n)
 		{
@@ -360,38 +367,42 @@ async function update(pos,value,showanimation=1)
 			i+=(i&-i);
 			if(i>n)
 			{
-				queue_operations.enqueue([0,String(i)+" este mai mare decat "+String(n),-2,prev_i,-1,prev_i]);
+				queue_operations.enqueue([0,String(i)+" este mai mare decat "+String(n),-2,prev_i,-1,prev_i,5,6]);
 				break;
 			}
-			queue_operations.enqueue([0,"Indexul curent este "+String(i),-1,prev_i,-2,prev_i,1,i,2,i]);
+			queue_operations.enqueue([0,"Indexul curent este "+String(i),-1,prev_i,-2,prev_i,1,i,2,i,5,3]);
 			//aib[i]+=value; asta fac in functia de progress
-			queue_operations.enqueue([0,"Incrementam valoarea din aib["+String(i)+"] cu "+String(value),3,i,String(FPAfix(aib[i]+value)),4,i,value]);
-			queue_operations.enqueue([-3,i,String(FPAfix(aib[i]+value)),0,"Parintele pozitiei "+String(i)+" este "+String(i)+"+ (-"+String(i)+"&"+String(i)+")="+String(i+(i&-i))]);
+			queue_operations.enqueue([0,"Incrementam valoarea din aib["+String(i)+"] cu "+String(value),3,i,String(FPAfix(aib[i]+value)),4,i,value,5,4]);
+			queue_operations.enqueue([-3,i,String(FPAfix(aib[i]+value)),0,"Parintele pozitiei "+String(i)+" este "+String(i)+"+ (-"+String(i)+"&"+String(i)+")="+String(i+(i&-i)),5,5]);
 		}
-		queue_operations.enqueue([0,"Actualizam vectorul original",7777777,pos,value]);
-		queue_operations.enqueue([0,"",-7777777]);
+		queue_operations.enqueue([0,"Actualizam vectorul original",7777777,pos,value,5,7]);
+		queue_operations.enqueue([0,"",-7777777,5,0]);
 	}
 	else{//animation=="automatic" ---------------------------------------------------------------------------------------------------------------
 		//alert("Shica");
 		//await wait(7000);
 		
 		write_text("Update(" + String(pos) + "," + String(value) + ")");
+		H_update(1);
 		await wait(timect/speed);
 		highlight_index(pos);
 		highlight_r(pos);
 		write_text("Indexul curent este "+String(pos));
+		H_update(2);
 		//aici poza cu int i=ind
 		await wait(timect/speed);
 		aib[pos]+=value;
 		aib[pos]=FPAfix(aib[pos]);
 		write_text("Incrementam valoarea din aib["+String(pos)+"] cu "+String(value));
 		highlight_text(pos,String(aib[pos]));
+		H_update(4);
 		//await wait(timect/speed);
 		//highlight_index(pos,1);
 		//highlight_r(pos,1);
 		await wait(timect/speed);
 		highlight_text(pos,String(aib[pos]),1);
 		write_text("Parintele pozitiei "+String(pos)+" este "+String(pos)+"+ (-"+String(pos)+"&"+String(pos)+")="+String(pos+(pos&-pos)));
+		H_update(5);
 		let i=pos;
 		while(i<=n)
 		{
@@ -400,6 +411,7 @@ async function update(pos,value,showanimation=1)
 			if(i>n)
 			{
 				write_text(String(i)+" este mai mare decat "+String(n));
+				H_update(6);
 				highlight_r(prev_i,1);
 				highlight_index(prev_i,1);
 				await wait(timect/speed);
@@ -407,6 +419,7 @@ async function update(pos,value,showanimation=1)
 			}
 			await wait(timect/speed);
 			write_text("Indexul curent este "+String(i));
+			H_update(3);
 			//aici poza cu comentariul
 			highlight_index(prev_i,1);
 			highlight_r(prev_i,1);
@@ -418,9 +431,11 @@ async function update(pos,value,showanimation=1)
 			aib[i]+=value;
 			aib[i]=FPAfix(aib[i]);
 			highlight_text(i,String(aib[i]));
+			H_update(4);
 			await wait(timect/speed);
 			highlight_text(i,String(aib[i]),1);
 			write_text("Parintele pozitiei "+String(i)+" este "+String(i)+"+ (-"+String(i)+"&"+String(i)+")="+String(i+(i&-i)));
+			H_update(5);
 		}
 		v[pos]+=value;
 		v[pos]=FPAfix(v[pos]);
@@ -428,8 +443,10 @@ async function update(pos,value,showanimation=1)
 		s+=pos;
 		document.getElementById(s).value=v[pos];
 		write_text("Actualizam vectorul original");
+		H_update(7);
 		await wait(timect/speed);
 		write_text("");
+		H_update(0);
 		document.getElementById("Hdiv").style.visibility="hidden";
 
 
@@ -467,7 +484,7 @@ async function query(pos)/*return sum of elements in [1,pos]*/
 			queue_operations.enqueue([0,"Query("+String(pos)+")=0"]);
 			return 0;
 		}
-		queue_operations.enqueue([0,"Sum: "+String(sum)+" -> "+String(sum+aib[pos]),3,pos,String(aib[pos]),4,FPAfix(sum),FPAfix(sum+aib[pos])]);
+		queue_operations.enqueue([0,"Sum: "+String(sum)+" -> "+String(FPAfix(sum+aib[pos])),3,pos,String(aib[pos]),4,FPAfix(sum),FPAfix(sum+aib[pos])]);
 		sum=FPAfix(sum+aib[pos]);
 		queue_operations.enqueue([-3,pos,String(aib[pos]),0,"Fratele stang pozitiei "+String(pos)+" este "+String(pos)+"- (-"+String(pos)+"&"+String(pos)+")="+String(pos-(pos&-pos))]);
 		let i=pos;
@@ -481,7 +498,7 @@ async function query(pos)/*return sum of elements in [1,pos]*/
 				break;
 			}
 			queue_operations.enqueue([0,"Indexul curent este "+String(i),-1,prev_i,-2,prev_i,1,i,2,i]);
-			queue_operations.enqueue([0,"Sum: "+String(sum)+" -> "+String(sum+aib[i]),3,i,String(aib[i]),4,FPAfix(sum),FPAfix(sum+aib[i])]);
+			queue_operations.enqueue([0,"Sum: "+String(sum)+" -> "+String(FPAfix(sum+aib[i])),3,i,String(aib[i]),4,FPAfix(sum),FPAfix(sum+aib[i])]);
 			sum=FPAfix(sum+aib[i]);
 			queue_operations.enqueue([0,"Fratele stang pozitiei "+String(i)+" este "+String(i)+"- (-"+String(i)+"&"+String(i)+")="+String(i-(i&-i)),-3,i,String(aib[i])]);
 		}
@@ -864,6 +881,12 @@ function progress()
 				let val=op_vector[j];
 				aib[ind]+=val;
 			}
+			else if(op_vector[j]==5)//schimba src imaginei
+			{
+				//j++ citeste elementul pune stc=update_element
+				j++;
+				H_update(op_vector[j]);
+			}
 			else if(op_vector[j]==7777777)
 			{
 				j++;let pos=op_vector[j];j++;let value=op_vector[j];
@@ -944,6 +967,7 @@ function progress()
 				/*placeholder*/
 				j++;
 			}
+			
 			else if(op_vector[j]==-7777777)
 			{
 				j++;
@@ -971,4 +995,5 @@ note8: TE ROG FOLOSESTE GIT HUB TE IMPLORRR
 bug2: poti schimba animatia din manuala in automatica cat timp lucrezi, trebuie sa existe un if care te impiedica in functia de change_speed sau cum se cheama
 bug3: butonul de continue apare langa cod chiar daca animatia este atomatica, schimba vizibilitatea
 note9: momentan trebuie sa folosesc FPAfix peste tot ca nu stiu ce problema au numerele reale in js de nu vor sa coopereze, nu uita cand scrii manual query sa adaugi, ar fi totusi frumos daca nu as avea nevoie
+note10: micsoreaza inaltimea vectorului, mult spatiu nefolosit
 */
