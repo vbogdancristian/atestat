@@ -334,6 +334,11 @@ function H_update(code)
 	let s="codeH_pictures/update_"+String(code);
 	code_obj.src=s+".png";
 }
+function H_query(code)
+{
+	let s="codeH_pictures/query_"+String(code);
+	code_obj.src=s+".png";
+}
 async function update(pos,value,showanimation=1)
 {
 	value=FPAfix(value);
@@ -473,20 +478,20 @@ async function query(pos)/*return sum of elements in [1,pos]*/
 	if(animation=="manual")
 	{
 		//op4: (4,oldsum,val){sum=oldsum+val} posibil sa nu folosesc
-		queue_operations.enqueue([0,"Query("+String(pos)+")"]);
-		queue_operations.enqueue([0,"Initializam suma cu 0",4,0,0]);
+		queue_operations.enqueue([0,"Query("+String(pos)+")",5,1]);
+		queue_operations.enqueue([0,"Initializam suma cu 0",4,0,0,5,2]);
 		let sum=0;
-		if(pos<=0)queue_operations.enqueue([0,"Indexul curent este "+String(pos)]);
-		else queue_operations.enqueue([0,"Indexul curent este "+String(pos),1,pos,2,pos]);
+		if(pos<=0)queue_operations.enqueue([0,"Indexul curent este "+String(pos),5,3]);
+		else queue_operations.enqueue([0,"Indexul curent este "+String(pos),1,pos,2,pos,5,3]);
 		if(pos==0)
 		{
-			queue_operations.enqueue([0,String(pos)+" este <=0"]);
-			queue_operations.enqueue([0,"Query("+String(pos)+")=0"]);
+			queue_operations.enqueue([0,String(pos)+" este <=0",5,7]);
+			queue_operations.enqueue([0,"Query("+String(pos)+")=0",5,8]);
 			return 0;
 		}
-		queue_operations.enqueue([0,"Sum: "+String(sum)+" -> "+String(FPAfix(sum+aib[pos])),3,pos,String(aib[pos]),4,FPAfix(sum),FPAfix(sum+aib[pos])]);
+		queue_operations.enqueue([0,"Sum: "+String(sum)+" -> "+String(FPAfix(sum+aib[pos])),3,pos,String(aib[pos]),4,FPAfix(sum),FPAfix(sum+aib[pos]),5,5]);
 		sum=FPAfix(sum+aib[pos]);
-		queue_operations.enqueue([-3,pos,String(aib[pos]),0,"Fratele stang pozitiei "+String(pos)+" este "+String(pos)+"- (-"+String(pos)+"&"+String(pos)+")="+String(pos-(pos&-pos))]);
+		queue_operations.enqueue([-3,pos,String(aib[pos]),0,"Fratele stang pozitiei "+String(pos)+" este "+String(pos)+"- (-"+String(pos)+"&"+String(pos)+")="+String(pos-(pos&-pos)),5,6]);
 		let i=pos;
 		while(i>0)
 		{
@@ -494,26 +499,29 @@ async function query(pos)/*return sum of elements in [1,pos]*/
 			i-=(i&-i);
 			if(i<=0)
 			{
-				queue_operations.enqueue([0,String(i)+" este <=0",-1,prev_i,-2,prev_i]);
+				queue_operations.enqueue([0,String(i)+" este <=0",-1,prev_i,-2,prev_i,5,7]);
 				break;
 			}
-			queue_operations.enqueue([0,"Indexul curent este "+String(i),-1,prev_i,-2,prev_i,1,i,2,i]);
-			queue_operations.enqueue([0,"Sum: "+String(sum)+" -> "+String(FPAfix(sum+aib[i])),3,i,String(aib[i]),4,FPAfix(sum),FPAfix(sum+aib[i])]);
+			queue_operations.enqueue([0,"Indexul curent este "+String(i),-1,prev_i,-2,prev_i,1,i,2,i,5,4]);
+			queue_operations.enqueue([0,"Sum: "+String(sum)+" -> "+String(FPAfix(sum+aib[i])),3,i,String(aib[i]),4,FPAfix(sum),FPAfix(sum+aib[i]),5,5]);
 			sum=FPAfix(sum+aib[i]);
-			queue_operations.enqueue([0,"Fratele stang pozitiei "+String(i)+" este "+String(i)+"- (-"+String(i)+"&"+String(i)+")="+String(i-(i&-i)),-3,i,String(aib[i])]);
+			queue_operations.enqueue([0,"Fratele stang pozitiei "+String(i)+" este "+String(i)+"- (-"+String(i)+"&"+String(i)+")="+String(i-(i&-i)),-3,i,String(aib[i]),5,6]);
 		}
-		queue_operations.enqueue([0,"Query("+String(pos)+")="+String(sum)]);
+		queue_operations.enqueue([0,"Query("+String(pos)+")="+String(sum),5,8]);
 		//queue_operations.enqueue([0,""]);
 		return sum;
 	}
 	else if(animation=="automatic")
 	{
 		write_text("Query("+String(pos)+")");
+		H_query(1);
 		await wait(timect/speed);
 		write_text("Initializam suma cu 0");
+		H_query(2);
 		let sum=0;
 		await wait(timect/speed);
 		write_text("Indexul curent este "+String(pos));
+		H_query(3);
 		if(pos>0)
 		{
 			highlight_index(pos);
@@ -524,17 +532,21 @@ async function query(pos)/*return sum of elements in [1,pos]*/
 		if(pos==0)
 		{
 			write_text(String(pos)+" este <=0");
+			H_query(7);
 			await wait(timect/speed);
 			write_text("Query("+String(pos)+")=0");
+			H_query(8);
 			return 0;
 		}
-		write_text("Sum: "+String(sum)+" -> "+String(sum+aib[pos]));
+		write_text("Sum: "+String(sum)+" -> "+String(FPAfix(sum+aib[pos])));
+		H_query(5);
 		highlight_text(pos,aib[pos]);
 		sum+=aib[pos];
 		sum=FPAfix(sum);
 		await wait(timect/speed);
 		highlight_text(pos,aib[pos],1);
 		write_text("Fratele stang pozitiei "+String(pos)+" este "+String(pos)+"- (-"+String(pos)+"&"+String(pos)+")="+String(pos-(pos&-pos)));
+		H_query(6);
 		let i=pos;
 		while(i>0)
 		{
@@ -544,6 +556,7 @@ async function query(pos)/*return sum of elements in [1,pos]*/
 			{
 				await wait(timect/speed);
 				write_text(String(i)+" este <=0");
+				H_query(7);
 				highlight_r(prev_i,1);
 				highlight_index(prev_i,1);
 				await wait(timect/speed);
@@ -551,23 +564,27 @@ async function query(pos)/*return sum of elements in [1,pos]*/
 			}
 			await wait(timect/speed);
 			write_text("Indexul curent este "+String(i));
+			H_query(4);
 			//aici poza cu comentariul
 			highlight_index(prev_i,1);
 			highlight_r(prev_i,1);
 			highlight_index(i);
 			highlight_r(i);
-			
 			await wait(timect/speed);
-			write_text("Sum: "+String(sum)+" -> "+String(sum+aib[i]));
+			write_text("Sum: "+String(sum)+" -> "+String(FPAfix(sum+aib[i])));
+			H_query(5);
 			sum+=aib[i];
 			sum=FPAfix(sum);
 			highlight_text(i,String(aib[i]));
 			await wait(timect/speed);
 			highlight_text(i,String(aib[i]),1);
 			write_text("Fratele stang pozitiei "+String(i)+" este "+String(i)+"- (-"+String(i)+"&"+String(i)+")="+String(i-(i&-i)));
+			H_query(6);
 		}
 		write_text("Query("+String(pos)+")="+String(sum));
+		H_query(8);
 		await wait(timect/speed);
+		H_query(0);
 		write_text("");
 		//animation_flag="green";
 		return sum;
@@ -584,14 +601,17 @@ async function query(pos)/*return sum of elements in [1,pos]*/
 async function range_query(pos1,pos2)/*return sum of elements in [pos1,pos2], pos1<pos2 and pos1,pos2 in [1,32]*/
 {
 	animation_flag="red";
+	H_query(0);
 	if(animation=="manual")
 	{
 		write_text("Apasati butonul de continuare adiacent pozei");
 		queue_operations.enqueue([0,"Σ("+String(pos1)+","+String(pos2)+")=query("+String(pos2)+")-query("+String(pos1-1)+")"]);
 		//queue_operations.enqueue([0,"Calculam valoarea query("+String(pos2)+")"]);
 		let s1= await query(pos2);//why does await fix it??? im not promising on that branch???
+		H_query(0);
 		//queue_operations.enqueue([0,"Calculam valoarea query("+String(pos1-1)+")"])
 		let s2=await query(pos1-1);
+		H_query(0);
 		queue_operations.enqueue([0,"Σ("+String(pos1)+","+String(pos2)+")=("+String(s1)+")-("+String(s2)+")="+String(FPAfix(s1-s2))]);
 		queue_operations.enqueue([0,"",-7777777,FPAfix(s1-s2)]);
 		/*document.getElementById("Qresult").innerHTML=String(FPAfix(s1-s2));
@@ -605,7 +625,6 @@ async function range_query(pos1,pos2)/*return sum of elements in [pos1,pos2], po
 		//write_text("Calculam valoarea query("+String(pos2)+")");
 		await wait(timect/speed);
 		let s1= await query(pos2);
-		
 		//await wait(timect/speed);
 		
 		//write_text("Calculam valoarea query("+String(pos1-1)+")");
@@ -713,7 +732,7 @@ function make_v()
 		let crt_s=s+i;
 		document.getElementById(crt_s).value=v[i];
 	}
-	debugging();
+	//debugging();
 	build();
 	draw_index(n);
 	draw_body(n);
@@ -967,7 +986,11 @@ function progress()
 				/*placeholder*/
 				j++;
 			}
-			
+			else if(op_vector[j]==5)//schimba src imaginei
+			{
+				j++;
+				H_query(op_vector[j]);
+			}
 			else if(op_vector[j]==-7777777)
 			{
 				j++;
