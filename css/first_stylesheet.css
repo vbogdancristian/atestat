@@ -1,0 +1,268 @@
+*
+{
+font-family:Arial, Helvetica, sans-serif;
+}
+:root
+{
+	--main_color: #CFB6E8;
+	--secondary_color:#D9CBFF;
+	--active_color:#7569FF;
+	--special_color:#AB93FF;
+	--frame_color:#666666;
+	--error_color:red;
+	--white:white;
+	--black:black;
+	--grey:#333333;
+	--dark_grey:#111111;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  /*overflow: hidden;*/
+  background-color: var(--grey);
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+body {
+	margin:0;
+}
+
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: var(--white);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active){
+  background-color: var(--dark_grey);
+}
+
+.active {
+  background-color: var(--active_color);
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.dropdown-content a {
+  color: var(--secondary_color);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.dropbtn li a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+.dropdown:hover .dropdown-content a{
+	color:black;
+	background-color:var(--main_color);
+	text-align: left;
+}
+.dropdown:hover .dropdown-content a:hover{
+	background-color:var(--active_color);
+}
+.dropbtn{
+	  cursor: pointer;
+}
+main {
+	padding-top: 65px;
+	padding-left: 0px;
+	width:100%;
+	box-sizing: border-box;
+}
+section {
+      padding: 20px;
+      background-color: #f0f0f0;
+	  width:40%;
+	  font-size:28px;
+	  float:left;
+}
+img{
+	padding:20px;
+	width:100%;
+	float:right;
+	
+}
+aside{
+	padding:20px;
+	background-color: green;
+	width:55%;
+	font-size:28px;
+	float:left;
+}
+#draw{
+	/*position:fixed;*/
+	border:1px solid var(--frame_color);
+	/*float:right;*/
+}
+.UI{
+	/*float:left;*/
+	width:100%;
+	padding:10px;
+	background-color: var(--white);
+	font-size:18px;
+	display: block;
+	border: 1px solid var(--frame_color);
+	margin-right:20px;
+	margin-left:20px;
+	margin-bottom:20px;
+	text-align:left;
+}
+.vector_UI{
+	/*float:left;*/
+	box-sizing: border-box;
+	width: calc(100% - 40px); 
+	padding:10px;
+	background-color: var(--white);
+	font-size:16px;
+	display: block;
+	/*border: 1px solid var(--frame_color);*/
+	margin-right:20px;
+	margin-left:20px;
+	margin-bottom:20px;
+}
+table, th, td {
+  /*border: 1px solid var(--frame_color);
+  border-collapse: collapse;*/
+  font-size:20px;
+  width:1250px;
+  text-align:center;
+}
+.datavector{
+	border: 1px solid var(--frame_color);
+	border-left:none;
+	border-collapse: collapse;
+}
+.datavector td{
+	border: 1px solid var(--frame_color);
+	border-collapse: collapse;
+}
+
+.button {
+  background-color: var(--secondary_color);
+  border: 2px solid var(--frame_color); 
+  color: black;
+  padding: 10px;/*old setup was 15px 32px;*/
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-right:10px;
+  cursor: pointer;
+}
+.button:hover{
+	background-color:var(--active_color);
+	border: 2px solid var(--special_color);
+}
+#maybe {
+	width: calc(100% - 40px); 
+	border:none;
+}
+
+#code_H{
+	padding:0px;
+	width:100%;
+	float:none;
+}
+.theader{
+	background-color:var(--secondary_color);
+}
+.input_text{
+	box-sizing:border-box;
+	width:42px;
+}
+.input_text_other{
+	box-sizing:border-box;
+	width:42px;
+}
+.side_table{
+	width:100%;
+	
+}
+.side_table .theader{
+	width:20%;
+}
+.side_table .input_text{
+	box-sizing:border-box;
+	width:90%;
+}
+#Hdiv{
+	visibility:hidden;
+}
+#Qresult{
+	display:inline;
+	visibility:hidden;
+}
+#n_error_feedback{
+	display:none;
+	color:var(--error_color);
+	padding:20px;
+}
+#upd_error_feedback{
+	display:none;
+	color:var(--error_color);
+	padding:20px;
+	text-align:left;
+	font-size:16px;
+}
+#qry_error_feedback{
+	display:none;
+	color:var(--error_color);
+	padding:20px;
+	text-align:left;
+	font-size:16px;
+}
+#Qresultbox{
+	background-color:var(--special_color);
+}
+#Qresultbox p{
+	color:var(--black);
+}
+#instructions{
+	color:var(--grey);
+	font-size:14px;
+}
+#speed
+{
+	visibility:hidden;
+}
+#above_canvas{
+	width:100%;
+	padding:10px;
+	background-color: var(--white);
+	font-size:18px;
+	display: block;
+	/*border: 1px solid var(--frame_color);*/
+	border:none;
+	margin-right:20px;
+	margin-left:50px;
+	margin-bottom:20px;
+	text-align:center;
+}

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="unicode-bidi">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="../css/first_stylesheet.css">
+</head>
+<body>
+
+<nav>
+<ul>
+  <li><a href="../AIB_home.html">Acasă</a></li>
+  <li class="dropdown"><a class="dropbtn">Teorie</a>
+  <div class="dropdown-content">
+  <a href="#">Introducere</a>
+  <a href="#">Functia de actualizare</a>
+  <a href="#">Functia de Citire</a>
+  <a href="#">Cautare binara eficienta</a>
+  <a href="#">Generalizare 2D</a>
+  </div>
+  </li>
+  <li><a href="#exercices">Exerciții</a></li>
+  <li class="dropdown"><a class="dropbtn">Extra</a>
+  <div class="dropdown-content">
+  <a href="#">Istoric</a>
+  <a href="#">Minim/Maxim?</a><!-- https://share.google/6CUgLof4S5z4bZMFf -->
+  <a href="#">Aplicații</a>
+  </div>
+  </li>
+  <li class="dropdown"><a class="active" class="dropbtn" style="cursor: pointer">Generator</a>
+  <div class="dropdown-content">
+  <a href="AIB_gen1.html"> AIB clasic </a>
+  <a href="AIB_gen2.html">AIB xor </a><!--  # = AIB_gen2.html -->
+  <a href="#"> AIB 2d</a><!--  # = AIB_gen3.html -->
+  </li>
+</ul>
+<nav>
+<main>
+<!-- <img id="code_H" style="width:45%; padding-right:50px; padding-top:0px" src="vica_jucarica.jpg" > 
+
+<!--
+am un width de 1000 in care voi avea maxim 5 dreptunghiuri (max size va fi 16)
+vreau sa fie un spatiu intre dreptunghiuri de h px  (h nu e inaltimea)
+h+w+h+w+h+w+h+w+h+w+h=1000
+5w+6h=1000=> w=(1000-6h)/5, w natural=>6h=M5 => h=M5 (5*k, k natural)
+daca vreau sa am nrd dreptunghiuri voi avea: h+nrd*(h+w)=1000, w=[(1000-h)/nrd]-h
+voi rezerva un spatiu pentru i,v[i] (coloane langa aib casa se vada indexarea) deci din 1000 scad un S
+am decis sa am 32 de elemente intr-un final, deci 6 dreptunghiuri (log2(32)+1). w=[(1000-S-h)/6]-h, inca nu am decis h si S (reminder din nou ca h NU E INALTIMEA) 
+-->
+
+<!--
+voi avea functiile reale de update si query si voi mai avea nevoie de functii care primesc ca input vectorul de pe site (din form) si transforma asta in input pentru functie
+adica form data -> make_query() -> query (voi mai si desena aici dar asta implementez dupa)
+-->
+
+<div class="vector_UI">
+
+	<table class="datavector" style="display:inline-table" ><tbody>
+	<tr >
+	<td rowspan="1" ><button class="button" onclick="make_v()">submit vector:</button></td>
+	<td class="theader"><input type="text" id="n_value" name="n_value" class="input_text" value="0" autocomplete='off' autofocus onblur="display_n(1)" onchange="is_modified()"></td>
+	<td class="theader"><p>v[i]</p></td>
+	<td><input class="input_text" autocomplete='off' type="text" id="v1" name="v1" value="0" onchange="is_modified()"></td>
+	<td><input class="input_text" autocomplete='off' type="text" id="v2" name="v2" value="0" onchange="is_modified()"></td>
+	<td><input class="input_text" autocomplete='off' type="text" id="v3" name="v3" value="0" onchange="is_modified()"></td>
+	<td><input class="input_text" autocomplete='off' type="text" id="v4" name="v4" value="0" onchange="is_modified()"></td>
+	<td><input class="input_text" autocomplete='off' type="text" id="v5" name="v5" value="0" onchange="is_modified()"></td>
+	<td><input class="input_text" autocomplete='off' type="text" id="v6" name="v6" value="0" onchange="is_modified()"></td>
+	<td><input class="input_text" autocomplete='off' type="text" id="v7" name="v7" value="0" onchange="is_modified()"></td>
+	<td><input class="input_text" autocomplete='off' type="text" id="v8" name="v8" value="0" onchange="is_modified()"></td>
+	<td><input class="input_text" autocomplete='off' type="text" id="v9" name="v9" value="0" onchange="is_modified()"></td>
+	<td><input class="input_text" autocomplete='off' type="text" id="v10" name="v10" value="0" onchange="is_modified()"></td>
+	<td><input class="input_text" autocomplete='off' type="text" id="v11" name="v11" value="0" onchange="is_modified()"></td>
+	<td><input class="input_text" autocomplete='off' type="text" id="v12" name="v12" value="0" onchange="is_modified()"></td>
+	<td><input class="input_text" autocomplete='off' type="text" id="v13" name="v13" value="0" onchange="is_modified()"></td>
+	<td><input class="input_text" autocomplete='off' type="text" id="v14" name="v14" value="0" onchange="is_modified()"></td>
+	<td><input class="input_text" autocomplete='off' type="text" id="v15" name="v15" value="0" onchange="is_modified()"></td>
+	<td><input class="input_text" autocomplete='off' type="text" id="v16" name="v16" value="0" onchange="is_modified()"></td>
+	<td><input class="input_text" autocomplete='off' type="text" id="v17" name="v17" value="0" onchange="is_modified()"></td>
+	<td><input class="input_text" autocomplete='off' type="text" id="v18" name="v18" value="0" onchange="is_modified()"></td>
+	<td><input class="input_text" autocomplete='off' type="text" id="v19" name="v19" value="0" onchange="is_modified()"></td>
+	<td><input class="input_text" autocomplete='off' type="text" id="v20" name="v20" value="0" onchange="is_modified()"></td>
+	<td><input class="input_text" autocomplete='off' type="text" id="v21" name="v21" value="0" onchange="is_modified()"></td>
+	<td><input class="input_text" autocomplete='off' type="text" id="v22" name="v22" value="0" onchange="is_modified()"></td>
+	<td><input class="input_text" autocomplete='off' type="text" id="v23" name="v23" value="0" onchange="is_modified()"></td>
+	<td><input class="input_text" autocomplete='off' type="text" id="v24" name="v24" value="0" onchange="is_modified()"></td>
+	<td><input class="input_text" autocomplete='off' type="text" id="v25" name="v25" value="0" onchange="is_modified()"></td>
+	<td><input class="input_text" autocomplete='off' type="text" id="v26" name="v26" value="0" onchange="is_modified()"></td>
+	<td><input class="input_text" autocomplete='off' type="text" id="v27" name="v27" value="0" onchange="is_modified()"></td>
+	<td><input class="input_text" autocomplete='off' type="text" id="v28" name="v28" value="0" onchange="is_modified()"></td>
+	<td><input class="input_text" autocomplete='off' type="text" id="v29" name="v29" value="0" onchange="is_modified()"></td>
+	<td><input class="input_text" autocomplete='off' type="text" id="v30" name="v30" value="0" onchange="is_modified()"></td>
+	<td><input class="input_text" autocomplete='off' type="text" id="v31" name="v31" value="0" onchange="is_modified()"></td>
+	<td><input class="input_text" autocomplete='off' type="text" id="v32" name="v32" value="0" onchange="is_modified()"></td>
+	</tr>
+	<tr>
+	<td><p id="instructions">Select n and navigate with TAB !</p></td>
+	<td class="theader"><label for="n_value">n</label></td>
+	<td class="theader"><p>i</p></td>
+	<td><p>1&nbsp</p></td>
+	<td><p>2&nbsp</p></td>
+	<td><p>3&nbsp</p></td>
+	<td><p>4&nbsp</p></td>
+	<td><p>5&nbsp</p></td>
+	<td><p>6&nbsp</p></td>
+	<td><p>7&nbsp</p></td>
+	<td><p>8&nbsp</p></td>
+	<td><p>9&nbsp</p></td>
+	<td><p>10</p></td>
+	<td><p>11</p></td>
+	<td><p>12</p></td>
+	<td><p>13</p></td>
+	<td><p>14</p></td>
+	<td><p>15</p></td>
+	<td><p>16</p></td>
+	<td><p>17</p></td>
+	<td><p>18</p></td>
+	<td><p>19</p></td>
+	<td><p>20</p></td>
+	<td><p>21</p></td>
+	<td><p>22</p></td>
+	<td><p>23</p></td>
+	<td><p>24</p></td>
+	<td><p>25</p></td>
+	<td><p>26</p></td>
+	<td><p>27</p></td>
+	<td><p>28</p></td>
+	<td><p>29</p></td>
+	<td><p>30</p></td>
+	<td><p>31</p></td>
+	<td><p>32</p></td>
+	</tr>
+	</tbody></table>
+</div>
+<p id="n_error_feedback"></p>
+
+
+<table id="maybe"><tr>
+<td style="border:none"><span>
+
+<div class="UI">
+<!-- here goes update-->
+<table style="display:inline-table" class="side_table"><tbody>
+<tr>
+<td><button class="button" onclick="make_upd()">Submit update:</button></td>
+<td class="theader">
+<p>pos:&nbsp</p>
+</td>
+<td>
+<input class="input_text_other" autocomplete='off' type="text" id="upd_pos" name="upd_pos" value="0">
+</td>
+<td class="theader">
+<p>val:&nbsp</p>
+</td>
+<td>
+<input class="input_text_other" autocomplete='off' type="text" id="upd_val" name="upd_val" value="0">
+</td>
+</tr>
+</tbody></table>
+</div>
+<p id="upd_error_feedback"></p>
+
+<div class="UI">
+<!-- here goes query-->
+<table style="display:inline-table" class="side_table"><tbody>
+<tr>
+<td rowspan="2"><button class="button" onclick="make_query()">Submit query:</button></td>
+<td class="theader" style="width:10%">
+<p>pos1:&nbsp</p>
+</td>
+<td>
+<input class="input_text_other" autocomplete='off' type="text" id="query_pos1" name="query_pos1" value="0">
+</td>
+<td class="theader" style="width:10%">
+<p>pos2:&nbsp</p>
+</td>
+<td>
+<input class="input_text_other" autocomplete='off' type="text" id="query_pos2" name="query_pos2" value="0">
+</td>
+<td style="width:20%;" id="Qresultbox">
+<p style="font-size:16px">⊕(pos1,pos2):&nbsp</p>
+<p id="Qresult" style="font-size:14px">Placeholder</p></td></tr>
+</tbody></table>
+</div>
+<p id="qry_error_feedback"></p>
+
+<div class="UI" id="Hdiv">
+<button class="button" onclick="progress()" id="codeHbutton">Continue</button>
+<img id="code_H" style="width:50%;" src="img/placeholder.jpg" ><!--this is just the Placeholder image-->
+</div>
+</span></td>
+
+
+
+<td style="border:none">
+<div id="above_canvas"><select id="type_animation" name="type_animation">
+<option value="manual" selected>Manual</option>
+<option value="automatic">Automatic</option>
+</select>
+<select id="speed" name="speed">
+<option value="0.0001">0.0001x</option>
+<option value="0.1">0.1x</option>
+<option value="0.2">0.2x</option>
+<option value="0.3">0.3x</option>
+<option value="0.5">0.5x</option>
+<option value="1" selected>1x</option><!--selected is weird so I'm using js to change the value when loading website-->
+<option value="2">2x</option>
+<option value="3">3x</option>
+<option value="5">5x</option>
+<option value="10">10x</option>
+<option value="25">25x</option>
+<option value="50">50x</option>
+<option value="100">100x</option>
+<option value="2000">2000x</option>
+</select>
+<button id="speed_button" onclick="submit_speed()">Salvează preferințele</button>
+</div>
+<span style="width:100%;"> <canvas id="draw" width="2000" height="1000"></canvas> </span>
+</td>
+
+</tr></table>
+<script>const page_id="gen_xor"</script>
+<script src="../js/JS_gen1D.js"></script>
+
+</main>
+
+</body>
+</html>
+
+
