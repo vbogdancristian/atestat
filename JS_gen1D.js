@@ -1,4 +1,4 @@
-class Queue {//Geeksforgeeks thank you
+class Queue {//I wanted to use a queue data structure for the manual tasks but there isn't one implemented in js
   constructor() {
     this.items = [];
   }
@@ -47,6 +47,7 @@ const highlight_color="cyan";
 const base_color="purple";
 const background_color="white";
 const upd = [];// la afisare voi colora cu rosu elementele vectorului nou updatate, dupa care le fac din nou negre/mov urmatoarea iteratie
+//nu am mai folosit upd pentru ca am avut un sistem mai bun
 let n;
 let animation_flag="green";
 let crtop="none";
@@ -104,9 +105,6 @@ function showColumn(pos) {
 function display_n(start=-1)
 {
 	/*if start is -1 hide all
-	if not then find real value of n and visibility n tds
-	and steal text from submit vector here (relating n of course)
-	if the animation_flag is red then stop everything
 	*/
 	if(animation_flag=="red")return;
 	if(start==-1)
@@ -236,7 +234,7 @@ function draw_body(n_value)
 	return;
 }
 
-function FPAfix(nr)
+function FPAfix(nr)//din cauza aritmeticii numerelor reale, 16.1-1=15.100000000000000000000000009 sau 15.09999999999999999999999999999999999
 {
 	nr=nr*1e9;
 	nr=Math.round(nr);
@@ -245,19 +243,19 @@ function FPAfix(nr)
 }
 function debugging()
 {
-	alert("MicaTicaRicaLicaPicaKicaNicaVicaZicaXicaHicaFicaMicuSHICA");
+	alert("MicaTicaRicaLicaPicaKicaNicaVicaZicaXicaHicaFicaMicuSHica");
 }
-function wait(ms) {/*this is stolen im sorry why is there not a wait function in js already*/
+function wait(ms) {
     return new Promise(resolve => {
 		cancelWait = () => {
 		clearTimeout(timething);
-		return new Promise(r => setTimeout(() => {/* I hate promises in js so much this is my workaround for not being able to cancel the wait and start a new one due to js magic*/
+		return new Promise(r => setTimeout(() => {
                 resolve(); 
                 r();       
             }, timect/speed));
 		}
         timething=setTimeout(resolve, ms);
-    });/*reminder trebuie facut await wait(ms)*/
+    });/*reminder trebuie facut await wait(ms) pentru ca e promisiune*/
 }
 
 function highlight_index(pos,mode=0)
@@ -462,7 +460,7 @@ async function update(pos,value,showanimation=1)
 		aib[i]+=value;
 	}*/
 	/* pentru manual o sa am un flag care incrementeaza pas cu pas (click cu click) pana cand termin, pentru automatic va fi wait(1000/speed )*/
-	/*ok change of plans*/
+	/*ok change of plans, am facut altceva ce n-am mai vazut folosit pana acum (nici nu am cautat): coada de instructiuni care este golita pe masura ce apas butonul*/
 	
 	
 	return;
@@ -478,6 +476,7 @@ async function query(pos)/*return sum of elements in [1,pos]*/
 	if(animation=="manual")
 	{
 		//op4: (4,oldsum,val){sum=oldsum+val} posibil sa nu folosesc
+		//nu am folosit pana acum 
 		queue_operations.enqueue([0,"Query("+String(pos)+")",5,1]);
 		queue_operations.enqueue([0,"Initializam suma cu 0",4,0,0,5,2]);
 		let sum=0;
@@ -614,9 +613,6 @@ async function range_query(pos1,pos2)/*return sum of elements in [pos1,pos2], po
 		H_query(0);
 		queue_operations.enqueue([0,"Σ("+String(pos1)+","+String(pos2)+")=("+String(s1)+")-("+String(s2)+")="+String(FPAfix(s1-s2))]);
 		queue_operations.enqueue([0,"",-7777777,FPAfix(s1-s2)]);
-		/*document.getElementById("Qresult").innerHTML=String(FPAfix(s1-s2));
-		document.getElementById("Qresult").style.visibility="visible";
-		animation_flag="green";*/
 	}
 	else if(animation=="automatic")
 	{
@@ -1012,11 +1008,11 @@ note2: the spam message isn't clear enough, maybe say what the ongoing operation
 note3: the vector is updating as soon as i submit the update, maybe i can wait for the operation of actually incrementing it to do so. 
 note4: for manual updating, there is no clear text telling you it registered, maybe some text saying "ongoing update, press continue"
 note5: I sorta fixed note3 by incrementing v[pos] by value at the end, so the update code should have a v[pos]+=value at the end to match
-note6: fa codul prezentat prezentabil (rocket science i know) i.e. aibsize->aib_size sau aibSize
+note6: fa codul prezentat prezentabil (rocket science i know) i.e. aibsize->aib_size sau aibSize FIXED: am pus n 
 note7: reminder de poze cu codul, poti pune in mai multe painturi aceeasi poza si adaugi dreptunghiuri sa inconjori sau o sageata la linie
-note8: TE ROG FOLOSESTE GIT HUB TE IMPLORRR
+note8: DON'T FORGET TO USE GIT HUB
 bug2: poti schimba animatia din manuala in automatica cat timp lucrezi, trebuie sa existe un if care te impiedica in functia de change_speed sau cum se cheama
 bug3: butonul de continue apare langa cod chiar daca animatia este atomatica, schimba vizibilitatea
-note9: momentan trebuie sa folosesc FPAfix peste tot ca nu stiu ce problema au numerele reale in js de nu vor sa coopereze, nu uita cand scrii manual query sa adaugi, ar fi totusi frumos daca nu as avea nevoie
+note9: momentan trebuie sa folosesc FPAfix peste tot ca nu stiu ce problema au numerele reale in js de nu vor sa coopereze, nu uita cand scrii manual query sa adaugi, ar fi totusi frumos daca nu as avea nevoie, specifica faptul ca accuracy-ul este pana la 9 zecimale
 note10: micsoreaza inaltimea vectorului, mult spatiu nefolosit
 */
