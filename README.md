@@ -5,4 +5,4 @@ Realizez un site in care sa prezint teoria, generatorul si cateva exercitii, int
 *idei:
 1. am observat ca software educational pentru heap are buton pentru vector aleatoriu
 2. tot pe acel site am vazut ca totul e frumos si curat, aici butoanele sunt destul de mari
-3. ...
+3. pot pune butoane de inapoi si continua pe site pentru a naviga mai usor intre pagini (adica daca sunt in AIB_introducere pot merge usor prin linkurile din susul paginii, nu navbarul, catre index si AIB_upd)
