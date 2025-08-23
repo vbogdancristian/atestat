@@ -55,8 +55,8 @@ let crtop="none";
 const code_obj=document.getElementById("code_H");
 function is_modified(state=true)
 {
-	if(state==true)document.getElementById("instructions").innerHTML="Data is modified!";
-	if(state==false)document.getElementById("instructions").innerHTML="Everything is up to date!";
+	if(state==true)document.getElementById("instructions").innerHTML="Datele sunt modificate!";
+	if(state==false)document.getElementById("instructions").innerHTML="Totul este la prezent!";
 	return;
 }
 async function submit_speed()
@@ -331,22 +331,22 @@ function write_text(word)//referrering to the bottom text
 function H_update(code)
 {
 	if(aibtype==0){
-		let s="img/update_"+String(code);
+		let s="../img/update_"+String(code);
 		code_obj.src=s+".png";
 	}
 	else if(aibtype==1){
-		let s="img/xor_update_"+String(code);
+		let s="../img/xor_update_"+String(code);
 		code_obj.src=s+".png";
 	}
 }
 function H_query(code)
 {
 	if(aibtype==0){
-		let s="img/query_"+String(code);
+		let s="../img/query_"+String(code);
 		code_obj.src=s+".png";
 	}
 	else if(aibtype==1){
-		let s="img/xor_query_"+String(code);
+		let s="../img/xor_query_"+String(code);
 		code_obj.src=s+".png";
 	}
 }
