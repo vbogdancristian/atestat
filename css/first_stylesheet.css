@@ -54,7 +54,9 @@ li a:hover:not(.active){
 .active {
   background-color: var(--active_color);
 }
-
+nav ul{
+	z-index:500;
+}
 .dropdown {
   position: relative;
   display: inline-block;
@@ -66,7 +68,7 @@ li a:hover:not(.active){
   min-width: 200px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   padding: 12px 16px;
-  z-index: 1;
+  z-index: 5;
 }
 
 .dropdown:hover .dropdown-content {
@@ -155,8 +157,8 @@ aside{
 }
 table, th, td {
   /*border: 1px solid var(--frame_color);
-  border-collapse: collapse;*/
-  font-size:20px;
+  border-collapse: collapse;
+  font-size:20px;*/
   width:1250px;
   text-align:center;
 }
@@ -245,14 +247,23 @@ table, th, td {
 	font-size:16px;
 }
 #Qresultbox{
-	background-color:var(--special_color);
+	background-color:var(--secondary_color);
 }
 #Qresultbox p{
 	color:var(--black);
 }
 #instructions{
-	color:var(--gray);
-	font-size:14px;
+	color:var(--dark_purple);
+	font-size:18px;
+	display:inline;
+	margin-left:6vw;
+}
+#mention{
+	color:var(--dark_purple);
+	font-size:18px;
+	display:inline;
+
+	margin-left:1.5vw;
 }
 #speed{
 	visibility:hidden;
@@ -345,6 +356,9 @@ table, th, td {
 #error_msg{
 	color:var(--error_color);
 }
+#nr_error_msg{
+	color:var(--error_color);
+}
 .imgtable img:hover:not(.plain_img){
 	border-collapse:collapse;
 	border: 2px solid var(--black);
@@ -406,4 +420,14 @@ table, th, td {
 }
 #moreproofs{
 	display:none;
+}
+.tryit{
+	width:64px;
+	background-color:var(--white);
+	border:1px solid var(--dark_gray);
+}
+.tryit:focus{
+	background-color:var(--secondary_color);
+	border:1px solid var(--dark_purple);
+	outline: none;
 }

@@ -29,7 +29,7 @@ class Queue {//I wanted to use a queue data structure for the manual tasks but t
 }
 
 const queue_operations = new Queue();
-
+let aibexist_flag=false;
 const WIDTH = screen.width;
 const HEIGHT = screen.height;
 canvas = document.getElementById("draw");
@@ -56,7 +56,7 @@ const code_obj=document.getElementById("code_H");
 function is_modified(state=true)
 {
 	if(state==true)document.getElementById("instructions").innerHTML="Datele sunt modificate!";
-	if(state==false)document.getElementById("instructions").innerHTML="Totul este la prezent!";
+	if(state==false)document.getElementById("instructions").innerHTML="Totul este actualizat!";
 	return;
 }
 async function submit_speed()
@@ -84,24 +84,26 @@ async function submit_speed()
 	return;
 }
 function hideColumn(pos) {
-  const allRows = document.querySelectorAll(".datavector tr");
-  for (const row of allRows) {
-    const cells = row.children;
-    if (cells.length > pos ) {/*this is so convoluted remember it's here plspls*/
-      cells[pos].style.visibility = "hidden";
-	  cells[pos].style.border = "none";
-    }
-  }
+	pos=pos-1;
+	const allRows = document.querySelectorAll(".datavector tr");
+	for (const row of allRows) {
+		const cells = row.children;
+		if (cells.length > pos ) {/*this is so convoluted remember it's here plspls*/
+		cells[pos].style.visibility = "hidden";
+		cells[pos].style.border = "none";
+		}
+	}
 }
 function showColumn(pos) {
-  const allRows = document.querySelectorAll(".datavector tr");
-  for (const row of allRows) {
-    const cells = row.children;
-    if (cells.length > pos ) {/*this is so convoluted remember it's here plspls*/
-      cells[pos].style.visibility = "visible";
-	  cells[pos].style.border = "1px solid var(--frame_color)";
-    }
-  }
+	pos=pos-1;
+	const allRows = document.querySelectorAll(".datavector tr");
+	for (const row of allRows) {
+		const cells = row.children;
+		if (cells.length > pos ) {/*this is so convoluted remember it's here plspls*/
+		cells[pos].style.visibility = "visible";
+		cells[pos].style.border = "1px solid var(--frame_color)";
+		}
+	}
 }
 function display_n(start=-1)
 {
@@ -781,9 +783,10 @@ function make_v()
 		document.getElementById("n_error_feedback").style.display="none";
 	}
 	init();
-	is_modified(false);
-	
 	n=display_n(1);
+	if(n>=1 && n<=32)is_modified(false);
+	
+	
 	let s="v"
 	for(let i=1;i<=n;i++)
 	{
@@ -800,6 +803,7 @@ function make_v()
 		document.getElementById(crt_s).value=v[i];
 	}
 	//debugging();
+	aibexist_flag=true;
 	build();
 	draw_index(n);
 	draw_body(n);
@@ -810,6 +814,10 @@ function make_upd()
 	/*validate both inputs*/
 	document.getElementById("Qresult").innerHTML="";
 	let error_string="";
+	if(aibexist_flag==false)
+	{
+		error_string+="creeaza vectorul\n";
+	}
 	if(animation_flag=="red")
 	{
 		error_string+="*trebuie finalizat procesul început\n";
@@ -829,7 +837,10 @@ function make_upd()
 	let given_val=upd_object.value;
 	given_val=converter(given_val,1);
 	upd_object.value=given_val;
-	
+	if(aibexist_flag==false)
+	{
+		error_string="*creeaza vectorul\n";
+	}
 	if(error_string!="")
 	{
 		error_object.style.display="block";
@@ -850,6 +861,7 @@ function make_query()
 	/*validate both inputs*/
 	
 	let error_string="";
+	
 	if(animation_flag=="red")
 	{
 		error_string+="*trebuie finalizat procesul început\n";
@@ -884,7 +896,10 @@ function make_query()
 		document.getElementById("query_pos1").value=0;
 		document.getElementById("query_pos2").value=0;
 	}
-		
+	if(aibexist_flag==false)
+	{
+		error_string="*creeaza vectorul\n";
+	}
 	if(error_string!="")
 	{
 		error_object.style.display="block";

@@ -52,12 +52,12 @@ am decis sa am 32 de elemente intr-un final, deci 6 dreptunghiuri (log2(32)+1). 
 voi avea functiile reale de update si query si voi mai avea nevoie de functii care primesc ca input vectorul de pe site (din form) si transforma asta in input pentru functie
 adica form data -> make_query() -> query (voi mai si desena aici dar asta implementez dupa)
 -->
-
+<p id="mention">AIB clasic cu precizie pana la 1e-9;</p><p id="instructions">Selecteaza n si navigheaza cu TAB !</p>
 <div class="vector_UI">
-
+	<button class="button" onclick="make_v()">Creeaza:</button></td>
 	<table class="datavector" style="display:inline-table" ><tbody>
 	<tr >
-	<td rowspan="1" ><button class="button" onclick="make_v()">Creeaza vectorul:</button></td>
+	
 	<td class="theader"><input type="text" id="n_value" name="n_value" class="input_text" value="0" autocomplete='off' autofocus onblur="display_n(1)" onchange="is_modified()"></td>
 	<td class="theader"><p>v[i]</p></td>
 	<td><input class="input_text" autocomplete='off' type="text" id="v1" name="v1" value="0" onchange="is_modified()"></td>
@@ -94,7 +94,7 @@ adica form data -> make_query() -> query (voi mai si desena aici dar asta implem
 	<td><input class="input_text" autocomplete='off' type="text" id="v32" name="v32" value="0" onchange="is_modified()"></td>
 	</tr>
 	<tr>
-	<td><p id="instructions">Selecteaza n si navigheaza cu TAB !</p></td>
+	
 	<td class="theader"><label for="n_value">n</label></td>
 	<td class="theader"><p>i</p></td>
 	<td><p>1&nbsp</p></td>
@@ -193,7 +193,9 @@ adica form data -> make_query() -> query (voi mai si desena aici dar asta implem
 
 
 <td style="border:none">
-<div id="above_canvas"><select id="type_animation" name="type_animation">
+<div id="above_canvas">
+
+<select id="type_animation" name="type_animation">
 <option value="manual" selected>Manual</option>
 <option value="automatic">Automatic</option>
 </select>

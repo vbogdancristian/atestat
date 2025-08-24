@@ -12,12 +12,13 @@ function send()
 	result_obj=document.getElementById("result");
 	n=n_obj.value;
 	pos=pos_obj.value;
-	if(+pos>+n || !Number.isInteger(+n) || !Number.isInteger(+pos) || n<=0 || pos<=0)
+	if(+pos>+n || !Number.isInteger(+n) || !Number.isInteger(+pos) || n<=0 || pos<=0 || n>=134217728+1 || pos>=134217728+1)
 	{
 		n_obj.value=2047;
 		pos_obj.value=398;
+		result_obj.innerHTML="AIB[398, 400, 416, 448, 512, 1024].";
 		error_obj.style.display="block";
-		error_obj.innerHTML="*n si pos sunt numere naturale nenule astfel incat pos<=n";
+		error_obj.innerHTML="*n si pos sunt numere naturale nenule astfel incat pos<=n, ambele mai mici decat 134217728 + 1";
 		return;
 	}
 	error_obj.style.display="none";
