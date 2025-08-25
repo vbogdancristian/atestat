@@ -19,10 +19,9 @@
   <a href="AIB_2d.html">Generalizare 2D</a>
   </div>
   </li>
-  <li><a href="#exercices">Exerciții</a></li>
+  <li><a href="AIB_exercitii.html">Exerciții</a></li>
   <li class="dropdown"><a class="dropbtn">Extra</a>
   <div class="dropdown-content">
-  <a href="#">Istoric</a>
   <a href="#">Minim/Maxim?</a><!-- https://share.google/6CUgLof4S5z4bZMFf -->
   <a href="#">Aplicații</a>
   </div>
@@ -45,7 +44,7 @@
 <p></p>
 <section><div>
 <h1>Functia de actualizare pe sufix</h1>
-<p>Daca dorim sa actualizam valoarea de pe pozitia <span class="s1">pos</span>, va trebuii sa actualizam toate nodurile din AIB care o contin. Amintim faptul ca nodul i contine suma subsecventei [i-(i&-i)+1,i] a vectorului, deci prin actualizarea elementului v[<span class="s1">pos</span>] vom actualiza de fapt fiecare nod i astfel incat<br> <span class="s1">pos</span>∈[i+1-(i&-i),i].Vom demonstra mai tarziu in articol faptul ca exista maxim log<sub>2</sub>n astfel de noduri, facand functia sa aiba complexitate de O(log<sub>2</sub>n).</p>
+<p>Daca dorim sa actualizam valoarea de pe pozitia <span class="s1">pos</span>, va trebuii sa actualizam toate nodurile din AIB care o contin. Amintim faptul ca nodul i contine suma subsecventei [i-(i&-i)+1,i] a vectorului, deci prin actualizarea elementului v[<span class="s1">pos</span>] vom actualiza de fapt fiecare nod i astfel incat<br> <span class="s1">pos</span>∈[i+1-(i&-i),i].Vom demonstra mai tarziu in articol faptul ca exista maxim log<sub>2</sub>n astfel de noduri, facand functia sa aiba complexitate de O(log n).</p>
 <h3>Intrebarea ramane: cum putem identifica aceste pozitii?</h3>
 <!--<p>Ei bine, este clar ca nu trebuie verificate numerele din intervalul [1,pos-1], deoarece acestea nu includ elemente din intervalul [pos,n]. De asemenea, orice index se va include pe el insusi, deci putem incepe de aici. In continuare trebuie sa cautam indecsi mai mari decat pos si mai mici sau egali decat n. Poate fi demonstrat matematic faptul ca toti indecsii care contin pozitia pos in interval apartin sirului x<sub>0</sub>=pos, x<sub>i+1</sub>=x<sub>i</sub>+(x<sub>i</sub>&-x<sub>i</sub>), ceea ce va avea mai mult sens dupa analiza reprezentarilor grafice ale structurii de date. </p>-->
 <p>Este greu de intuit logic motivul, dar prin aplicarea repetata a operatiei <span class="s2">x=x+(x&-x)</span> incepand cu x=pos putem atinge toate nodurile importante. Vom folosi drept reper <span class="s1">vizualizarea arborelui indexat binar</span> pentru a deduce formula folosita, dupa care ii vom demonstra validitatea matematic. Iata cateva exemple:<br><br>
@@ -67,7 +66,7 @@ Pentru n=<input id="n1" name="n1" type="number" value="2047" autocomplete='off' 
  
 </div></section><p></p><section><div>
 <h1>Reprezentarea grafica a unui AIB</h1>
-In continuare puteti apasa pe reprezentarea AIB pe care o preferati:</p>
+<p>In continuare puteti apasa pe reprezentarea AIB pe care o preferati:</p>
 <table class="imgtable"><tr>
 <td><img id="choose_arb" src="../img/AIB_arb_both.png" onclick="choose(0)"></td>
 <td><img id="choose_seg" src="../img/AIB_segment_0_nrs.png" onclick="choose(1)"></td>
@@ -82,7 +81,7 @@ Nodul y este parintele nodului x <=> <span class="s2">y=x+(x&-x)</span> sau y=ra
 <!--<Graph indexType="custom" height="400" width="400" nodes={[{options:{circleAttr:{radius:30},fixed:true},label:"1",center:{x:34.6,y:393.1}},{options:{circleAttr:{radius:30},fixed:true},label:"2",center:{x:34.6,y:340.4}},{options:{circleAttr:{radius:30},fixed:true},label:"4",center:{x:86.9,y:288.3}},{options:{circleAttr:{radius:30},fixed:true},label:"5",center:{x:136.7,y:339.9}},{options:{circleAttr:{radius:30},fixed:true},label:"6",center:{x:137.8,y:286.4}},{options:{circleAttr:{radius:30},fixed:true},label:"8",center:{x:188.5,y:214.1}},{options:{circleAttr:{radius:30},fixed:true},label:"7",center:{x:187.2,y:284.6}},{options:{circleAttr:{radius:30},fixed:true},label:"9",center:{x:237.5,y:281}},{options:{circleAttr:{radius:30},fixed:true},label:"10",center:{x:237.3,y:219.4}},{options:{circleAttr:{radius:30},fixed:true},label:"12",center:{x:287.8,y:180.7}},{options:{circleAttr:{radius:30},fixed:true},label:"16",center:{x:378.1,y:85.1}},{options:{circleAttr:{radius:30},fixed:true},label:"11",center:{x:288.6,y:226.6}},{options:{circleAttr:{radius:30},fixed:true},label:"13",center:{x:338.4,y:223.8}},{options:{circleAttr:{radius:30},fixed:true},label:"14",center:{x:340.6,y:180.5}},{options:{circleAttr:{radius:30},fixed:true},label:"17",center:{x:393.1,y:34.6}},{options:{circleAttr:{radius:30},fixed:true},label:"3",center:{x:84.9,y:339.6}},{options:{circleAttr:{radius:30},fixed:true},label:15,center:{x:389.6,y:186.4}}]} edges={[{source:0,target:1},{source:1,target:2},{source:2,target:5},{source:4,target:3},{source:4,target:5},{source:6,target:5},{source:7,target:8},{source:8,target:9},{source:9,target:10},{source:11,target:9},{source:12,target:13},{source:13,target:10},{source:5,target:10},{source:10,target:14},{source:2,target:15},{source:16,target:10}]} />-->
 <table class="imgtable"><tr><td><img class="plain_img" src="../img/AIB_arb_r17_0.png"></td>
 <td><img class="plain_img" src="../img/AIB_arb_r17_1.png"></td></table>
-<p style="text-align:left">Observam ca urcand arborele incepand cu nodul 3 pana la radacina parcurgem toate nodurile ce contin pozitia 3 in interval, iar asta este adevarat pentru orice pozitie datorita modului in care este definint parintele unui nod oarecare. Asadar, toti indecsii ce contin pozitia <span class="s1">pos</span> in interval vor fi termeni ai sirului (x)<sub>n</sub>, x<sub>0</sub>=pos, x<sub>i+1</sub>=x<sub>i</sub>+(x<sub>i</sub>&-x<sub>i</sub>), singura precizare fiind ca oprim cautarea in momentul in care x<sub>i+1</sub> depaseste radacina, (echivalent cu x<sub>i+1</sub>&lt=n). Numarul maxim de noduri pe care le vizitam pe drum este <a class=".goinpage_link" href="#logn_proof">in cel mai rau caz log<sub>2</sub>n</a>, facand complexitatea functiei O(log<sub>2</sub>n).</p>
+<p style="text-align:left">Observam ca urcand arborele incepand cu nodul 3 pana la radacina parcurgem toate nodurile ce contin pozitia 3 in interval, iar asta este adevarat pentru orice pozitie datorita modului in care este definint parintele unui nod oarecare. Asadar, toti indecsii ce contin pozitia <span class="s1">pos</span> in interval vor fi termeni ai sirului (x)<sub>n</sub>, x<sub>0</sub>=pos, x<sub>i+1</sub>=x<sub>i</sub>+(x<sub>i</sub>&-x<sub>i</sub>), singura precizare fiind ca oprim cautarea in momentul in care x<sub>i+1</sub> depaseste radacina, (echivalent cu x<sub>i+1</sub>&lt=n). Numarul maxim de noduri pe care le vizitam pe drum este <a class=".goinpage_link" href="#logn_proof">in cel mai rau caz log<sub>2</sub>n</a>, facand complexitatea functiei O(log n).</p>
 
 </section><p></p></div>
 <div id="segstyle"><section>
@@ -91,7 +90,7 @@ Nodul y este parintele nodului x <=> <span class="s2">y=x+(x&-x)</span> sau y=ra
 Nodul y este parintele nodului x <=> <span class="s2">y=x+(x&-x)</span>.</p>
  <table class="imgtable"><tr><td><img class="plain_img" src="../img/AIB_segment_0.png"></td>
 <td><img class="plain_img" src="../img/AIB_segment_1.png"></td></tr></table>
-<p>Este evident din reprezentare faptul ca toate nodurile ce contin pozitia 3 se afla in nodurile alfate de-asupra sa <a class=".goinpage_link" href="#nokoutside_proof">(pentru cei interesati de demonstratia matematica)</a>. Asadar, toti indecsii ce contin pozitia <span class="s1">pos</span> in interval vor fi termeni ai sirului (x)<sub>n</sub>, x<sub>0</sub>=pos, x<sub>i+1</sub>=x<sub>i</sub>+(x<sub>i</sub>&-x<sub>i</sub>), singura precizare fiind ca oprim cautarea in momentul in care x<sub>i+1</sub> depaseste n, (echivalent cu x<sub>i+1</sub>&lt=n). Numarul maxim de noduri pe care le vizitam pe drum este <a class=".goinpage_link" href="#logn_proof">in cel mai rau caz log<sub>2</sub>n</a>, facand complexitatea functiei O(log<sub>2</sub>n).</p>
+<p>Este evident din reprezentare faptul ca toate nodurile ce contin pozitia 3 se afla in nodurile alfate de-asupra sa <a class=".goinpage_link" href="#nokoutside_proof">(pentru cei interesati de demonstratia matematica)</a>. Asadar, toti indecsii ce contin pozitia <span class="s1">pos</span> in interval vor fi termeni ai sirului (x)<sub>n</sub>, x<sub>0</sub>=pos, x<sub>i+1</sub>=x<sub>i</sub>+(x<sub>i</sub>&-x<sub>i</sub>), singura precizare fiind ca oprim cautarea in momentul in care x<sub>i+1</sub> depaseste n, (echivalent cu x<sub>i+1</sub>&lt=n). Numarul maxim de noduri pe care le vizitam pe drum este <a class=".goinpage_link" href="#logn_proof">in cel mai rau caz log<sub>2</sub>n</a>, facand complexitatea functiei O(log n).</p>
 </section><p></p></div>
 <div id="afterwards"><section>
 <h1>Implementarea in C++</h1>
@@ -113,7 +112,7 @@ void update(int ind, int val)<br>
 </td></tr></table>
 
 </section><p></p><section>
-<h1 id="logn_proof">De ce O(log<sub>2</sub> n)?</h1>
+<h1 id="logn_proof">De ce O(log n)?</h1>
 <!--<p>Fie f:ℕ*→ℕ, f(x)=2<sup>UB(x)</sup>=(x&-x)</p>-->
 <p>Fie sirul (x)<sub>n</sub>, x<sub>0</sub>=pos, x<sub>i+1</sub>=x<sub>i</sub>+(x<sub>i</sub>&-x<sub>i</sub>). Notam x<sub>i</sub>=a<span class="s2">1b</span> => x<sub>i+1</sub>=a1b+01b=<span class="s2">(a+1)0b</span> => UB(x<sub>i+1</sub>)&gt=1+UB(x<sub>i</sub>). UB(h)∈[0,log<sub>2</sub>n] ∀h∈[1,n] ,deoarece n poate avea maxim log<sub>2</sub>n + 1 biti, dintre care un bit este setat, iar functia logaritmica (in baza 2) este strict crescatoate. Fie k cel mai mare index pentru care x<sub>k</sub><=n. Avem log<sub>2</sub>n>=UB(x<sub>k</sub>)>=1+UB(x<sub>k-1</sub>)>=2+...>=k+UB(x<sub>0</sub>)>=0 rezulta log<sub>2</sub>n-UB(x<sub>0</sub>)>=k, iar UB(x<sub>0</sub>)∈[0,log<sub>2</sub>n], de unde rezulta faptul ca <span class="s2">valoarea maxima pe care o poate lua k este log<sub>2</sub>n</span>.</p>
 

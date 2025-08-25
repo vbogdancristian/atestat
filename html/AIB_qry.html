@@ -19,10 +19,9 @@
   <a href="AIB_2d.html">Generalizare 2D</a>
   </div>
   </li>
-  <li><a href="#exercices">Exerciții</a></li>
+  <li><a href="AIB_exercitii.html">Exerciții</a></li>
   <li class="dropdown"><a class="dropbtn">Extra</a>
   <div class="dropdown-content">
-  <a href="#">Istoric</a>
   <a href="#">Minim/Maxim?</a><!-- https://share.google/6CUgLof4S5z4bZMFf -->
   <a href="#">Aplicații</a>
   </div>
@@ -45,7 +44,7 @@
 <p></p>
 <section><div>
 <h1>Functia de interogare pe prefix</h1>
-<p>Dupa cum sugereaza si numele, functia de interogare va returna pentru un index <span class="s1">p</span> dat suma tuturor elementelor din intervalul [1,<span class="s1">p</span>]. Pentru a calcula suma tuturor elementelor din subsecventa [p<sub>1</sub>,p<sub>2</sub>] avem: v[p<sub>1</sub>]+v[p<sub>1</sub>+1]+...+v[p<sub>2</sub>-1]+v[p<sub>2</sub>]=(v[1]+v[2]+...v[p<sub>1</sub>-1]+v[p<sub>1</sub>]+v[p<sub>1</sub>+1]+...+v[p<sub>2</sub>])-(v[1]+v[2]+...+v[p<sub>1</sub>-1])=> <span class="s2">Σ(p<sub>1</sub>,p<sub>2</sub>)=Σ(1,p<sub>2</sub>)-Σ(1,p<sub>1</sub>-1)</span>. Pentru a efectua interogarea in O(log<sub>2</sub>n) vom vizita anumite noduri ale AIB-ului astfel incat sa formam pas cu pas secventa dorita.</p>
+<p>Dupa cum sugereaza si numele, functia de interogare va returna pentru un index <span class="s1">p</span> dat suma tuturor elementelor din intervalul [1,<span class="s1">p</span>]. Pentru a calcula suma tuturor elementelor din subsecventa [p<sub>1</sub>,p<sub>2</sub>] avem: v[p<sub>1</sub>]+v[p<sub>1</sub>+1]+...+v[p<sub>2</sub>-1]+v[p<sub>2</sub>]=(v[1]+v[2]+...v[p<sub>1</sub>-1]+v[p<sub>1</sub>]+v[p<sub>1</sub>+1]+...+v[p<sub>2</sub>])-(v[1]+v[2]+...+v[p<sub>1</sub>-1])=> <span class="s2">Σ(p<sub>1</sub>,p<sub>2</sub>)=Σ(1,p<sub>2</sub>)-Σ(1,p<sub>1</sub>-1)</span>. Pentru a efectua interogarea in O(log n) vom vizita anumite noduri ale AIB-ului astfel incat sa formam pas cu pas secventa dorita.</p>
 <h3>Intrebarea ramane: cum putem identifica nodurile ce trebuie vizitate?</h3>
 <p>Vom reprezenta numarul p in baza 2 si vom sterge treptat fiecare bit setat incepand din dreapta, pana ajungem la primul. In alte cuvinte, aplicam in mod repetat operatia <span class="s2">x=x-(x&-x)</span>, incepand de la x=pos. Vom folosi drept reper <span class="s1">vizualizarea arborelui indexat binar</span> pentru a deduce formula folosita, dupa care ii vom demonstra validitatea matematic. Iata cateva exemple:</p>
 <p>Σ(1,1)=Σ(1,[1])=AIB[1]=v[1];<br>
@@ -64,7 +63,7 @@
 <p></p>
 <section><div>
 <h1>Reprezentarea grafica a unui AIB</h1>
-In continuare puteti apasa pe reprezentarea AIB pe care o preferati:</p>
+<p>In continuare puteti apasa pe reprezentarea AIB pe care o preferati:</p>
 <table class="imgtable"><tr>
 <td><img id="choose_arb" src="../img/AIB_arb_both.png" onclick="choose(0)"></td>
 <td><img id="choose_seg" src="../img/AIB_segment_0_nrs.png" onclick="choose(1)"></td>
@@ -79,7 +78,7 @@ Nodul y este parintele nodului x <=> <span class="s2">y=x-(x&-x)</span>;<br>
 *Radacina arborelui va fi nodul imaginar 0, acesta nu ii corespunde unei subsecvente din vector si are doar rolul de a uni padurile disjuncte de arbori create prin ingorarea nodurilor cu index mai mare decat n.</p>
 <table class="imgtable"><tr><td><img class="plain_img" src="../img/AIB_arb_r0_0.png"></td>
 <td><img class="plain_img" src="../img/AIB_arb_r0_1.png"></td></table>
-<p style="text-align:left">Observam ca daca urcam din nodul 11 catre radacina si reunim intervalele nodurilor parcurse vom avea obtine subsecventa [1,11], iar asta este adevarat pentru orice pozitie datorita modului in care este definit parintele unui nod oarecare. Asadar, pentru a reconstitui suma elementelor din subsecventa [1,pos] trebuie sa vizitam indecsii din sirul (x)<sub>n</sub>, x<sub>0</sub>=pos, x<sub>i+1</sub>=x<sub>i</sub>-(x<sub>i</sub>&-x<sub>i</sub>), singura precizare fiind ca trebuie oprita cautarea cand ajungem in nodul imaginar 0. Numarul de noduri vizitate este egal cu numarul de biti setati ai pozitiei cautate, iar aceasta poate avea maxim log<sub>2</sub>n astfel de biti, facand complexitatea functiei O(log<sub>2</sub>n).</p>
+<p style="text-align:left">Observam ca daca urcam din nodul 11 catre radacina si reunim intervalele nodurilor parcurse vom avea obtine subsecventa [1,11], iar asta este adevarat pentru orice pozitie datorita modului in care este definit parintele unui nod oarecare. Asadar, pentru a reconstitui suma elementelor din subsecventa [1,pos] trebuie sa vizitam indecsii din sirul (x)<sub>n</sub>, x<sub>0</sub>=pos, x<sub>i+1</sub>=x<sub>i</sub>-(x<sub>i</sub>&-x<sub>i</sub>), singura precizare fiind ca trebuie oprita cautarea cand ajungem in nodul imaginar 0. Numarul de noduri vizitate este egal cu numarul de biti setati ai pozitiei cautate, iar aceasta poate avea maxim log<sub>2</sub>n astfel de biti, facand complexitatea functiei O(log n).</p>
 </section><p></p></div>
 <div id="segstyle"><section>
 <h1>Reprezentarea prin segmente</h1>
@@ -88,7 +87,7 @@ Nodul y este "fratele stang" nodului x <=> <span class="s2">y=x-(x&-x)</span>.<b
 Cu toate ca nu exista conceptul de frati "stangi" sau "drepti" atunci cand discutam despre arbori, ne putem gandi la muchiile arborelui astfel pentru a pastra aceeasi figura la ambii arbori (de sufix si de prefix). Cand avem o operatie pe prefix vom parcurge "fratii stangi", iar cand avem o operatie pe sufix vom parcurge parintii.</p>
 <table class="imgtable"><tr><td><img class="plain_img" src="../img/AIB_segment_0.png"></td>
 <td><img class="plain_img" src="../img/AIB_segment_2.png"></td></table>
-<p>Este evident din reprezentare faptul ca pentru a acoperi intervalul original va trebuii sa alegem mereu "fratele stang", adica nodul de unde se termina intervalul nodului curent (x-(x&-x)+1). Asadar, pentru a reconstitui suma elementelor din subsecventa [1,pos] trebuie sa vizitam indecsii din sirul (x)<sub>n</sub>, x<sub>0</sub>=pos, x<sub>i+1</sub>=x<sub>i</sub>-(x<sub>i</sub>&-x<sub>i</sub>), singura precizare fiind ca trebuie oprita cautarea cand nodul curent devine 0. Numarul de noduri vizitate este egal cu numarul de biti setati ai pozitiei cautate, iar aceasta poate avea maxim log<sub>2</sub>n astfel de biti, facand complexitatea functiei O(log<sub>2</sub>n).</p>
+<p>Este evident din reprezentare faptul ca pentru a acoperi intervalul original va trebuii sa alegem mereu "fratele stang", adica nodul de unde se termina intervalul nodului curent (x-(x&-x)+1). Asadar, pentru a reconstitui suma elementelor din subsecventa [1,pos] trebuie sa vizitam indecsii din sirul (x)<sub>n</sub>, x<sub>0</sub>=pos, x<sub>i+1</sub>=x<sub>i</sub>-(x<sub>i</sub>&-x<sub>i</sub>), singura precizare fiind ca trebuie oprita cautarea cand nodul curent devine 0. Numarul de noduri vizitate este egal cu numarul de biti setati ai pozitiei cautate, iar aceasta poate avea maxim log<sub>2</sub>n astfel de biti, facand complexitatea functiei O(log n).</p>
 </section><p></p></div>
 
 <div id="afterwards"><section>
@@ -113,7 +112,7 @@ int query(int ind)<br>
 </td></tr></table>
 
 </section><p></p><section>
-<h1 id="logn_proof">De ce O(log<sub>2</sub> n)?</h1>
+<h1 id="logn_proof">De ce O(log n)?</h1>
 <p>Vom relua cele discutate: Functia de interogare primeste un numar x si ii sterge in fiecare iteratie ultimul bit setat, pana transformam x in 0. Pentru a calcula complexitatea vrem sa aflam numarul maxim de biti pe care ii poate avea numarul x, asa ca vom presupune ca toti bitii sunt setati. Daca x are k biti inseamna ca acesta este mai mic decat orice numar care are k+1 biti (la fel cum in baza 10 toate numerele de 2 cifre sunt mai mici decat orice numar de 3 cifre), iar cel mai mic numar de k+1 biti este 2<sup>k+1</sup>. In acelasi timp este adevarat ca orice numar de k biti este mai mare sau egal decat 2<sup>k</sup> (la fel cum orice numar de 2 cifre este mai mare sau egal ca 10). Asadar il putem incadra pe x astfel: 2<sup>k</sup>&lt=x.&lt2<sup>k+1</sup>, inegalitatea se mentine daca logaritmam in baza 2, => k&lt=log<sub>2</sub>x&ltk+1, => [log<sub>2</sub>x]= k = numarul de biti ai numarului x. Putem conclude astfel ca numarul maxim de iteratii pentru un input x oarecare este log<sub>2</sub>x.
 <h3 id="bonus" style="cursor:pointer" onclick="hhh()">Alte demonstratii🞃</h3><div id="moreproofs">
 <p><span class="s1">Fie f:ℕ<sup>*</sup>→ℕ, f(x)=2<sup>UB(x)</sup>=(x&-x); f(a1b)=1b</span>;<br>
@@ -127,8 +126,8 @@ intr(x<sub>i</sub>) ∪ intr(x<sub>i+1</sub>) = [x<sub>i+1</sub>-f(x<sub>i+1</su
 Prin inductie se poate demonstra faptul ca pentru un oarecare k avem relatia: intr(x<sub>0</sub>) ∪ intr(x<sub>1</sub>) ∪... ∪ intr(x<sub>k</sub>) = (notatie) ∪(0,k) = [x<sub>k</sub> - f(x<sub>k</sub>) +1, x<sub>0</sub>]. Stiind x<sub>[log<sub>2</sub>n]</sub> = 0, avem ∪(0,[log<sub>2</sub>n]) = [0-0+1,x<sub>0</sub>] = [1,x<sub>0</sub>].
 </span> 
 </section>
-<p><p><section><p>
-In continuare vom discuta despre <span class="s2"><a href="AIB_qry.html">Interogarea pe prefix</a></span>. Daca ati revizuit deja teoria, puteti studia in continuare:<br>
+<p></p><section><p>
+In continuare vom discuta despre <span class="s2"><a href="AIB_upd.html">Actualizarea pe sufix</a></span>. Daca ati revizuit deja teoria, puteti studia in continuare:<br>
 A) <span class="s2"><a href="AIB_binsrch.html">Cautarea binara</a></span><br>
 B) <span class="s2"><a href="AIB_2d.html">AIB bidimensional</a></span>
 </p>
