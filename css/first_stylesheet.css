@@ -475,4 +475,5 @@ table, th, td {
 	background-color:var(--white);
 	tab-size: 4;
 	text-align: left;
+	overflow-x: auto;
 }
