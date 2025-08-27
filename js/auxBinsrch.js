@@ -29,12 +29,11 @@ function copycode_in()
 {
 	let copyText=`int binSearch(int val)
 {
-    int ind=0;
-    int sum=0;
-    int interval=n/2;
+    int ind=0, sum=0;
+    int interval=1<<((int)log2(n));
     while(interval)
     {
-        if(aib[ind+interval]+sum<val)
+        if(ind+interval<=n and aib[ind+interval]+sum<val)
         {
             sum+=aib[ind+interval];
             ind+=interval;

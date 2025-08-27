@@ -22,6 +22,7 @@
   <li><a href="AIB_exercitii.html">Exerciții</a></li>
   <li class="dropdown"><a class="dropbtn">Extra</a>
   <div class="dropdown-content">
+  <a href="#">Functia de construire</a>
   <a href="#">Minim/Maxim?</a><!-- https://share.google/6CUgLof4S5z4bZMFf -->
   <a href="#">Aplicații</a>
   </div>
@@ -93,21 +94,21 @@ Cu toate ca nu exista conceptul de frati "stangi" sau "drepti" atunci cand discu
 <div id="afterwards"><section>
 <h1>Implementarea in C++</h1>
 <table class="imgtable"><tr><td><img class="plain_img" src="../img/query_0.png"></td>
-<td><p style="text-align:left">&nbsp;&nbsp;&nbsp;&nbsp;In stanga este codul functiei in C++ care implementeaza simplu si eficient parcurgerea nodurilor cheie discutata mai sus. Comentariul din bucla nu este <span class="groupUp">necesar, dar</span> le-am pastrat in scheletul functiei pentru claritate.<br><br><span class="tooltip" >
+<td><p style="text-align:left">In stanga este codul functiei in C++ care implementeaza simplu si eficient parcurgerea nodurilor cheie discutata mai sus. Comentariul din bucla nu este <span class="groupUp">necesar, dar</span> le-am pastrat in scheletul functiei pentru claritate.<br><br><span class="tooltip" >
 <button onclick="copycode_in()" onmouseout="copycode_out()" class="button">
 <span class="tooltiptext" id="idtooltip">Copiaza pe clipboard</span>
 Copiaza codul direct
 </button></span><br><br>
 sau selecteaza-l manual:<br><br>
-int query(int ind)<br>
-{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int s=0;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(int i=ind;i>0;i-=(i&-i))<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s+=aib[i];<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return s;<br>
-}<br>
+<pre class="codebox">int query(int ind)
+{
+    int s=0;
+    for(int i=ind;i>0;i-=(i&-i))
+    {
+        s+=aib[i];
+    }
+    return s;
+}</pre>
 </p>
 </td></tr></table>
 

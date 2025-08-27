@@ -22,6 +22,7 @@
   <li><a href="AIB_exercitii.html">Exerciții</a></li>
   <li class="dropdown"><a class="dropbtn">Extra</a>
   <div class="dropdown-content">
+  <a href="#">Functia de construire</a>
   <a href="#">Minim/Maxim?</a><!-- https://share.google/6CUgLof4S5z4bZMFf -->
   <a href="#">Aplicații</a>
   </div>
@@ -90,20 +91,20 @@ Ce s-ar intampla daca drumul o ia prin mijloc? Ei bine, vom cauta (log n)/2 frat
 <div id="afterwards"><section>
 <h1>Implementarea in C++</h1>
 <table class="imgtable"><tr><td><img class="plain_img" src="../img/binsrch_0.png"></td>
-<td><p style="text-align:left">&nbsp;&nbsp;&nbsp;&nbsp;In stanga este codul functiei in C++ care implementeaza simplu si eficient cautarea binara in log n, ceea ce se vede clar din structura algoritmului.<br><span class="tooltip" >
+<td><p style="text-align:left">In stanga este codul functiei in C++ care implementeaza simplu si eficient cautarea binara in log n, ceea ce se vede clar din structura algoritmului.</p><span class="tooltip" >
 <button onclick="copycode_in()" onmouseout="copycode_out()" class="button">
 <span class="tooltiptext" id="idtooltip">Copiaza pe clipboard</span>
 Copiaza codul direct
 </button></span><br>
-sau selecteaza-l manual:<br>
-int binSearch(int val)<br>
+<p style="text-align:left">sau selecteaza-l manual:</p>
+<!--<span class="codeLook">int binSearch(int val)<br>
 {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int ind=0;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int sum=0;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int interval=n/2;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int interval=1&lt&lt((int)log2(n));<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while(interval)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(aib[ind+interval]+sum&ltval)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(ind+interval<=n and aib[ind+interval]+sum&ltval)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sum+=aib[ind+interval];<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ind+=interval;<br>
@@ -111,9 +112,25 @@ int binSearch(int val)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interval/=2;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return ind;<br>
-}<br>
-</p>
+}<br></span>-->
+<pre class="codebox">int binSearch(int val)
+{
+    int ind=0, sum=0;
+    int interval=1&lt&lt((int)log2(n));
+    while(interval)
+    {
+        if(ind+interval&lt=n and aib[ind+interval]+sum&ltval)
+        {
+            sum+=aib[ind+interval];
+            ind+=interval;
+        }
+        interval/=2;
+    }
+    return ind;
+}</pre>
+
 </td></tr></table>
+<p>Mic detaliu de implementare: 1&lt&lt((int)log2(n)) reprezinta cea mai mare putere de 2 mai mica decat n. Daca variabila de start este initializata cu orice altceva atunci codul nu va functiona corect mereu;</p>
 </section><p></p>
 
 <section>
