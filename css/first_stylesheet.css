@@ -478,3 +478,11 @@ table, th, td {
 	text-align: left;
 	overflow-x: auto;
 }
+.badge:not(img)
+{
+	margin-left:10px;
+	margin-right:10px;
+}
+.badge img{
+	margin-top:10px;
+}

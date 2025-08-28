@@ -4,11 +4,12 @@
 <meta charset="unicode-bidi">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="../css/first_stylesheet.css">
+<link rel="icon" type="image/x-icon" href="../img/favicon.ico">
 </head>
 <body>
-
 <nav>
 <ul>
+	<li class="badge"><img src="../img/favicon.ico" ></li>
   <li><a href="../index.html">Acasă</a></li>
   <li class="dropdown"><a class="dropbtn">Teorie</a>
   <div class="dropdown-content">
@@ -36,19 +37,65 @@
 </ul>
 </nav>
 <main>
-<button class="back_button" onclick="location.href='AIB_exercitii.html'">&ltInapoi</button>
-<button class="front_button" onclick="location.href='#placeholder'">Inainte&gt</button>
+<button class="back_button" onclick="location.href='AIB_minmax.html'">&ltInapoi</button>
 <p></p>
 <section class="prereq"><div>
-*Pentru a intelege acest articol este necesara familiarizarea cu <a href="AIB_introducere.html" target="_blank">structura unui AIB</a>.
+*Acest articol presupune ca ai revizuit deja <a href="AIB_introducere">teoria in intregime</a>.
 </div></section>
 <p></p>
 <section>
+<h1>Aplicatii</h1>
+<p>1.<br><br>a) Cate noduri de lungime 4 va avea un AIB de marime 20?</p><!--3-->
 
-</section
+<p>b) Cate noduri de lungime 2 va avea un AIB de marime 21?</p><!--5-->
+
+<p>c) Cate noduri de lungime 16 va avea un AIB de marime 1099?</p><!--34-->
+
+<p>d) Cate noduri de lungime 3 va avea un AIB de marime 15?</p><!--0-->
+
+<p>e) Cat este UB(39483) ? </p>
+
+<p>f) Cat este UB(100) ? </p>
+
+<p>g) Cat este (1024&-1024) ? </p>
+
+<p>h) Cat este (1023&-1023) ? </p>
+
+<p>2.<br><br>a) Cum va arata AIB pe sume daca are ca reper vectorul [3,4,2,5,3,4] ? Raspunde-ti cu un string de numere separate doar de virgula: [<!--here goes input textbox-->]
+</p>
+
+<p>b) Daca AIB este memorat ca fiind [3,4,21,4,2,9], cum arata vectorul original ? Raspunde-ti cu un string de numere separate doar de virgula: [<!--here goes input textbox-->]
+</p>
+
+<p>c) Daca adaugam 25 la valoarea elementului de pe pozitia 3 a vectorului [2,8,3,7,4,16], cum va arata vectorul AIB ?  Raspunde-ti cu un string de numere separate doar de virgula: [<!--here goes input textbox-->]
+</p>
+
+<p>d) Ce valoarea va returna query(3,6) daca vectorul AIB este [4,2,9,4,5,4] ? 
+</p>
+
+<p>3.<br><br>a) Cate noduri vor fi vizitate daca apelam update(4,val) si n = 15 ?
+</p>
+
+<p>b) Cate noduri vor fi vizitate daca apelam query(24) ?
+</p>
+
+<p>c) Cate noduri vor fi vizitate daca apelam binSearch(7) intr-un AIB cu vectorul [2,3,1,0,1,1] ? Functia binSearch(val) returneaza cel mai mare index ind pentru care Σ(1,ind) &lt val;
+</p>
+
+<p>d) Cate noduri vor fi vizitate daca apelam update(2,7,val) intr-un AIB 2d cu n=4, m=13 ?
+</p>
+
+<p>e) Cate noduri vor fi vizitate daca apelam query(29,4) intr-un AIB 2d ?
+</p> 
+</section>
 <p></p>
-<button class="back_button" onclick="location.href='AIB_exercitii.html'">&ltInapoi</button>
-<button class="front_button" onclick="location.href='#placeholder'">Inainte&gt</button>
+<section>
+<p>In continuare puteti alege generatorul dorit:<br>
+A) <a href="AIB_gen1.html">Generator AIB sume</a>;<br>
+B) <a href="AIB_gen2.html">Generator AIB xor</a>;<br>
+</section>
+<p></p>
+<button class="back_button" onclick="location.href='AIB_minmax.html'">&ltInapoi</button>
 <p></p>
 </main>
 </body>

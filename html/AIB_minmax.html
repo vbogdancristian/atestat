@@ -4,11 +4,12 @@
 <meta charset="unicode-bidi">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="../css/first_stylesheet.css">
+<link rel="icon" type="image/x-icon" href="../img/favicon.ico">
 </head>
 <body>
-
 <nav>
 <ul>
+	<li class="badge"><img src="../img/favicon.ico" ></li>
   <li><a href="../index.html">Acasă</a></li>
   <li class="dropdown"><a class="dropbtn">Teorie</a>
   <div class="dropdown-content">
@@ -36,19 +37,108 @@
 </ul>
 </nav>
 <main>
-<button class="back_button" onclick="location.href='AIB_exercitii.html'">&ltInapoi</button>
-<button class="front_button" onclick="location.href='#placeholder'">Inainte&gt</button>
+<button class="back_button" onclick="location.href='AIB_build.html'">&ltInapoi</button>
+<button class="front_button" onclick="location.href='AIB_apl.html'">Inainte&gt</button>
 <p></p>
 <section class="prereq"><div>
-*Pentru a intelege acest articol este necesara familiarizarea cu <a href="AIB_introducere.html" target="_blank">structura unui AIB</a>.
+*Pentru a intelege acest articol este necesara familiarizarea cu <a href="AIB_introducere.html" target="_blank">toata teoria</a>.
 </div></section>
 <p></p>
 <section>
-
-</section
+<h1>Arbori indexati binari si Arbore de intervale</h1>
+<p>Pana acum am vazut cum functioneaza arborii indexati binari pentru stocarea unei sume, dar pentru ce alte operatii i-am putea aplica? Ei bine, daca vrem sa folosim un singur AIB atunci trebuie functia sa fie <span class="s2">inversabila</span>. Atunci cand spunem faptul ca Σ(st,dr)=Σ(1,dr)-Σ(1,st-1) ne folosim de faptul ca primele st-1 elemente se <span class="s1">reduc</span>, am putea scrie in mod asemanator ∏(st,dr)=∏(1,dr)/∏(1,st-1) sau ⊕(st,dr)=⊕(1,dr)^⊕(1,st-1) (deoarece a^a=0, a^0=a, facand functia inversa lui xor ea insasi). <span class="s2">NU</span> putem folosi un singur AIB pentru a determina minimul, maximul, cel mai mare divizor comun etc, cel mai mult putem determina raspunsul la interogari de tip f[x-(x&-x)+1,x]. Pentru acest tip de probleme este folosita alta structura de date care poate actualiza si interoga cu aceeasi complexitate ca cea studiata, numita arbori de intervale (Aint pe scurt).
+<p>Toate problemele ce pot fi rezolvate prin AIB pot fi rezolvate si prin AInt, dar reciproca nu se aplica. Daca modificam problema originala astfel incat in loc de suma sa calculam minimul/maximul pe o secventa atunci nu vom reusi cu un singur AIB. Daca nu vrem sa folosim AInt se pune urmatoarea intrebare: <span class="s1">Oare am putea rezolva problema cu doua AIB-uri?</span> Da, in O(m log n log n).</p>
+<p>In continuare voi reda solutia gasita de userul <a href="https://stackoverflow.com/users/4490400/bkoodaa">bkoodaa</a> pe <a href="https://stackoverflow.com/questions/31106459/how-to-adapt-fenwick-tree-to-answer-range-minimum-queries/34602284#34602284">stack overflow</a>:</p>
+</section>
 <p></p>
-<button class="back_button" onclick="location.href='AIB_exercitii.html'">&ltInapoi</button>
-<button class="front_button" onclick="location.href='#placeholder'">Inainte&gt</button>
+<section>
+<h1>AIB de minim/maxim</h1>
+<p>Vrem sa folosim AIB pentru a rezolva problema specifica arborilor de intervale:<br><br>
+A)Actualizare pe o singura pozitie in O(log n log n)<br>
+B)Interogarea maximului din secventa [st,dr] in O(log n)<br><br>
+Vom avea un AIB care actualizeaza pe sufix, interogheaza pe sufix, notat AIB1 si un alt AIB care actualizeaza pe prefix, interogheaza pe sufix, notat AIB2. AIB1[x] va stoca max[x-(x&-x)+1,x], iar AIB2[x] va stoca max[x,x+(x&-x)+1] (secventa oglindita). De asemenea pastram vectorul original.</p>
+<h3>Functia de interogare</h3>
+<p>Pentru a determina maxim dintr-o secventa [st,dr] vom interoga ambele structuri de date in intervalul [st,dr] (veti vedea la ce ma refer cand vedeti codul) si vom returna maximul dintre cele 2. Problema este ca aceste 2 parcurgeri se apropie dar nu ating un singur index din [st,dr], deci vom mai face o verificare la final. Acesta este codul:</p>
+<pre class="codebox">int QUERY(int st, int dr)
+{
+    int val=-1;
+    for(int i=dr;i-(i&-i)>=st;i-=(i&-i))
+    {
+        val=max(val,aib1[i]);
+    }
+    int i=st;
+    for(;i+(i&-i)<=dr;i+=(i&-i))
+    {
+        val=max(val,aib2[i]);
+    }
+    val=max(val,v[i]);
+    return val;
+}
+</pre>
+<h3>Functia de actualizare</h3>
+<p>Aceasta este mai dificila de implementat din cauza faptului ca <span class="s2">setam</span> valoarea unei pozitii, nu o inlocuim cu maximul dintre cea veche si inputul nou. Astfel va trebui sa stergem orice semn ca a existat vreo-data valoarea respectiva. Va trebuii sa comparam valoarea veche a nodurilor cu cea noua, iar daca aceasta este mai mare putem inlocuii fara grija, urcand catre radacina. Daca in schimb aceasta nu este mai mare apare o problema, caci nu putem lasa valoarea pe care vrem sa o inlocuim, deci vom scana fiecare fiu (frate daca ne gandim la reprezentarea prin segmente) si ii vom lua valoarea maxima. Complexitatea devine O(log n log n), dar pentru mai multe apeluri de functie cu indecsi diferiti devine O(log n) <span class="s2">amortizat</span>, inferior arborilor de intervale. Acesta este codul:<br>
+<pre class="codebox">void UPDATE(int pos, int val)
+{
+    int oldValue=v[pos];
+    v[pos]=val;
+    int copyval=val;
+    int node=pos;
+    ///aib1
+    while (node&lt=n)
+    {
+        if (val&ltaib1[node])
+        {
+            if(oldValue==aib1[node])
+            {
+                val=max(val,v[node]);
+                for(int i=0;i&lt__builtin_ctz(node);i++)///functia __builtin_ctz(x) returneaza UB(x), este mai rapid si mai sigur decat log2(x&-x)
+                {
+                    int child=node-(1&lt&lti);
+                    val=max(val,aib1[child]);
+                }
+            }
+            else break;
+        }
+        if (val==aib1[node]) break;
+        aib1[node]=val;
+        node+=(node&-node);
+    }
+    ///aib2
+    node=pos;
+    val=copyval;
+    while (node>0)
+    {
+        if (val&ltaib2[node])
+        {
+            if(oldValue==aib2[node])
+            {
+                val=max(val,v[node]);
+                for(int i=0;i&lt__builtin_ctz(node);i++)
+                {
+                    int child=node+(1&lt&lti);
+                    val=max(val,aib2[child]);
+                }
+            }
+            else break;
+        }
+        if (val==aib2[node]) break;
+        aib2[node]=val;
+        node-=(node&-node);
+    }
+
+}</pre>
+Cu toate ca solutia nu este O((n+m)log n) curat, este de 2 ori mai rapida decat implementarea obisnuita cu arbori de intervale. Codul ar deveni mai eficient (ca timp si ca linii de cod) daca problema originala nu ar fi <span class="s2">setat</span> un element, ci ar fi facut maximul dintre el si pozitia deja-existenta.</p>
+</section>
+<p></p>
+<section>
+<h1>Ce inseamna asta?</h1>
+<p>Nimic, tot arborii de intervale vor fi folositi pentru probleme de minim si maxim, tot arborii indexati binari se vor prefera pentru probleme cu functii inversabile (adunare/inmultire/xor). Scopul articolului este de a ilustra capacitatile structurii de date, dar si limitatiile sale.</p>
+<p>Pentru cei interesati puteti afla mai multe in aceasta lucrare: http://ioinformatics.org/oi/pdf/v9_2015_39_44.pdf;<br>
+Acestea fiind spuse, ati ajuns la finalul ultimii pagini de "teorie". In continuare va puteti testa cu niste <a href="AIB_apl.html">aplicatii simple</a> sau puteti experimenta cu <a href="AIB_gen1.html">generatorul</a>.</p>
+</section>
+<p></p>
+<button class="back_button" onclick="location.href='AIB_build.html'">&ltInapoi</button>
+<button class="front_button" onclick="location.href='AIB_apl.html'">Inainte&gt</button>
 <p></p>
 </main>
 </body>
