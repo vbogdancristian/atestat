@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="unicode-bidi">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="../css/first_stylesheet.css">
+</head>
+<body>
+
+<nav>
+<ul>
+  <li><a href="../index.html">Acasă</a></li>
+  <li class="dropdown"><a class="dropbtn">Teorie</a>
+  <div class="dropdown-content">
+  <a href="AIB_introducere.html">Introducere</a>
+  <a href="AIB_upd.html">Functia de actualizare</a>
+  <a href="AIB_qry.html">Functia de interogare</a>
+  <a href="AIB_binsrch.html">Cautare binara eficienta</a>
+  <a href="AIB_2d.html">Generalizare 2D</a>
+  </div>
+  </li>
+  <li><a href="AIB_exercitii.html">Exerciții</a></li>
+  <li class="dropdown"><a class="active" class="dropbtn">Extra</a>
+  <div class="dropdown-content">
+  <a href="AIB_build.html">Functia de construire</a>
+  <a href="AIB_minmax.html">Minim/Maxim?</a><!-- https://share.google/6CUgLof4S5z4bZMFf -->
+  <a href="AIB_apl.html">Aplicații</a>
+  </div>
+  </li>
+  <li class="dropdown"><a class="dropbtn" style="cursor: pointer">Generator</a>
+  <div class="dropdown-content">
+  <a href="AIB_gen1.html"> AIB clasic </a>
+  <a href="AIB_gen2.html">AIB xor </a><!--  # = AIB_gen2.html -->
+  <a href="#"> AIB 2d</a><!--  # = AIB_gen3.html -->
+  </li>
+</ul>
+</nav>
+<main>
+<button class="back_button" onclick="location.href='AIB_exercitii.html'">&ltInapoi</button>
+<button class="front_button" onclick="location.href='AIB_minmax.html'">Inainte&gt</button>
+<p></p>
+<section class="prereq"><div>
+*Pentru a intelege acest articol este necesara familiarizarea cu <a href="AIB_introducere.html" target="_blank">structura unui AIB</a> si <a href="AIB_upd.html" target="_blank">functia de actualizare</a>.
+</div></section>
+<p></p>
+<section>
+<h1>Functia de construire eficienta</h1>
+<p>Adesea atunci cand vrem sa cream un AIB pe baza unui vector de lungime n vom apela functia de actualizare de n ori pentru fiecare index.</p>
+<pre class="codebox">for(int i=1;i<=n;i++)
+{
+	fin>>v[i];
+	update(i,v[i]);
+}</pre>
+<p>Daca AIB-ul are deja valorile corespunzatoare unui alt vector w:</p>
+<pre class="codebox">for(int i=1;i<=n;i++)
+{
+	fin>>v[i];
+	update(i,v[i]-w[i]);
+}</pre>
+<p>In cele mai multe cazuri cand folosim AIB nu ne incurca complexitatea de O(nlog n), dar se poate construii in timp liniar dupa urmatoarea recurenta:</p>
+<pre class="codebox">for(int i=1; i&lt=n; i++)
+{
+    AIB[i]+=v[i];///evenual -w[i] daca este cazul
+    if(i+(i&-i)&lt=n)AIB[i+(i&-i)]+=AIB[i];
+}
+</pre>
+<span class="tooltip" >
+<button onclick="copycode_in()" onmouseout="copycode_out()" class="button">
+<span class="tooltiptext" id="idtooltip">Copiaza pe clipboard</span>
+Copiaza codul direct
+</button></span><br>
+<p>Indexul i trebuie adaugat la AIB[i], AIB[i+(i&-i)], AIB[i+(i&-i)+(i+(i&-i)&-(i+(i&-i)))] etc. In AIB[i] vor intra mai multe elemente ce se regasesc si AIB[i+(i&-i), acestea la randul lor se regasesc in <span class="groupUp">AIB[i+(i&-i)+(i+(i&-i)&-(i+(i&-i)))]</span>, deci ar avea mai mult sens sa adaugam la AIB[i+(i&-i)] suma tuturor indecsilor determinati de AIB[i] decat sa ii luam pe rand.</p>
+<p>Recurenta fiind liniara vom avea complexitatea finala O(n).</p>
+
+</section>
+<p></p>
+<button class="back_button" onclick="location.href='AIB_exercitii.html'">&ltInapoi</button>
+<button class="front_button" onclick="location.href='AIB_minmax.html'">Inainte&gt</button>
+<p></p>
+</main>
+<script src="../js/auxBuild.js"></script>
+</body>
+</html>

@@ -259,14 +259,15 @@ table, th, td {
 	color:var(--dark_purple);
 	font-size:18px;
 	display:inline;
-	margin-left:6vw;
+	margin-left:20px;
 }
 #mention{
 	color:var(--dark_purple);
 	font-size:18px;
 	display:inline;
-
-	margin-left:1.5vw;
+	margin-left:60vw;
+	font-weight:800;
+	text-shadow:1px 1px var(--yellow);
 }
 #speed{
 	visibility:hidden;
