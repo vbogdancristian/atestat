@@ -142,7 +142,7 @@ Complexitatea totala este O(nlog n + mlog m), al doilea termen venind de la sort
 Observam faptul ca va exista mereu secventa evantai formata din capetele sirului: A<sub>1</sub>, A<sub>5</sub>. Intrebarea este: cum ramane cu A<sub>2</sub>, A<sub>3</sub>, A<sub>4</sub> ? In cate moduri putem cupla 2 elemente din sirul [1+1,5-1] astfel incat suma acestora sa nu depaseasca A<sub>1</sub>+A<sub>5</sub>? <br>
 Vom itera prin toate capetele posibile in O(n<sup>2</sup>) cu i si j si vom calcula pentru fiecare nr[i][j]= 1 + #moduri([i+1,j-1],A[i]+A[j]-1), adaugam rezultatul la rezultatul total, dupa care transmitem pentru urmatoarele secvente mai mari rezultatul. Vom folosi un AIB 2d - prima stare pentru index si a doua stare pentru suma. Pentru a simplifica lucrurile putem parcurge in ordine inversa (i=<span class="numarNatural">n,1</span>,j=<span class="numarNatural">n,i+1</span>) ceea ce inseamna ca in pozitiile (i,j) putem scrie #moduri([i+1,j-1], A[i]+A[j]-1) drept query( j-1 , A[i]+A[j]-1) (pozitiile 1, 2, ..., i nu au fost actualizate, deci raman 0 si nu au efect asupra calculului). Transmiterea informatiei se face simplu printr-o actualizare de tipul: update(posX = j, posY = A[i] + A[j], val =  nr[i][j]). Rezultatul final va fi nr[1][1] + nr[1][2] + ... + nr[n][n], ceea ce il putem calcula pe parcurs, deci putem renunta la matricea nr cand implementam.</p>
 <p>Complexitatea finala este O(n<sup>2</sup>log n log summax), unde summax reprezinta suma maxima a 2 elemente din sir (in problema summax = 2000, nmax = 700);</p>
-<p>*Observatie: daca nu vrem o parcurgere inversa va trebui sa implementam update pe prefix si query pe prefix;</p> 
+<p>*Observatie: daca nu vrem o parcurgere inversa va trebui sa implementam update pe prefix si query pe sufix. Acesta functioneaza pe acelasi principiu in mare, modificarile fiind: AIB[x]=[x,x+(x&-x)-1], functia de actualizare foloseste parcurgerea pe prefix (x -> x-(x&-x)), functia de interogare foloseste parcurgerea pe sufix (x -> x+(x&-x)). Am inclus pentru cei curiosi codul alternativ la sectia de rezolvari mai jos;</p> 
 </p>
 </div>
 </section>
@@ -173,5 +173,8 @@ cod alternativ pentru evantai:
 <p></p>
 </main>
 <script src="../js/auxExercitii.js"></script>
+<footer>
+Software educational realizat de Vlad Bogdan Cristian, Colegiul National Emil Racovita Iasi
+</footer>
 </body>
 </html>

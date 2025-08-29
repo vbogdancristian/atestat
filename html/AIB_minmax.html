@@ -54,7 +54,7 @@
 <section>
 <h1>AIB de minim/maxim</h1>
 <p>Vrem sa folosim AIB pentru a rezolva problema specifica arborilor de intervale:<br><br>
-A)Actualizare pe o singura pozitie in O(log n log n)<br>
+A)Actualizare pe o <span class="s2">singura</span> pozitie in O(log<sup>2</sup> n)/O(log n) amortizat<br>
 B)Interogarea maximului din secventa [st,dr] in O(log n)<br><br>
 Vom avea un AIB care actualizeaza pe sufix, interogheaza pe sufix, notat AIB1 si un alt AIB care actualizeaza pe prefix, interogheaza pe sufix, notat AIB2. AIB1[x] va stoca max[x-(x&-x)+1,x], iar AIB2[x] va stoca max[x,x+(x&-x)+1] (secventa oglindita). De asemenea pastram vectorul original.</p>
 <h3>Functia de interogare</h3>
@@ -76,7 +76,7 @@ Vom avea un AIB care actualizeaza pe sufix, interogheaza pe sufix, notat AIB1 si
 }
 </pre>
 <h3>Functia de actualizare</h3>
-<p>Aceasta este mai dificila de implementat din cauza faptului ca <span class="s2">setam</span> valoarea unei pozitii, nu o inlocuim cu maximul dintre cea veche si inputul nou. Astfel va trebui sa stergem orice semn ca a existat vreo-data valoarea respectiva. Va trebuii sa comparam valoarea veche a nodurilor cu cea noua, iar daca aceasta este mai mare putem inlocuii fara grija, urcand catre radacina. Daca in schimb aceasta nu este mai mare apare o problema, caci nu putem lasa valoarea pe care vrem sa o inlocuim, deci vom scana fiecare fiu (frate daca ne gandim la reprezentarea prin segmente) si ii vom lua valoarea maxima. Complexitatea devine O(log n log n), dar pentru mai multe apeluri de functie cu indecsi diferiti devine O(log n) <span class="s2">amortizat</span>, inferior arborilor de intervale. Acesta este codul:<br>
+<p>Aceasta este mai dificila de implementat din cauza faptului ca <span class="s2">setam</span> valoarea unei pozitii, nu o inlocuim cu maximul dintre cea veche si inputul nou. Astfel va trebui sa stergem orice semn ca a existat vreo-data valoarea respectiva. Va trebuii sa comparam valoarea veche a nodurilor cu cea noua, iar daca aceasta este mai mare putem inlocuii fara grija, urcand catre radacina. Daca in schimb aceasta nu este mai mare apare o problema, caci nu putem lasa valoarea pe care vrem sa o inlocuim, deci vom scana fiecare fiu (frate daca ne gandim la reprezentarea prin segmente) si ii vom lua valoarea maxima. Complexitatea devine O(log<sup>2</sup> n), dar pentru mai multe apeluri de functie cu indecsi diferiti devine O(log n) <span class="s2">amortizat</span>. Acesta este codul:<br>
 <pre class="codebox">void UPDATE(int pos, int val)
 {
     int oldValue=v[pos];
@@ -132,7 +132,7 @@ Cu toate ca solutia nu este O((n+m)log n) curat, este de 2 ori mai rapida decat 
 <p></p>
 <section>
 <h1>Ce inseamna asta?</h1>
-<p>Nimic, tot arborii de intervale vor fi folositi pentru probleme de minim si maxim, tot arborii indexati binari se vor prefera pentru probleme cu functii inversabile (adunare/inmultire/xor). Scopul articolului este de a ilustra capacitatile structurii de date, dar si limitatiile sale.</p>
+<p>Nimic, tot arborii de intervale vor fi folositi pentru probleme de minim si maxim si actualizari pe un interval, tot arborii indexati binari se vor prefera pentru probleme cu functii inversabile (adunare/inmultire/xor). Scopul articolului este de a vedea cat de tare poate fi impinsa aceasta structura de date peste limita sa.</p>
 <p>Pentru cei interesati puteti afla mai multe in aceasta lucrare: http://ioinformatics.org/oi/pdf/v9_2015_39_44.pdf;<br>
 Acestea fiind spuse, ati ajuns la finalul ultimii pagini de "teorie". In continuare va puteti testa cu niste <a href="AIB_apl.html">aplicatii simple</a> sau puteti experimenta cu <a href="AIB_gen1.html">generatorul</a>.</p>
 </section>
@@ -141,5 +141,8 @@ Acestea fiind spuse, ati ajuns la finalul ultimii pagini de "teorie". In continu
 <button class="front_button" onclick="location.href='AIB_apl.html'">Inainte&gt</button>
 <p></p>
 </main>
+<footer>
+Software educational realizat de Vlad Bogdan Cristian, Colegiul National Emil Racovita Iasi
+</footer>
 </body>
 </html>
