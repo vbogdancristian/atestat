@@ -58,7 +58,7 @@
 	fin>>v[i];
 	update(i,v[i]-w[i]);
 }</pre>
-<p>In cele mai multe cazuri cand folosim AIB nu ne incurca complexitatea de O(nlog n), dar se poate construii in timp liniar dupa urmatoarea recurenta:</p>
+<p>In cele mai multe cazuri cand folosim AIB nu ne incurca complexitatea de O(nlog n), dar se poate construi in timp liniar dupa urmatoarea recurenta:</p>
 <pre class="codebox">for(int i=1; i&lt=n; i++)
 {
     AIB[i]+=v[i];///evenual -w[i] daca este cazul

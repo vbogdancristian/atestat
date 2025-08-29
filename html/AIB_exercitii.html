@@ -47,15 +47,23 @@
 <p></p>
 <section>
 <h1>Probleme rezolvate cu AIB</h1>
-<p>In acest articol vom descrie solutia la cateva probleme selectate folosind cele invatate anterior. Daca ati stat mai mult timp la o problema si doriti sa vedeti sursa de 100 de puncte, am inclus-o la finalul paginii in sectia de spoiler. Problemele sunt sortate crescator dupa dificultate:</p>
+<p>In acest articol vom descrie solutia la cateva probleme selectate folosind cele invatate anterior. Daca ati stat mai mult timp la o problema si doriti sa vedeti sursa de 100 de puncte, am inclus-o la finalul paginii in sectia de rezolvari. Problemele sunt sortate crescator dupa dificultate:</p>
 </section><p></p>
 
 <section>
 <h1>Problema <span class="s1">schi</span> de pe Infoarena</h1>
-<p>Cerinta o puteti gasi <a href="https://www.infoarena.ro/problema/schi" target="_blank">aici</a>.</p>
+<p>Cerinta o mai puteti gasi si <a href="https://www.infoarena.ro/problema/schi" target="_blank">aici</a>.<br>
+La un concurs de schi, are loc o proba contra-cronometru, concurentii trebuind sa termine traseul in cel mai scurt timp cu putinta. Acestia vor evolua consecutiv si, dupa finish, li se va comunica locul ocupat in clasamentul intermediar. Mai exact, dupa evolutia celui de-al p-lea concurent, acesta va sti locul sau in clasamentul format de primii p concurenti. Cunoscand pozitiile intermediare, se cere sa se determine clasamentul final al competitiei.<br>
+Date de intrare:<br>
+Pe prima linie a fisierului de intrare schi.in se afla N, reprezentand numarul de concurenti aliniati la startul concursului. Pe urmatoarele N linii se afla cate o valoare intreaga, indicand locul ocupat de fiecare concurent in clasamentul intermediar, actualizat dupa evolutia sa.<br>
+Date de iesire:<br>
+Fisierul de iesire schi.out va avea N linii. Pe linia i se va afisa numarul de ordine al concurentului care ocupa locul i in clasamentul final.<br>
+Restrictii:<br>
+1 ≤ N ≤ 30000<br>
+</p>
 <h3 class="boxType" id="schi_box" onclick="schi_h()">Descriere solutie🞃</h3>
 <div class="solType" id="schi_sol">
-<p>Notam v[i] pozitia concurentului i la momentul i (ce se da) si pos[i] concurentul de pe pozitia i la finalul concursului (ce se cere). Observam faptul ca pozitia finala a concurentului final este chiar v[n], acesta neavand ocazia sa intreaca sau sa fie intrecut de altcineva in ultimul moment. Despre penultimul concurent avem mai multe cazuri: daca v[n-1]&ltv[n] (are o pozitie mai buna decat concurentul n), atunci acelasi argument se aplica. Daca in schimb v[n-1]&gt=v[n], inseamna ca in momentul n acesta va cobori cu exact o pozitie, fiind in urma concurentului n. Ne putem gandi atunci ca vom simula procesul de la coada la cap si vom cauta pentru fiecare concurent x a v[x]-a pozitie libera in clasament, dupa care vom marca pozitia ca fiind ocupata de x. Vom folosi structura de date invatata astfel: la inceput initializam toate pozitiile cu 1, iar pentru a marca o pozitie ca fiind indisponibila facem update(pos,-1). Cand cautam binar cel mai mare index mai mic sau egal decat v[x], cautam de fapt care este a v[x]-a pozitie neocupata. Pentru fiecare concurent facem o cautare si o actualizare, facand complexitatea totala O(n*log n).</p>
+<p>Notam v[i] pozitia concurentului i la momentul i (ce se da) si pos[i] concurentul de pe pozitia i la finalul concursului (ce se cere). Observam faptul ca pozitia finala a concurentului final este chiar v[n], acesta neavand ocazia sa intreaca sau sa fie intrecut de altcineva in ultimul moment. Pentru penultimul concurent avem mai multe cazuri: daca v[n-1]&ltv[n] (are o pozitie mai buna decat concurentul n), atunci acelasi argument se aplica. Daca in schimb v[n-1]&gt=v[n], inseamna ca in momentul n acesta va cobori cu exact o pozitie, fiind in urma concurentului n. Ne putem gandi atunci ca vom simula procesul de la coada la cap si vom cauta pentru fiecare concurent x a v[x]-a pozitie libera in clasament, dupa care vom marca pozitia ca fiind ocupata de x. Vom folosi structura de date invatata astfel: la inceput initializam toate pozitiile cu 1, iar pentru a marca o pozitie ca fiind indisponibila facem update(pos,-1). Cand cautam binar cel mai mare index mai mic sau egal decat v[x], cautam de fapt care este a v[x]-a pozitie neocupata. Pentru fiecare concurent facem o cautare si o actualizare, facand complexitatea totala O(n*log n).</p>
 <p>Exemplul rezolvat pas cu pas:<br><br>
 initial, <br>
 <table class="normalTable"><tr class="normaltr">
@@ -117,10 +125,20 @@ Repetam procesul pana la v[1]=1. Vectorul final este:<br>
 
 <section>
 <h1>Problema <span class="s1">calafat</span> data la ONI in 2016</h1>
-<p>Cerinta o puteti gasi <a href="https://www.pbinfo.ro/probleme/1692/calafat" target="_blank">aici</a>.</p>
+<p>Cerinta o mai puteti gasi si <a href="https://www.pbinfo.ro/probleme/1692/calafat" target="_blank">aici</a>.<br>
+Se dă un șir format din N numere naturale. Pentru fiecare valoare distinctă dintr-o subsecvență cuprinsă între doi indici st si dr considerăm distanța dintre indicii primei și ultimei apariții ale acesteia în cadrul subsecvenței. Dându-se M subsecvențe de forma [st, dr], se cere să se calculeze suma distanțelor corespunzătoare tuturor valorilor distincte din subsecvență.<br>
+Date de intrare:<br>
+Fișierul de intrare calafat.in conține pe prima linie două numere natural N și M. Pe a doua linie se vor afla cele N numere din șirul dat. Pe următoarele M linii se vor afla câte două numere st și dr, cu semnificația că vrem să calculăm suma menționată mai sus pentru subsecvența [st,dr].<br>
+Date de ieșire:<br>
+Fișierul de ieșire calafat.out va conține M numere naturale, câte unul pe fiecare linie, reprezentând cele M sume cerute.<br>
+Restricții și precizări:<br>
+1 ≤ N, M ≤ 200000<br>
+1 ≤ st ≤ dr ≤ N<br>
+Valorile din șir se vor afla în intervalul [1, N]<br>
+</p>
 <h3 class="boxType" id="calafat_box" onclick="calafat_h()">Descriere solutie🞃</h3>
 <div class="solType" id="calafat_sol">
-<p>Vom sorta subsecventele date crescator dupa capatul drept si vom creea vectorul <span class="s1">st[i]</span> = cea mai apropiata pozitie mai mica ca i astfel incat v[i] = v[st[i]]. Pe baza urmatoarei informatii va functiona AIB-ul:<br>
+<p>Vom sorta subsecventele date crescator dupa capatul drept si vom crea vectorul <span class="s1">st[i]</span> = cea mai apropiata pozitie mai mica ca i astfel incat v[i] = v[st[i]]. Pe baza urmatoarei informatii va functiona AIB-ul:<br>
 ...x...x...x...<br>
 ..i1..i2..i3...<br>
 dist(i1,i3)=dist(i1,i2)+dist(i2,i3)<br>
@@ -134,13 +152,26 @@ Complexitatea totala este O(nlog n + mlog m), al doilea termen venind de la sort
 
 <section>
 <h1>Problema <span class="s1">evantai</span> data la ONI in 2005</h1>
-<p>Cerinta o puteti gasi <a href="https://www.infoarena.ro/problema/evantai" target="_blank">aici</a>.</p>
+<p>Cerinta o mai puteti gasi si <a href="https://www.infoarena.ro/problema/evantai" target="_blank">aici</a>.<br>
+Lui Algorel ii plac mult sirurile de numere naturale cu proprietati cat mai ciudate. Cautand astfel de ciudatenii ale informaticii, a gasit printr-o carte prafuita de vreme un nou tip de sir denumit evantai. Un evantai este un sir cu un numar par de termeni, E<sub>1</sub> E<sub>2</sub> ... E<sub>2K</sub>, cu urmatoarea proprietate:<br>
+E<sub>1</sub> + E<sub>2K</sub> > E<sub>2</sub> + E<sub>2K-1</sub> > ... > E<sub>K</sub> + <sub>EK+1</sub><br>
+Cerinta:<br>
+Fiind dat un sir de numere naturale distincte A<sub>1</sub> <sub>A2</sub> ... A<sub>N</sub>, Algorel vrea sa afle cate subsiruri ale acestuia sunt evantaie.<br>
+Date de intrare:<br>
+Prima linie a fisierului evantai.in contine numarul intreg N, reprezentand numarul de elemente ale sirului. Urmatoarele N linii contin, in ordine, elementele sirului A.<br>
+Date de iesire:<br>
+Pe prima linie a fisierului evantai.out se va afla un singur numar intreg C, reprezentand numarul de subsiruri evantai. Rezultatul va fi afisat modulo 30103.<br>
+Restrictii si precizari:<br>
+2 ≤ N ≤ 700<br>
+Elementele sirului sunt numere intregi distincte cuprinse intre 1 si 1000<br>
+Prin subsir se intelege orice insiruire de termeni A<sub>i1</sub> A<sub>i2</sub> ... A<sub>ik</sub> astfel incat i<sub>1</sub> &lt i<sub>2</sub> &lt ... &lt i<sub>k</sub> <br>
+</p>
 <h3 class="boxType" id="evantai_box" onclick="evantai_h()">Descriere solutie🞃</h3>
 <div class="solType" id="evantai_sol">
 <p>La o prima vedere problema pare a fi de programare dinamica, dar are o rezolvare eleganta doar cu AIB. Consideram nr[i][j] = numarul de siruri "evantai" ce putem forma folosind elemente din subsirul [i,j] si avand capetele in i si in j. Ultima conditie este importanta, deoarece vrem ca sirul A<sub>i1</sub>, A<sub>i2</sub>, ... , A<sub>ik</sub> sa fie tratat separat de sirul A<sub>i1</sub>, A<sub>i2</sub>, ... , A<sub>ik+1</sub>. Vom considera nr[1][5]:<br>
 <span class="s2">A<sub>1</sub></span>, A<sub>2</sub>, A<sub>3</sub>, A<sub>4</sub>, <span class="s2">A<sub>5</sub></span>;<br>
 Observam faptul ca va exista mereu secventa evantai formata din capetele sirului: A<sub>1</sub>, A<sub>5</sub>. Intrebarea este: cum ramane cu A<sub>2</sub>, A<sub>3</sub>, A<sub>4</sub> ? In cate moduri putem cupla 2 elemente din sirul [1+1,5-1] astfel incat suma acestora sa nu depaseasca A<sub>1</sub>+A<sub>5</sub>? <br>
-Vom itera prin toate capetele posibile in O(n<sup>2</sup>) cu i si j si vom calcula pentru fiecare nr[i][j]= 1 + #moduri([i+1,j-1],A[i]+A[j]-1), adaugam rezultatul la rezultatul total, dupa care transmitem pentru urmatoarele secvente mai mari rezultatul. Vom folosi un AIB 2d - prima stare pentru index si a doua stare pentru suma. Pentru a simplifica lucrurile putem parcurge in ordine inversa (i=<span class="numarNatural">n,1</span>,j=<span class="numarNatural">n,i+1</span>) ceea ce inseamna ca in pozitiile (i,j) putem scrie #moduri([i+1,j-1], A[i]+A[j]-1) drept query( j-1 , A[i]+A[j]-1) (pozitiile 1, 2, ..., i nu au fost actualizate, deci raman 0 si nu au efect asupra calculului). Transmiterea informatiei se face simplu printr-o actualizare de tipul: update(posX = j, posY = A[i] + A[j], val =  nr[i][j]). Rezultatul final va fi nr[1][1] + nr[1][2] + ... + nr[n][n], ceea ce il putem calcula pe parcurs, deci putem renunta la matricea nr cand implementam.</p>
+Vom itera prin toate capetele posibile in O(n<sup>2</sup>) cu i si j si vom calcula pentru fiecare nr[i][j]= 1 + #moduri([i+1,j-1],A[i]+A[j]-1), adaugam rezultatul la rezultatul total, dupa care transmitem pentru urmatoarele secvente mai mari rezultatul. Vom folosi un AIB 2d - prima stare pentru index si a doua stare pentru suma. Pentru a simplifica lucrurile putem parcurge in ordine inversa (i=<span class="numarNatural">n,1</span>,j=<span class="numarNatural">n,i+1</span>) ceea ce inseamna ca in pozitiile (i,j) putem scrie #moduri([i+1,j-1], A[i]+A[j]-1) drept query( j-1 , A[i]+A[j]-1) (pozitiile 1, 2, ..., i nu au fost actualizate, deci raman 0 si nu au efect asupra calculului). Transmiterea informatiei se face simplu printr-o actualizare de tipul: update(posX = j, posY = A[i] + A[j], val =  nr[i][j]). Rezultatul final va fi nr[1][1] + nr[1][2] + ... + nr[n][n], pe care il putem calcula pe parcurs, deci putem renunta la matricea nr cand implementam.</p>
 <p>Complexitatea finala este O(n<sup>2</sup>log n log summax), unde summax reprezinta suma maxima a 2 elemente din sir (in problema summax = 2000, nmax = 700);</p>
 <p>*Observatie: daca nu vrem o parcurgere inversa va trebui sa implementam update pe prefix si query pe sufix. Acesta functioneaza pe acelasi principiu in mare, modificarile fiind: AIB[x]=[x,x+(x&-x)-1], functia de actualizare foloseste parcurgerea pe prefix (x -> x-(x&-x)), functia de interogare foloseste parcurgerea pe sufix (x -> x+(x&-x)). Am inclus pentru cei curiosi codul alternativ la sectia de rezolvari mai jos;</p> 
 </p>
@@ -150,10 +181,10 @@ Vom itera prin toate capetele posibile in O(n<sup>2</sup>) cu i si j si vom calc
 <p></p>
 
 <section><h1>Alte probleme</h1>
-<p>BoB de pe pbinfo: https://www.pbinfo.ro/probleme/3511/bob<br>
-<p>Inversiuni de pe NerdArena:https://www.nerdarena.ro/problema/inversiuni<br>
-<p>Tokitsukaze and Strange Inequality de pe codeforces:https://codeforces.com/problemset/problem/1677/A</p></section>
-
+<p>BoB de pe pbinfo: <a href="https://www.pbinfo.ro/probleme/3511/bob">https://www.pbinfo.ro/probleme/3511/bob</a></p>
+<p>Inversiuni de pe NerdArena: <a href="https://www.nerdarena.ro/problema/inversiuni">https://www.nerdarena.ro/problema/inversiuni</a></p>
+<p>Tokitsukaze and Strange Inequality de pe codeforces: <a href="https://codeforces.com/problemset/problem/1677/A">https://codeforces.com/problemset/problem/1677/A</a></p></section>
+<p></p>
 <section><h1>Rezolvari</h1><p>Se recomanda incercarea problemei un timp indelungat inainte de a vedea sursa de 100 de puncte.</p>
 <h3 class="boxType" id="spoiler_warning" onclick="spoiler_h()">Afisati🞃</h3>
 <div class="solType" id="spoiler">

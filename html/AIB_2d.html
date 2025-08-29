@@ -49,7 +49,7 @@
 <section>
 <h1>Generalizarea in 2 dimensiuni</h1>
 <p>Conceptul de arbore indexat binar il putem generaliza pentru tablouri multi-dimensionale. Pentru AIB 2d vom avea urmatoarea problema de rezolvat:<br>
-Se da o matrice a (indexata de la 1,1) cu <span class="s1">n</span> linii si <span class="s1">m</span> coloane, dupa care se dau <span class="s1">k</span> operatii care pot fi de 2 feluri:<br>
+Se da o matrice a (indexata de la 1,1) cu <span class="s1">n</span> linii si <span class="s1">m</span> coloane, dupa care se dau <span class="s1">k</span> operatii care pot fi de 2 tipuri:<br>
 A) Adauga <span class="s1">val</span> la a[<span class="s1">posX</span>][<span class="s1">posX</span>]; <span class="s2">(Actualizare)</span><br>
 B) Afiseaza suma elementelor din matrice din dreptunghiul cu colturile in [1,1] si [<span class="s1">posX</span>,<span class="s1">posY</span>]; <span class="s2">(Interogare)</span><br><br>
 Complexitatea dorita este O(k*log n * log m), adica O(log n * log m) pentru fiecare operatie.
@@ -75,14 +75,14 @@ Reprezentarea grafica a unui AIB 2d este greu de urmarit, dar ideea din spate es
 <section>
 <h1>Noile functii</h1>
 <p>Functiile de actualizare si interogare 2-dimensionale sunt extensii logice a celor clasice.</p>
-<h2>Noua functie de actualizare pe sufix</h2><br>
-<p>Avand ca input o valoare <span class="s1">val</span> si doua pozitii <span class="s1">posX</span> si <span class="s1">posY</span>, vom actualiza toate nodurile din toate AIB-urile ce contin a[<span class="s1">posX</span>][<span class="s1">posY</span>]. Aplicam aceeasi operatie repetata <span class="s2">x=x+(x&-x)</span> pentru ambii indecsi de data aceasta, creeand sirurile (x)<sub>n</sub> si (y)<sub>n</sub>. Vom adaugam val la AIB[x<sub>i</sub>][y<sub>j</sub>] pentru oricare i,j astfel incat x<sub>i</sub>&lt=n si y<sub>j</sub>&lt=m. Am dedus in articolul functiei clasice de actualizare ca exista maxim log n (respectiv log m) indecsi ce respecta conditia, asadar complexitatea finala a noii functii este O(log n * log m).</p><br>
+<h2>Noua functie de actualizare pe sufix</h2>
+<p>Avand ca input o valoare <span class="s1">val</span> si doua pozitii <span class="s1">posX</span> si <span class="s1">posY</span>, vom actualiza toate nodurile din toate AIB-urile ce contin a[<span class="s1">posX</span>][<span class="s1">posY</span>]. Aplicam aceeasi operatie repetata <span class="s2">x=x+(x&-x)</span> pentru ambii indecsi de data aceasta, creand sirurile (x)<sub>n</sub> si (y)<sub>n</sub>. Vom adaugam val la AIB[x<sub>i</sub>][y<sub>j</sub>] pentru oricare i,j astfel incat x<sub>i</sub>≤n si y<sub>j</sub>≤m. Am dedus in articolul functiei clasice de actualizare ca exista maxim log n (respectiv log m) indecsi ce respecta conditia, asadar complexitatea finala a noii functii este O(log n * log m).</p><br>
 <table class="imgtable"><tr>
 <td><img class="plain_img" id="choose_arb" src="../img/AIB_arb_r17_3.png"></td>
 <td><img class="plain_img" id="choose_seg" src="../img/AIB_segment_5.png"></td>
 </tr></table><br>
 
-Testeaza: Daca n = <input id="n_upd" name="n_upd" type="number" value="31" autocomplete='off' class="tryit" onchange="upd_send()"></input>, 
+<span class="s2">Testeaza</span>: Daca n = <input id="n_upd" name="n_upd" type="number" value="31" autocomplete='off' class="tryit" onchange="upd_send()"></input>, 
 m = <input id="m_upd" name="m_upd" type="number" value="32" autocomplete='off' class="tryit" onchange="upd_send()"></input>, 
 posX = <input id="posX_upd" name="posX_upd" type="number" value="27" autocomplete='off' class="tryit" onchange="upd_send()"></input>, 
 posY = <input id="posY_upd" name="posY_upd" type="number" value="1" autocomplete='off' class="tryit" onchange="upd_send()"></input>, 
@@ -90,14 +90,14 @@ vom actualiza AIB[<span id="result_upd">(27,1), (27,2), (27,4), (27,8), (27,16),
 <p id="error_msg_upd"></p>
 <p id="upd_secret">*Avand in vedere restrictiile, ati descoperit cel mai lung raspuns posibil, felicitari!</p>
 <br>
-<h2>Noua functie de interogare pe prefix</h2><br>
-<p>Vrem sa aflam suma din dreptunghiul [(1, 1) , (<span class="s1">posX</span>, <span class="s1">posY</span>)], unde <span class="s1">posX</span> si <span class="s1">posY</span> sunt indecsi dati. Aplicam aceeasi aplicatie repetata pentru ambii indecsi de data aceasta, creeand sirurile (x)<sub>n</sub> si (y)<sub>n</sub>. Vom culege valoarea din fiecare nod AIB[x<sub>i</sub>][y<sub>j</sub>] pentru oricare i,j astfel incat x<sub>i</sub>&gt0 si y<sub>i</sub>&gt0. Am dedus in articolul functiei de interogare ca exista log n (respectiv log m) indecsi ce respecta conditia, asadar complexitatea finala a noii functii este O(log n * log m).</p><br>
+<h2>Noua functie de interogare pe prefix</h2>
+<p>Vrem sa aflam suma din dreptunghiul [(1, 1) , (<span class="s1">posX</span>, <span class="s1">posY</span>)], unde <span class="s1">posX</span> si <span class="s1">posY</span> sunt indecsi dati. Aplicam aceeasi operatie repetata pentru ambii indecsi de data aceasta, creand sirurile (x)<sub>n</sub> si (y)<sub>n</sub>. Vom culege valoarea din fiecare nod AIB[x<sub>i</sub>][y<sub>j</sub>] pentru oricare i,j astfel incat x<sub>i</sub>&gt0 si y<sub>i</sub>&gt0. Am dedus in articolul functiei de interogare ca exista log n (respectiv log m) indecsi ce respecta conditia, asadar complexitatea finala a noii functii este O(log n * log m).</p><br>
 <table class="imgtable"><tr>
 <td><img class="plain_img" id="choose_arb" src="../img/AIB_arb_r0_4.png"></td>
 <td><img class="plain_img" id="choose_seg" src="../img/AIB_segment_6.png"></td>
 </tr></table><br>
 
-Testeaza: Σ[(1,1), (<input id="posX_qry" name="posX_qry" type="number" value="27" autocomplete='off' class="tryit" onchange="qry_send()"></input> , <input id="posY_qry" name="posY_qry" type="number" value="20" autocomplete='off' class="tryit" onchange="qry_send()"></input>)] = <span id="result_qry">Σ[(1,1),([11011],[10100]) = AIB[27][20] + AIB[27][16] + AIB[26][20] + AIB[26][16] + AIB[24][20] + AIB[24][16] + AIB[16][20] + AIB[16][16];</span>
+<span class="s2">Testeaza</span>: Σ[(1,1), (<input id="posX_qry" name="posX_qry" type="number" value="27" autocomplete='off' class="tryit" onchange="qry_send()"></input> , <input id="posY_qry" name="posY_qry" type="number" value="20" autocomplete='off' class="tryit" onchange="qry_send()"></input>)] = <span id="result_qry">Σ[(1,1),([11011],[10100]) = AIB[27][20] + AIB[27][16] + AIB[26][20] + AIB[26][16] + AIB[24][20] + AIB[24][16] + AIB[16][20] + AIB[16][16];</span>
 <p id="error_msg_qry"></p>
 </section>
 <p></p>
@@ -158,7 +158,7 @@ int query(int indX, int indY)
 	}
 	return sum;
 }</pre>
-Frumusetea la AIB este ca, spre deosebire de alte structuri de date, pot fi generalizati cu usurinta pe dimensiuni mai mari. Daca avem nevoie de un AIB 3d, singurul lucru ce trebuie adaugat in interiorul functiilor este inca o bucla <span class="s1">for</span> identica cu celelalte 2.
+Un aspect important la AIB este faptul ca, spre deosebire de alte structuri de date, pot fi generalizati cu usurinta pe dimensiuni mai mari. Daca avem nevoie de un AIB 3d, singurul lucru ce trebuie adaugat in interiorul functiilor este inca o bucla <span class="s1">for</span> identica cu celelalte 2.
 </section><p></p><section>
 <p>Vom discuta in continuare despre <span class="s2"><a href="AIB_binsrch.html">Cautarea binara eficienta in AIB</a></span>. Daca ati revizuit deja teoria, testati-va la <span class="s2"><a href="AIB_exercitii.html">sectia de exercitii</a></span>!
 </section>

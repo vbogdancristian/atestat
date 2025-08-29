@@ -50,10 +50,10 @@
 <section>
 <h1>Fie urmatoarea problema:</h1>
 <div >
-<p>Se da un vector v (indexat de la 1) care contine <span class="s1">n</span> elemente, dupa care se dau <span class="s1">m</span> operatii care pot fi de 2 feluri:<br>
+<p>Se da un vector v (indexat de la 1) care contine <span class="s1">n</span> elemente, dupa care se dau <span class="s1">m</span> operatii care pot fi de 2 tipuri:<br>
 A) Adauga <span class="s1">val</span> la v[<span class="s1">pos</span>]; <span class="s2">(Actualizare)</span><br>
 <!-- -> Afiseaza suma elementelor a caror pozitii sunt in intervalul [<span class="s1">pos1</span> ,<span class="s1">pos2</span>] <span class="s2">(query)</span><br><br>-->
-B) Afiseaza suma subsecventei [<span class="s1">pos1</span>,<span class="s1">pos2</span>] a vectorului; <span class="s2">(Interogare)</span><br><br>
+B) Afiseaza suma subsecventei [<span class="s1">pos1</span>, <span class="s1">pos2</span>] a vectorului; <span class="s2">(Interogare)</span><br><br>
 </p> 
 <p>O solutie consta in crearea unui vector suplimentar de sume partiale pentru raspuns in O(1) la <span class="s2">interogare</span>. Problema cu aceasta abordare este faptul ca <span class="s2">actualizarea</span> implica actualizarea sumelor partiale dupa pozitia modificata, ceea ce poate duce in cel mai rau caz la O(n), facand complexitatea totala O(n*m). Tot aceeasi complexitate obtinem daca renuntam la sume partiale pentru a actualiza in O(1) si raspundem in O(n) la <span class="s2">interogare</span>. Pentru o solutie optima de O(m*log n) vom putea folosi un AIB.</p>
 </div>
@@ -61,16 +61,16 @@ B) Afiseaza suma subsecventei [<span class="s1">pos1</span>,<span class="s1">pos
 <p></p>
 <section>
 <h1>Ideea din spate</h1><div>
-<p>Un <span class="s3">Arbore Indexat Binar</span> este o structura de date dinamica eficienta usor de implementat care ocupa putin spatiu si implementeaza in timp logaritmic actualizarea si interogarea pe un prefix/sufix. Acesta functioneaza dupa urmatorul principiu:<br><br>
-1. AIB[i]=v[i] daca i=M1, i!=M2<br>
-2. AIB[i]=v[i-1]+v[i] daca i=M2,i!=M4<br>
-3. AIB[i]=v[i-3]+v[i-2]+v[i-1]+v[i] daca i=M4,i!=M8<br>
-4. AIB[i]=v[i-7]+v[i-6]+v[i-5]+v[i-4]+v[i-3]+v[i-2]+v[i-1]+v[i] daca i=M8,i!=M16<br>
+<p>Un <span class="s1">Arbore Indexat Binar</span> este o structura de date dinamica, eficienta, usor de implementat, care ocupa putin spatiu si implementeaza in timp logaritmic actualizarea si interogarea pe un prefix/sufix. Acesta functioneaza dupa urmatorul principiu:<br><br>
+1. AIB[i]=v[i] daca i=M<sub>1</sub>, i!=M<sub>2</sub><br>
+2. AIB[i]=v[i-1]+v[i] daca i=M<sub>2</sub>,i!=M<sub>4</sub><br>
+3. AIB[i]=v[i-3]+v[i-2]+v[i-1]+v[i] daca i=M<sub>4</sub>,i!=M<sub>8</sub><br>
+4. AIB[i]=v[i-7]+v[i-6]+v[i-5]+v[i-4]+v[i-3]+v[i-2]+v[i-1]+v[i] daca i=M<sub>8</sub>,i!=M<sub>16</sub><br>
 ...<br>
-k. AIB[i]=v[i-2<sup>(k-1)</sup>+1]+...+v[i-1]+v[i] daca i=M(2<sup>(k-1)</sup>),i!=M(2<sup>k</sup>)<br><br>
+k. AIB[i]=v[i-2<sup>(k-1)</sup>+1]+...+v[i-1]+v[i] daca i=M<sub>2<sup>(k-1)</sup></sub>,i!=M<sub>2<sup>k</sup></sub><br><br>
 Calculati: AIB[ <input id="p" name="p" type="number" value="24" autocomplete='off' class="tryit" onchange="send()"></input> ]=<span id="result" style="word-wrap: break-word;">Σ(17,24);</span><br>
 <span id="error_msg"></span><br>
-In alte cuvinte, AIB[i] stocheaza suma subsecventei [i-2<sup>UB(i)</sup>+1,i] a vectorului, unde UB(i)=pozitia (indexata din dreapta cu 0) ultimului bit de 1 din reprezentarea binara a numarului i. Pentru a vizualiza mai usor functia, acestea sunt cateva valori:<br><br>
+Cu alte cuvinte, AIB[i] stocheaza suma subsecventei [i-2<sup>UB(i)</sup>+1,i] a vectorului, unde UB(i)=pozitia (indexata din dreapta cu 0) ultimului bit de 1 din reprezentarea binara a numarului i. Pentru a vizualiza mai usor functia, acestea sunt cateva valori:<br><br>
 UB(1)=0<br>
 UB(2)=UB([10])=1<br>
 UB(3)=UB([11])=0<br>
@@ -85,7 +85,7 @@ Se poate vedea usor ca UB(i) poate fi interpretat si ca numarul de zerouri termi
 bit<sub>0</sub>*2<sup>0</sup>+bit<sub>1</sub>*2<sup>1</sup>+...+bit<sub>k</sub>*2<sup>k</sup> = 
 0+...+1*2<sup>UB(<span class="s1">nr</span>)</sup>+bit<sub>UB(<span class="s1">nr</span>)+1</sub>*2<sup>(UB(<span class="s1">nr</span>)+1)</sup>+...+bit<sub>k</sub>*2<sup>k</sup> = 
 2<sup>UB(<span class="s1">nr</span>)</sup> * (1+bit<sub>UB(<span class="s1">nr</span>)+1</sub>*2+...+bit<sub>k</sub>*2<sup>(k-UB(<span class="s1">nr</span>))</sup>) = 
-2<sup>UB(<span class="s1">nr</span>)</sup> * (1+M2), rezulta faptul ca <span class="s1">nr</span> este multiplu de 2<sup>UB(<span class="s1">nr</span>)</sup> si nu este multiplu de 2<sup>(UB(<span class="s1">nr</span>)+1)</sup>, echivalent cu conditia initiala.
+2<sup>UB(<span class="s1">nr</span>)</sup> * (1+M<sub>2</sub>), rezulta faptul ca <span class="s1">nr</span> este multiplu de 2<sup>UB(<span class="s1">nr</span>)</sup> si nu este multiplu de 2<sup>(UB(<span class="s1">nr</span>)+1)</sup>, echivalent cu conditia initiala.
 </p><br>
 </div></section>
 <p></p>
