@@ -53,6 +53,93 @@ let n;
 let animation_flag="green";
 let crtop="none";
 const code_obj=document.getElementById("code_H");
+function newop(optype)
+{
+	speed=document.getElementById("speed");///definition of bandaid fix
+	crtop=optype;
+	display_newop();
+	button_manage();
+	return;
+}
+function display_newop(){
+	if(crtop=="none")document.getElementById("opdisplay").innerHTML="niciunul&nbsp;&nbsp;&nbsp;";
+	if(crtop=="upd")document.getElementById("opdisplay").innerHTML="actualizare&nbsp;&nbsp;&nbsp;";
+	if(crtop=="qry")document.getElementById("opdisplay").innerHTML="interogare&nbsp;&nbsp;&nbsp;";
+}
+function button_manage(){
+	let updBstate=document.getElementById("updbutton").style.visibility;
+	let qryBstate=document.getElementById("qrybutton").style.visibility;
+	let buildBstate=document.getElementById("buildbutton").style.visibility;
+	let animtypestate=document.getElementById("type_animation").style.visibility;
+	if(crtop=="none")
+	{
+		updBstate="visible";
+		qryBstate="visible";
+		buildBstate="visible";
+		animtypestate="visible";
+	}
+	else if(crtop=="upd")
+	{
+		updBstate="hidden";
+		qryBstate="hidden";
+		buildBstate="hidden";
+		animtypestate="hidden";
+	}
+	else if(crtop=="qry")
+	{
+		updBstate="hidden";
+		qryBstate="hidden";
+		buildBstate="hidden";
+		animtypestate="hidden";
+	}
+	if(animtypestate=="hidden" && animation=="manual")//most bandaid fix ever
+	{
+		document.getElementById("speed").style.visibility="hidden";
+		document.getElementById("type_animation").value="manual";
+	}
+	else if(animtypestate=="hidden" && animation=="automatic")
+	{
+		document.getElementById("speed").style.visibility="visible";
+		document.getElementById("type_animation").value="automatic";
+	}
+	else
+	{
+		if(animation=="automatic")document.getElementById("speed").style.visibility="visible";
+	}
+	
+	document.getElementById("updbutton").style.visibility=updBstate;
+	document.getElementById("qrybutton").style.visibility=qryBstate;
+	document.getElementById("buildbutton").style.visibility=buildBstate;
+	document.getElementById("type_animation").style.visibility=animtypestate;
+	return;
+	//am scris functia cat de ineficient posibil
+}
+function value_range_tooltip(nr)
+{
+	if(nr==1 || nr==-1)
+	{
+		let tooltip = document.getElementById("idtooltip"+String(1));
+		tooltip.innerHTML = "pos ∈ ℕ ∩ [1, n]";
+		return;
+	}
+	if(nr==2 || nr==-2)
+	{
+		let tooltip = document.getElementById("idtooltip"+String(2));
+		tooltip.innerHTML = "pos1 ∈ ℕ ∩ [1, n]";
+		return;
+	}
+	if(nr==3 || nr==-3)
+	{
+		let tooltip = document.getElementById("idtooltip"+String(3));
+		tooltip.innerHTML = "pos2 ∈ ℕ ∩ [1, n]";
+		return;
+	}
+}		
+function bugfix1()
+{
+	display_n(1);
+	is_modified(true);
+}
 function is_modified(state=true)
 {
 	if(state==true)document.getElementById("instructions").innerHTML="Datele sunt modificate!";
@@ -74,6 +161,7 @@ async function submit_speed()
 	}
 	if(animation=="manual")
 	{
+		speed=document.getElementById("speed").value;//for some reason when you get manual you make speed = 1, idk
 		document.getElementById("codeHbutton").style.visibility="inherit";
 		return;
 	}
@@ -489,8 +577,7 @@ async function update(pos,value,showanimation=1)
 		write_text("");
 		H_update(0);
 		document.getElementById("Hdiv").style.visibility="hidden";
-
-
+		newop("none");
 		animation_flag="green";
 	}
 	/*for(let i=pos;i<=n;i+=(i&-i) )
@@ -699,6 +786,7 @@ async function range_query(pos1,pos2)/*return sum of elements in [pos1,pos2], po
 		document.getElementById("Qresult").style.visibility="visible";
 		document.getElementById("Hdiv").style.visibility="hidden";
 		animation_flag="green";
+		newop("none");
 	}
 	return;
 	//return query(pos2)-query(pos1-1);
@@ -802,7 +890,7 @@ function make_v()
 		let crt_s=s+i;
 		document.getElementById(crt_s).value=v[i];
 	}
-	//debugging();
+	// debugging();
 	aibexist_flag=true;
 	build();
 	draw_index(n);
@@ -851,8 +939,9 @@ function make_upd()
 	error_object.style.display="none";
 	error_object.innerHTML="";
 	document.getElementById("Hdiv").style.visibility="visible";
-	crtop="upd";
+	newop("upd");
 	update(given_pos,given_val);
+	
 	return;
 }
 function make_query()
@@ -910,7 +999,7 @@ function make_query()
 	error_object.style.display="none";
 	error_object.innerHTML="";
 	document.getElementById("Hdiv").style.visibility="visible";
-	crtop="qry";
+	newop("qry");
 	range_query(given_pos1,given_pos2);
 	return;
 }
@@ -1003,6 +1092,7 @@ function progress()
 			else if(op_vector[j]==-7777777)///animation_flag="green";
 			{
 				animation_flag="green";
+				newop("none");
 				document.getElementById("Hdiv").style.visibility="hidden";
 			}
 		}
@@ -1082,6 +1172,7 @@ function progress()
 				document.getElementById("Qresult").innerHTML=String(result);
 				document.getElementById("Qresult").style.visibility="visible";
 				animation_flag="green";
+				newop("none");
 				document.getElementById("Hdiv").style.visibility="hidden";
 			}
 		}

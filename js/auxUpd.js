@@ -83,7 +83,7 @@ function copycode_in()
 function copycode_out()
 {
 	let tooltip = document.getElementById("idtooltip");
-	tooltip.innerHTML = "Copiaza codul";
+	tooltip.innerHTML = "Copiaza pe clipboard";
 	return;
 }
 let proofstate=0;

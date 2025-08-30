@@ -30,7 +30,7 @@ int query(int indX, int indY)
 function copycode_out()
 {
 	let tooltip = document.getElementById("idtooltip");
-	tooltip.innerHTML = "Copiaza codul";
+	tooltip.innerHTML = "Copiaza pe clipboard";
 	return;
 }
 function upd_send()

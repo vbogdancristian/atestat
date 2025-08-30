@@ -17,16 +17,16 @@
   <li class="dropdown"><a  class="dropbtn">Teorie</a>
   <div class="dropdown-content">
   <a href="AIB_introducere.html">Introducere</a>
-  <a href="AIB_upd.html">Functia de actualizare</a>
-  <a href="AIB_qry.html">Functia de interogare</a>
-  <a href="AIB_binsrch.html">Cautare binara eficienta</a>
+  <a href="AIB_upd.html">Funcția de actualizare</a>
+  <a href="AIB_qry.html">Funcția de interogare</a>
+  <a href="AIB_binsrch.html">Căutare binara eficienta</a>
   <a href="AIB_2d.html">Generalizare 2D</a>
   </div>
   </li>
   <li><a href="AIB_exercitii.html">Exerciții</a></li>
   <li class="dropdown"><a class="dropbtn">Extra</a>
   <div class="dropdown-content">
-  <a href="AIB_build.html">Functia de construire</a>
+  <a href="AIB_build.html">Funcția de construire</a>
   <a href="AIB_minmax.html">Minim/Maxim?</a><!-- https://share.google/6CUgLof4S5z4bZMFf -->
   <a href="AIB_apl.html">Aplicații</a>
   </div>
@@ -61,7 +61,7 @@ adica form data -> make_query() -> query (voi mai si desena aici dar asta implem
 	<table class="datavector" style="display:inline-table" ><tbody>
 	<tr >
 	
-	<td class="theader"><input type="text" id="n_value" name="n_value" class="input_text" value="0" autocomplete='off' autofocus onblur="display_n(1)" onchange="is_modified()"></td>
+	<td class="theader"><input type="text" id="n_value" name="n_value" class="input_text" value="0" autocomplete='off' autofocus onchange="bugfix1()"></td>
 	<td class="theader"><p>v[i]</p></td>
 	<td><input class="input_text" autocomplete='off' type="text" id="v1" name="v1" value="0" onchange="is_modified()"></td>
 	<td><input class="input_text" autocomplete='off' type="text" id="v2" name="v2" value="0" onchange="is_modified()"></td>
@@ -135,7 +135,7 @@ adica form data -> make_query() -> query (voi mai si desena aici dar asta implem
 	</tr>
 	</tbody></table>
 </div>
-<button class="button" style="margin-left:30px;margin-right:20px;margin-bottom:10px;" onclick="make_v()">Creeaza</button>
+<button class="button" id="buildbutton" style="margin-left:30px;margin-right:20px;margin-bottom:10px;" onclick="make_v()">Creeaza</button>
 <p id="n_error_feedback"></p>
 
 
@@ -146,12 +146,13 @@ adica form data -> make_query() -> query (voi mai si desena aici dar asta implem
 <!-- here goes update-->
 <table style="display:inline-table" class="side_table"><tbody>
 <tr>
-<td><button class="button" onclick="make_upd()">Actualizeaza:</button></td>
+<td><button class="button" id="updbutton" onclick="make_upd()">Actualizeaza:</button></td>
 <td class="theader">
 <p>pos:&nbsp</p>
 </td>
-<td>
-<input class="input_text_other" autocomplete='off' type="text" id="upd_pos" name="upd_pos" value="0">
+<td><span class="tooltip" >
+<span class="tooltiptext" id="idtooltip1"></span>
+<input class="input_text_other" autocomplete='off' type="text" id="upd_pos" name="upd_pos" value="0" onmouseover="value_range_tooltip(1)" onmouseout="value_range_tooltip(-1)"></span>
 </td>
 <td class="theader">
 <p>val:&nbsp</p>
@@ -168,38 +169,42 @@ adica form data -> make_query() -> query (voi mai si desena aici dar asta implem
 <!-- here goes query-->
 <table style="display:inline-table" class="side_table"><tbody>
 <tr>
-<td rowspan="2"><button class="button" onclick="make_query()">Interogheaza:</button></td>
+<td rowspan="2"><button id="qrybutton" class="button" onclick="make_query()">Interogheaza:</button></td>
 <td class="theader" style="width:10%">
 <p>pos1:&nbsp</p>
 </td>
-<td>
-<input class="input_text_other" autocomplete='off' type="text" id="query_pos1" name="query_pos1" value="0">
+<td><span class="tooltip" >
+<span class="tooltiptext" id="idtooltip2"></span>
+<input class="input_text_other" autocomplete='off' type="text" id="query_pos1" name="query_pos1" value="0" onmouseover="value_range_tooltip(2)" onmouseout="value_range_tooltip(-2)"></span>
 </td>
 <td class="theader" style="width:10%">
 <p>pos2:&nbsp</p>
 </td>
-<td>
-<input class="input_text_other" autocomplete='off' type="text" id="query_pos2" name="query_pos2" value="0">
+<td><span class="tooltip" >
+<span class="tooltiptext" id="idtooltip3"></span>
+<input class="input_text_other" autocomplete='off' type="text" id="query_pos2" name="query_pos2" value="0" onmouseover="value_range_tooltip(3)" onmouseout="value_range_tooltip(-3)"></span>
 </td>
 <td style="width:20%;" id="Qresultbox">
 <p style="font-size:16px">⊕(pos1,pos2):&nbsp</p>
-<p id="Qresult" style="font-size:14px">Placeholder</p></td></tr>
+<p id="Qresult" style="font-size:14px"></p></td></tr>
 </tbody></table>
 </div>
 <p id="qry_error_feedback"></p>
 
 <div class="UI" id="Hdiv">
 <button class="button" onclick="progress()" id="codeHbutton">Continua</button>
-<img id="code_H" style="width:50%;" src="img/placeholder.jpg" ><!--this is just the Placeholder image-->
+<img id="code_H" style="width:50%; height:160px" src="img/favicon.ico" ><!--this is just the Placeholder image-->
 </div>
 </span></td>
 
 
 
 <td style="border:none">
-<div id="above_canvas"><select id="type_animation" name="type_animation">
+<div id="above_canvas">
+<p style="display:inline-block; font-size:18px; margin:0px">Proces in desfasurare: <span id="opdisplay">niciunul&nbsp;&nbsp;&nbsp;</span></p>
+<select id="type_animation" name="type_animation">
 <option value="manual" selected>Manual</option>
-<option value="automatic">Automatic</option>
+<option value="automatic">Automat</option>
 </select>
 <select id="speed" name="speed">
 <option value="0.0001">0.0001x</option>
