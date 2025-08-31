@@ -30,7 +30,7 @@ int query(int indX, int indY)
 function copycode_out()
 {
 	let tooltip = document.getElementById("idtooltip");
-	tooltip.innerHTML = "Copiaza pe clipboard";
+	tooltip.innerHTML = "Copiază pe clipboard";
 	return;
 }
 function upd_send()
@@ -62,7 +62,7 @@ function upd_send()
 		posY_obj.value=1;
 		result_obj.innerHTML="(27,1), (27,2), (27,4), (27,8), (27,16), (27,32), (28,1), (28,2), (28,4), (28,8), (28,16), (28,32)";
 		error_obj.style.display="block";
-		error_obj.innerHTML="*toate valorile date trebuie sa fie numare naturale mai mari sau egale cu 1 si mai mici sau egale cu 134217728";
+		error_obj.innerHTML="*toate valorile date trebuie să fie numere naturale mai mari sau egale cu 1 și mai mici sau egale cu 134217728";
 		return;
 	}
 	if(n==134217728 && m==134217728 && posX==1 && posY==1)
@@ -104,7 +104,7 @@ function qry_send()
 		posY_obj.value=20;
 		result_obj.innerHTML="Σ[(1,1),([11011],[10100]) = AIB[27][20] + AIB[27][16] + AIB[26][20] + AIB[26][16] + AIB[24][20] + AIB[24][16] + AIB[16][20] + AIB[16][16];";
 		error_obj.style.display="block";
-		error_obj.innerHTML="*toate valorile date trebuie sa fie numare naturale mai mari sau egale cu 1 si mai mici sau egale cu 134217728";
+		error_obj.innerHTML="*toate valorile date trebuie să fie numere naturale mai mari sau egale cu 1 și mai mici sau egale cu 134217728";
 		return;
 	}
 	error_obj.style.display="none";

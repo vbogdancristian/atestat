@@ -13,6 +13,6 @@ function copycode_in()
 function copycode_out()
 {
 	let tooltip = document.getElementById("idtooltip");
-	tooltip.innerHTML = "Copiaza pe clipboard";
+	tooltip.innerHTML = "Copiază pe clipboard";
 	return;
 }

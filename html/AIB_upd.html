@@ -39,38 +39,38 @@
 </ul>
 </nav>
 <main>
-<button class="back_button" onclick="location.href='AIB_introducere.html'">&ltInapoi</button>
-<button class="front_button" onclick="location.href='AIB_qry.html'">Inainte&gt</button>
+<button class="back_button" onclick="location.href='AIB_introducere.html'">&ltÎnapoi</button>
+<button class="front_button" onclick="location.href='AIB_qry.html'">Înainte&gt</button>
 <p></p>
 <section class="prereq"><div>
-*Pentru a intelege acest articol este necesara familiarizarea cu <a href="AIB_introducere.html" target="_blank">structura unui AIB</a>.
+*Pentru a ințelege acest articol este necesară familiarizarea cu <a href="AIB_introducere.html" target="_blank">structura unui AIB</a>.
 </div></section>
 <p></p>
 <section><div>
-<h1>Functia de actualizare pe sufix</h1>
-<p>Daca dorim sa actualizam valoarea de pe pozitia <span class="s1">pos</span>, va trebui sa actualizam toate nodurile din AIB care o contin. Amintim faptul ca nodul i contine suma subsecventei [i-(i&-i)+1,i] a vectorului, deci prin actualizarea elementului v[<span class="s1">pos</span>] vom actualiza de fapt fiecare nod i astfel incat<br> <span class="s1">pos</span>∈[i+1-(i&-i),i]. Vom demonstra mai tarziu in articol faptul ca exista maxim log<sub>2</sub>n astfel de noduri, facand functia sa aiba complexitate de O(log n).</p>
-<h3>Intrebarea ramane: cum putem identifica aceste pozitii?</h3>
+<h1>Funcția de actualizare pe sufix</h1>
+<p>Dacă dorim să actualizam valoarea de pe poziția <span class="s1">pos</span>, va trebui să actualizam toate nodurile din AIB care o conțin. Amintim faptul că nodul i conține suma subsecvenței [i - (i&-i) + 1, i] a vectorului, deci prin actualizarea elementului v[<span class="s1">pos</span>] vom actualiza de fapt fiecare nod i astfel încât<br> <span class="s1">pos</span> ∈ [i - (i&-i) + 1, i]. Vom demonstra mai târziu în articol că există maxim log<sub>2</sub>n astfel de noduri, făcând funcția să aibă complexitate de O(log n).</p>
+<h3>Intrebarea rămâne: cum putem identifica aceste poziții?</h3>
 <!--<p>Ei bine, este clar ca nu trebuie verificate numerele din intervalul [1,pos-1], deoarece acestea nu includ elemente din intervalul [pos,n]. De asemenea, orice index se va include pe el insusi, deci putem incepe de aici. In continuare trebuie sa cautam indecsi mai mari decat pos si mai mici sau egali decat n. Poate fi demonstrat matematic faptul ca toti indecsii care contin pozitia pos in interval apartin sirului x<sub>0</sub>=pos, x<sub>i+1</sub>=x<sub>i</sub>+(x<sub>i</sub>&-x<sub>i</sub>), ceea ce va avea mai mult sens dupa analiza reprezentarilor grafice ale structurii de date. </p>-->
-<p>Este greu de intuit logic motivul, dar prin aplicarea repetata a operatiei <span class="s2">x=x+(x&-x)</span> incepand cu x=pos putem atinge toate nodurile importante. Vom folosi drept reper <span class="s1">vizualizarea arborelui indexat binar</span> pentru a deduce formula folosita, dupa care ii vom demonstra validitatea matematic. Iata cateva exemple:<br><br>
-Pentru n=16 si <span class="s1">pos</span>=3 vom actualiza urmatoarele noduri:<br><br>
-AIB[3]=<span class="s2">v[3]</span>+val;<br>
-AIB[4]=<span class="s2">v[3]</span>+v[4]+val;<br>
-AIB[8]=v[1]+v[2]+<span class="s2">v[3]</span>+v[4]+v[5]+v[6]+v[7]+v[8]+val;<br>
-AIB[16]=v[1]+v[2]+<span class="s2">v[3]</span>+v[4]+v[5]+v[6]+v[7]+v[8]+v[9]+v[10]+v[11]+v[12]+v[13]+v[14]+v[15]+v[16]+val;<br><br>
-Pentru n=32 si <span class="s1">pos</span>=21 vom actualiza urmatoarele noduri:<br><br>
-AIB[21]=<span class="s2">v[21]</span>+val;<br>
-AIB[22]=<span class="s2">v[21]</span>+v[22]+val;<br>
-AIB[24]=<span class="s2">v[21]</span>+v[22]+v[23]+v[24]+val;<br>
-AIB[32]=v[1]+v[2]+...+<span class="s2">v[21]</span>+v[22]+...+v[32]+val;<br><br>
-Pentru n=<input id="n1" name="n1" type="number" value="2047" autocomplete='off' class="tryit" onchange="send()"> si 
-<span class="s1">pos</span>=<input id="pos1" name="pos1" type="number" value="398" autocomplete='off' class="tryit" onchange="send()"> vom actualiza
+<p>Este greu de intuit logic motivul, dar prin aplicarea repetată a operației <span class="s2">x = x + (x&-x)</span> începând cu x = pos putem atinge toate nodurile importante. Vom folosi drept reper <span class="s1">vizualizarea arborelui indexat binar</span> pentru a deduce formula folosită, dupa care îi vom demonstra validitatea matematic. Iată câteva exemple:<br><br>
+Pentru n = 16 și <span class="s1">pos</span> = 3 vom actualiza următoarele noduri:<br><br>
+AIB[3] = <span class="s2">v[3]</span> + val;<br>
+AIB[4] = <span class="s2">v[3]</span> + v[4] + val;<br>
+AIB[8] = v[1] + v[2] + <span class="s2">v[3]</span> + v[4] + v[5] + v[6] + v[7] + v[8] + val;<br>
+AIB[16] = v[1] + v[2] + <span class="s2">v[3]</span> + v[4] + v[5] + v[6] + v[7] + v[8] + v[9] + v[10] + v[11] + v[12] + v[13] + v[14] + v[15] + v[16] + val;<br><br>
+Pentru n = 32 și <span class="s1">pos</span> = 21 vom actualiza următoarele noduri:<br><br>
+AIB[21] = <span class="s2">v[21]</span> + val;<br>
+AIB[22] = <span class="s2">v[21]</span> + v[22] + val;<br>
+AIB[24] = <span class="s2">v[21]</span> + v[22] + v[23] + v[24] + val;<br>
+AIB[32] = v[1] + v[2] + ... + <span class="s2">v[21]</span> + v[22] + ... + v[32] + val;<br><br>
+Pentru n = <input id="n1" name="n1" type="number" value="2047" autocomplete='off' class="tryit" onchange="send()"> și 
+<span class="s1">pos</span> = <input id="pos1" name="pos1" type="number" value="398" autocomplete='off' class="tryit" onchange="send()"> vom actualiza 
 </span><span id="result">AIB[398, 400, 416, 448, 512, 1024].</span>
 <p id="error_msg"></p>
 
  
 </div></section><p></p><section><div>
-<h1>Reprezentarea grafica a unui AIB</h1>
-<p>In continuare puteti apasa pe reprezentarea AIB pe care o preferati:</p>
+<h1>Reprezentarea grafică a unui AIB</h1>
+<p>În continuare puteți apăsa pe reprezentarea AIB pe care o preferați:</p>
 <table class="imgtable"><tr>
 <td><img id="choose_arb" src="../img/AIB_arb_both.png" onclick="choose(0)"></td>
 <td><img id="choose_seg" src="../img/AIB_segment_0_nrs.png" onclick="choose(1)"></td>
@@ -78,36 +78,36 @@ Pentru n=<input id="n1" name="n1" type="number" value="2047" autocomplete='off' 
 </section></div>
 <p></p>
 <div id="arbstyle"><section>
-<h1>Reprezentarea clasica</h1>
-<p>Nodurile arborelui vor avea 2 valori: indexul unic si valoarea propriu-zisa (AIB[index]) pe care o putem ignora cand reprezentam grafic. Cand spunem <span class="s1">nodul a</span> ne referim la nodul care are indexul egal cu <span class="s1">a</span>. Definim astfel arborele de actualizare pe <span class="s2">sufix</span>:<br>
-Nodul y este parintele nodului x ⇔ <span class="s2">y=x+(x&-x)</span> sau y=radacina.<br>
-*Radacina arborelui va fi nodul imaginar n+1, acesta nu ii corespunde unei subsecvente din vector si are doar rolul de a uni multimile disjuncte create prin ignorarea nodurilor cu index mai mare decat n.</p>
+<h1>Reprezentarea clasică</h1>
+<p>Nodurile arborelui vor avea 2 valori: indexul unic și valoarea propriu-zisă (AIB[index]) pe care o putem ignora când reprezentăm grafic. Când spunem <span class="s1">nodul a</span> ne referim la nodul care are indexul egal cu <span class="s1">a</span>. Definim astfel arborele de actualizare pe <span class="s2">sufix</span>:<br>
+Nodul y este părintele nodului x ⇔ <span class="s2">y = x + (x&-x)</span> sau y = rădăcina.<br>
+*Rădăcina arborelui va fi nodul imaginar n + 1, acesta nu corespunde unei subsecvențe din vector și are doar rolul de a uni mulțimile disjuncte create prin ignorarea nodurilor cu index mai mare decât n.</p>
 <!--<Graph indexType="custom" height="400" width="400" nodes={[{options:{circleAttr:{radius:30},fixed:true},label:"1",center:{x:34.6,y:393.1}},{options:{circleAttr:{radius:30},fixed:true},label:"2",center:{x:34.6,y:340.4}},{options:{circleAttr:{radius:30},fixed:true},label:"4",center:{x:86.9,y:288.3}},{options:{circleAttr:{radius:30},fixed:true},label:"5",center:{x:136.7,y:339.9}},{options:{circleAttr:{radius:30},fixed:true},label:"6",center:{x:137.8,y:286.4}},{options:{circleAttr:{radius:30},fixed:true},label:"8",center:{x:188.5,y:214.1}},{options:{circleAttr:{radius:30},fixed:true},label:"7",center:{x:187.2,y:284.6}},{options:{circleAttr:{radius:30},fixed:true},label:"9",center:{x:237.5,y:281}},{options:{circleAttr:{radius:30},fixed:true},label:"10",center:{x:237.3,y:219.4}},{options:{circleAttr:{radius:30},fixed:true},label:"12",center:{x:287.8,y:180.7}},{options:{circleAttr:{radius:30},fixed:true},label:"16",center:{x:378.1,y:85.1}},{options:{circleAttr:{radius:30},fixed:true},label:"11",center:{x:288.6,y:226.6}},{options:{circleAttr:{radius:30},fixed:true},label:"13",center:{x:338.4,y:223.8}},{options:{circleAttr:{radius:30},fixed:true},label:"14",center:{x:340.6,y:180.5}},{options:{circleAttr:{radius:30},fixed:true},label:"17",center:{x:393.1,y:34.6}},{options:{circleAttr:{radius:30},fixed:true},label:"3",center:{x:84.9,y:339.6}},{options:{circleAttr:{radius:30},fixed:true},label:15,center:{x:389.6,y:186.4}}]} edges={[{source:0,target:1},{source:1,target:2},{source:2,target:5},{source:4,target:3},{source:4,target:5},{source:6,target:5},{source:7,target:8},{source:8,target:9},{source:9,target:10},{source:11,target:9},{source:12,target:13},{source:13,target:10},{source:5,target:10},{source:10,target:14},{source:2,target:15},{source:16,target:10}]} />-->
 <table class="imgtable"><tr><td><img class="plain_img" src="../img/AIB_arb_r17_0.png"></td>
 <td><img class="plain_img" src="../img/AIB_arb_r17_1.png"></td></table>
-<p style="text-align:left">Observam ca urcand arborele incepand cu nodul 3 pana la radacina parcurgem toate nodurile ce contin pozitia 3 in interval, iar asta este adevarat pentru orice pozitie datorita modului in care este definint parintele unui nod oarecare. Asadar, toti indecsii ce contin pozitia <span class="s1">pos</span> in interval vor fi termeni ai sirului (x)<sub>n</sub>, x<sub>0</sub>=pos, x<sub>i+1</sub>=x<sub>i</sub>+(x<sub>i</sub>&-x<sub>i</sub>), singura precizare fiind ca oprim cautarea in momentul in care x<sub>i+1</sub> depaseste radacina, (echivalent cu x<sub>i+1</sub>≤n). Numarul maxim de noduri pe care le vizitam pe drum este <a class=".goinpage_link" href="#logn_proof">in cel mai rau caz log<sub>2</sub>n</a>, facand complexitatea functiei O(log n).</p>
+<p style="text-align:left">Observăm că urcând arborele începând cu nodul 3 până la rădăcină parcurgem toate nodurile ce conțin poziția 3 în interval, iar asta este adevarat pentru orice poziție datorită modului în care este definint părintele unui nod oarecare. Așadar, toți indecșii ce conțin poziția <span class="s1">pos</span> în interval vor fi termeni ai șirului (x)<sub>n</sub>, x<sub>0</sub> = pos, x<sub>i+1</sub> = x<sub>i</sub> + (x<sub>i</sub>&-x<sub>i</sub>), singura precizare fiind că oprim căutarea în momentul în care x<sub>i+1</sub> depășește rădăcina (echivalent cu x<sub>i+1</sub> ≤ n). Numărul maxim de noduri pe care le vizităm pe drum este <a class=".goinpage_link" href="#logn_proof">în cel mai rău caz log<sub>2</sub>n</a>, făcând complexitatea funcției O(log n).</p>
 
 </section><p></p></div>
 <div id="segstyle"><section>
 <h1>Reprezentarea prin segmente</h1>
-<p>Nodurile arborelui vor avea 2 valori: indexul unic si valoarea propriu-zisa. Cand spunem <span class="s1">nodul a</span> ne referim la nodul care are indexul egal cu <span class="s1">a</span>. Spre deosebire de reprezentarea clasica, reprezentarea prin segmente este mai compacta, motiv pentru care am pastrat mai multe informatii. Principiul este urmatorul: pe primul nivel se afla nodurile care au lungimea intervalului (dr-st+1) egala cu 1, pe al doilea nivel se afla nodurile cu lungimea intervalului egala cu 2, ..., pe al k-lea nivel se afla nodurile cu lungimea intervalului egala cu 2<sup>k-1</sup>. Definim astfel arborele de actualizare pe <span class="s2">sufix</span>:<br>
-Nodul y este parintele nodului x ⇔ <span class="s2">y=x+(x&-x)</span>.</p>
+<p>Nodurile arborelui vor avea 2 valori: indexul unic și valoarea propriu-zisă. Când spunem <span class="s1">nodul a</span> ne referim la nodul care are indexul egal cu <span class="s1">a</span>. Spre deosebire de reprezentarea clasică, reprezentarea prin segmente este mai compactă, motiv pentru care am păstrat mai multe informații. Principiul este urmatorul: pe primul nivel se află nodurile care au lungimea intervalului (dr-st+1) egală cu 1, pe al doilea nivel se află nodurile cu lungimea intervalului egală cu 2, ..., pe al k-lea nivel se află nodurile cu lungimea intervalului egală cu 2<sup>k-1</sup>. Definim astfel arborele de actualizare pe <span class="s2">sufix</span>:<br>
+Nodul y este părintele nodului x ⇔ <span class="s2">y = x + (x&-x)</span>.</p>
  <table class="imgtable"><tr><td><img class="plain_img" src="../img/AIB_segment_0.png"></td>
 <td><img class="plain_img" src="../img/AIB_segment_1.png"></td></tr></table>
-<p>Este evident din reprezentare faptul ca toate nodurile ce contin pozitia 3 se afla de-asupra sa nodului indexat cu 3<a class=".goinpage_link" href="#nokoutside_proof">(pentru cei interesati de demonstratia matematica)</a>. Asadar, toti indecsii ce contin pozitia <span class="s1">pos</span> in interval vor fi termeni ai sirului (x)<sub>n</sub>, x<sub>0</sub>=pos, x<sub>i+1</sub>=x<sub>i</sub>+(x<sub>i</sub>&-x<sub>i</sub>), singura precizare fiind ca oprim cautarea in momentul in care x<sub>i+1</sub> depaseste n, (echivalent cu x<sub>i+1</sub>≤n). Numarul maxim de noduri pe care le vizitam pe drum este <a class=".goinpage_link" href="#logn_proof">in cel mai rau caz log<sub>2</sub>n</a>, facand complexitatea functiei O(log n).</p>
+<p>Este evident din reprezentare faptul că toate nodurile ce conțin poziția 3 se află de-asupra sa <a class=".goinpage_link" href="#nokoutside_proof">(pentru cei interesați de demonstrația matematică)</a>. Așadar, toți indecșii ce conțin poziția <span class="s1">pos</span> în interval vor fi termeni ai șirului (x)<sub>n</sub>, x<sub>0</sub> = pos, x<sub>i+1</sub> = x<sub>i</sub> + (x<sub>i</sub>&-x<sub>i</sub>), singura precizare fiind că oprim căutarea în momentul în care x<sub>i+1</sub> depășește n, (echivalent cu x<sub>i+1</sub> ≤ n). Numărul maxim de noduri pe care le vizităm pe drum este <a class=".goinpage_link" href="#logn_proof">în cel mai rău caz log<sub>2</sub>n</a>, făcând complexitatea funcției O(log n).</p>
 </section><p></p></div>
 <div id="afterwards"><section>
-<h1>Implementarea in C++</h1>
+<h1>Implementarea în C++</h1>
 <table class="imgtable"><tr><td><img class="plain_img" src="../img/update_0.png"></td>
-<td><p style="text-align:left">In stanga este codul functiei in C++ care implementeaza simplu si eficient parcurgerea nodurilor cheie discutata mai sus. Comentariul din bucla si ultima linie de cod nu sunt <span class="groupUp">necesare, dar</span> le-am pastrat in scheletul functiei pentru claritate. <br><br><span class="tooltip" >
+<td><p style="text-align:left">În stânga este codul funcției în C++ care implementează simplu și eficient parcurgerea nodurilor cheie discutată mai sus. Am păstrat comentariul din buclă în scheletul funcției pentru claritate. <br><br><span class="tooltip" >
 <button onclick="copycode_in()" onmouseout="copycode_out()" class="button">
-<span class="tooltiptext" id="idtooltip">Copiaza pe clipboard</span>
-Copiaza codul direct
+<span class="tooltiptext" id="idtooltip">Copiază pe clipboard</span>
+Copiază codul direct
 </button></span><br><br>
-sau selecteaza-l manual:<br><br>
+sau selectează-l manual:<br><br>
 <pre class="codebox">void update(int ind, int val)
 {
-	for(int i=ind;i<=n;i+=(i&-i))
+	for(int i=ind;i&lt=n;i+=(i&-i))
 	{
 		aib[i]+=val;
 	}  
@@ -118,41 +118,41 @@ sau selecteaza-l manual:<br><br>
 </section><p></p><section>
 <h1 id="logn_proof">De ce O(log n)?</h1>
 <!--<p>Fie f:ℕ*→ℕ, f(x)=2<sup>UB(x)</sup>=(x&-x)</p>-->
-<p>Fie sirul (x)<sub>n</sub>, x<sub>0</sub>=pos, x<sub>i+1</sub>=x<sub>i</sub>+(x<sub>i</sub>&-x<sub>i</sub>). Notam x<sub>i</sub>=a<span class="s2">1b</span> ⇒ x<sub>i+1</sub>=a1b+01b=<span class="s2">(a+1)0b</span> ⇒ UB(x<sub>i+1</sub>)≥1+UB(x<sub>i</sub>). UB(h)∈[0,log<sub>2</sub>n] ∀h∈[1,n] ,deoarece n poate avea maxim log<sub>2</sub>n + 1 biti, dintre care un bit este setat, iar functia logaritmica (in baza 2) este strict crescatoate. Fie k cel mai mare index pentru care x<sub>k</sub>≤n. Avem log<sub>2</sub>n≥UB(x<sub>k</sub>)≥1+UB(x<sub>k-1</sub>)≥2+...≥k+UB(x<sub>0</sub>)≥0 rezulta log<sub>2</sub>n-UB(x<sub>0</sub>)≥k, iar UB(x<sub>0</sub>)∈[0,log<sub>2</sub>n], de unde rezulta faptul ca <span class="s2">valoarea maxima pe care o poate lua k este log<sub>2</sub>n</span>.</p>
+<p>Fie șirul (x)<sub>n</sub>, x<sub>0</sub> = pos, x<sub>i+1</sub> = x<sub>i</sub> + (x<sub>i</sub>&-x<sub>i</sub>). Notăm x<sub>i</sub> = a<span class="s2">1b</span> ⇒ x<sub>i+1</sub> = a1b + 01b = <span class="s2">(a+1)0b</span> ⇒ UB(x<sub>i+1</sub>) ≥ 1 + UB(x<sub>i</sub>). UB(h) ∈ [0, log<sub>2</sub>n] ∀h ∈ [1, n], deoarece n poate avea maxim log<sub>2</sub>n + 1 biți, dintre care un bit este setat, iar funcția logaritmică (în baza 2) este strict crescătoare. Fie k cel mai mare index pentru care x<sub>k</sub> ≤ n. Avem log<sub>2</sub>n ≥ UB(x<sub>k</sub>) ≥ 1 + UB(x<sub>k-1</sub>) ≥ 2 + ... ≥ k + UB(x<sub>0</sub>) ≥ 0 rezultă log<sub>2</sub>n - UB(x<sub>0</sub>) ≥ k, iar UB(x<sub>0</sub>) ∈ [0, log<sub>2</sub>n], de unde rezultă că <span class="s2">valoarea maximă pe care o poate lua k este log<sub>2</sub>n</span>.</p>
 
-<h3 id="bonus" style="cursor:pointer" onclick="hhh()">Alte demonstratii🞃</h3><div id="moreproofs">
-<p><span class="s1">Fie f:ℕ<sup>*</sup>→ℕ, f(x)=2<sup>UB(x)</sup>=(x&-x); f(a1b)=1b</span>;<br>
-<span class="s1">Fie sirul (x)<sub>n</sub>, x<sub>0</sub>=pos, x<sub>i+1</sub>=x<sub>i</sub>+f(x<sub>i</sub>) </span><br>
+<h3 id="bonus" style="cursor:pointer" onclick="hhh()">Alte demonstrații🞃</h3><div id="moreproofs">
+<p><span class="s1">Fie f:ℕ<sup>*</sup>→ℕ, f(x) = 2<sup>UB(x)</sup> = (x&-x); f(a1b) = 1b</span>;<br>
+<span class="s1">Fie șirul (x)<sub>n</sub>, x<sub>0</sub> = pos, x<sub>i+1</sub> = x<sub>i</sub> + f(x<sub>i</sub>) </span><br>
 
-Vom demonstra: Daca k∈[x-f(x)+1,x] atunci k∈[x+f(x)-f(f(x)+x),x+f(x)]<br>
-x&ltx+f(x) ⇔ 0&ltf(x) ⇔ 0&lt2<sup>UB(x)</sup> adevarat (conditia 1)<br>
-f-f(x)+1≥x+f(x)-f(f(x)+x)+1 ⇔ f(f(x)+x)≥2*f(x) ⇔ 2<sup>UB(f(x)+x)</sup>≥2<sup>UB(x)+1</sup> ⇔ UB(x+f(x))≥UB(x)+1 <br>
-Notam forma binara a numarului x drept a1b<br>
-UB(x+f(x))≥UB(x)+1 ⇔ UB(a1b+1b)≥1+1b ⇔ (a+1)0b≥10b ⇔ (a+1)≥1 adevarat (conditia 2)<br>
-(conditia 1) + (conditia 2) ⇒ k∈[x-f(x)+1,x] atunci k∈[x+f(x)-f(f(x)+x),x+f(x)] cctd.<br>
-Din aceasta relatie rezulta prin inductie faptul ca toti termenii sirului (x)<sub>n</sub> contin pos in intervalele lor.<br></p>
+Vom demonstra: Dacă k ∈ [x - f(x) + 1, x], atunci k ∈ [x + f(x) - f(f(x) + x) + 1, x + f(x)]<br>
+x &lt x + f(x) ⇔ 0 &lt f(x) ⇔ 0 &lt 2<sup>UB(x)</sup> adevărat (condiția 1)<br>
+f - f(x) + 1 ≥ x + f(x) - f(f(x) + x) + 1 ⇔ f(f(x) + x) ≥ 2 * f(x) ⇔ 2<sup>UB(f(x) + x)</sup> ≥ 2<sup>UB(x) + 1</sup> ⇔ UB(x + f(x)) ≥ UB(x) + 1 <br>
+Notăm forma binară a numărului x drept a1b<br>
+UB(x + f(x)) ≥ UB(x) + 1 ⇔ UB(a1b + 1b) ≥ 1 + 1b ⇔ (a + 1)0b ≥ 10b ⇔ (a+1) ≥ 1, adevărat (condiția 2)<br>
+(condiția 1) + (condiția 2) ⇒ Dacă k ∈ [x - f(x) + 1, x], atunci k ∈ [x + f(x) - f(f(x) + x) + 1, x + f(x)], c.c.t.d.<br>
+Din această relație rezultă prin inducție că toți termenii șirului (x)<sub>n</sub> conțin pos în intervalele lor.<br></p>
 
-<p id="nokoutside_proof">Vom demonstra ca ∄ k astfel incat k⊄(x)<sub>n</sub>, pos∈[k-f(k)+1,k].<br>Presupunem prin absurd ca ∃ k astfe incat k⊄(x)<sub>n</sub>, pos∈[k-f(k)+1,k]. Fara a restrange generalitatea putem afirma faptul ca k se afla intre 2 termeni consecutivi ai sirului x<sub>i</sub> si x<sub>i+1</sub> ⇒ x<sub>i</sub>&lt k &ltx<sub>i+1</sub> (conditie *)</p>
-<table class="imgtable"><tr><td><img class="plain_img" src="../img/de_demonstrat_upd.png"></td><td><p style="text-align:left">Acestea sunt singurele 3 cazuri posibile astfel incat pos∈[k-f(k)+1,k] si conditia * sa fie indeplinite. Putem reduce cazul II si III folosind faptul ca din conditia * ⇒ f(k)≤f(x<sub>i</sub>), ceea ce vom demonstra mai jos.</p></td></tr></table><p></p>
-<p>Din h = M<sub>2<sup>UB(h)</sup></sub>,∀h∈ℕ<sup>*</sup> ⇒ x<sub>i</sub>=M<sub>2<sup>UB(x<sub>i</sub>)</sup></sub>, iar UB(x<sub>i+1</sub>)≥1+UB(x<sub>i</sub>) ⇒ x<sub>i+1</sub>=M2<sup>UB(x<sub>i</sub>)+1</sup>=M<sub>2<sup>UB(x<sub>i</sub>)</sup></sub><br>
-Din conditia * ⇒ k∈{x<sub>i</sub>+1,x<sub>i</sub>+2,...,x<sub>i+1</sub>-1}, x<sub>i+1</sub>=x<sub>i</sub>+2<sup>UB(x<sub>i</sub>)</sup>. Aplicand %2<sup>UB(x<sub>i</sub>)</sup> ⇒ k%2<sup>UB(x<sub>i</sub>)</sup>∈{1,2,...2<sup>UB(x<sub>i</sub>)</sup>-1}. Asadar, UB(k)&ltUB(x<sub>i</sub>)⇒f(k)&ltf(x<sub>i</sub>) (conditia **). Notam x<sub>i</sub>=a1b ,k=A1B si |nr|=numarul de cifre a numarului nr, rezulta din conditia ** faptul ca |B|<|b|, dar din conditia * ⇒ a1b&ltA1b ⇒ a1B&ltA1B ⇒ a&ltA ⇒ (a+1)≤A ⇒ din conditia *: A1B&lt(a+1)0b≤A0b ⇒ A1B&ltA0b ⇒ 1≤1B&lt0b (b,B sunt siruri de 0) ⇒ 1&lt0 contradictie ⇒ ∄ k astfel incat k⊄(x)<sub>n</sub>, pos∈[k-f(k)+1,k].</p>
-<p>Pe scurt: Aceste 2 demonstratii demonstreaza faptul ca singurii indecsi ce trebuie actualizati sunt pos, pos+(pos&-pos), pos+(pos&-pos) + (pos+(pos&-pos)&-(pos+(pos&-pos))) s.a.m.d</p>
+<p id="nokoutside_proof">Vom demonstra că ∄ k astfel încât k ⊄ (x)<sub>n</sub>, pos ∈ [k - f(k) + 1, k].<br>Presupunem prin absurd că ∃ k astfel încât k ⊄ (x)<sub>n</sub>, pos ∈ [k - f(k) + 1, k]. Fară a restrânge generalitatea putem afirma că k se află între 2 termeni consecutivi ai șirului x<sub>i</sub> și x<sub>i+1</sub> ⇒ x<sub>i</sub> &lt k &lt x<sub>i+1</sub> (condiție *)</p>
+<table class="imgtable"><tr><td><img class="plain_img" src="../img/de_demonstrat_upd.png"></td><td><p style="text-align:left">Acestea sunt singurele 3 cazuri posibile astfel încât pos ∈ [k - f(k) + 1, k] și condiția * să fie îndeplinite. Putem reduce cazul II și III folosind faptul că din condiția * ⇒ f(k) ≤ f(x<sub>i</sub>), ceea ce vom demonstra mai jos.</p></td></tr></table><p></p>
+<p>Din h = M<sub>2<sup>UB(h)</sup></sub> ∀h ∈ ℕ<sup>*</sup> ⇒ x<sub>i</sub> = M<sub>2<sup>UB(x<sub>i</sub>)</sup></sub>, iar UB(x<sub>i+1</sub>) ≥ 1 + UB(x<sub>i</sub>) ⇒ x<sub>i+1</sub> = M2<sup>UB(x<sub>i</sub>) + 1</sup> = M<sub>2<sup>UB(x<sub>i</sub>)</sup></sub><br>
+Din condiția * ⇒ k ∈ {x<sub>i</sub> + 1, x<sub>i</sub> + 2, ..., x<sub>i+1</sub> - 1}, x<sub>i+1</sub> = x<sub>i</sub> + 2<sup>UB(x<sub>i</sub>)</sup>. Aplicând %2<sup>UB(x<sub>i</sub>)</sup> ⇒ k %2<sup>UB(x<sub>i</sub>)</sup> ∈ {1, 2, ..., 2<sup>UB(x<sub>i</sub>)</sup> - 1}. Așadar, UB(k) &lt UB(x<sub>i</sub>) ⇒ f(k) &lt f(x<sub>i</sub>) (condiția **). Notăm x<sub>i</sub> = a1b , k=A1B și |nr| = numărul de cifre a numărului nr, rezultă din condiția ** faptul că |B| &lt |b|, dar din condiția * ⇒ a1b &lt A1b ⇒ a1B &lt A1B ⇒ a &lt A ⇒ (a + 1) ≤ A ⇒ din condiția *:  A1B &lt (a + 1)0b ≤ A0b ⇒ A1B &lt A0b ⇒ 1 ≤1B &lt 0b (b, B sunt șiruri de 0) ⇒ 1 &lt 0, contradicție ⇒ ∄ k astfel încât k ⊄ (x)<sub>n</sub>, pos ∈ [k - f(k) + 1, k].</p>
+<p>Pe scurt: Aceste 2 demonstrații ne arată că singurii indecși ce trebuie actualizați sunt pos, pos + (pos&-pos), pos + (pos&-pos) + (pos + (pos&-pos)&-(pos + (pos&-pos))) s.a.m.d</p>
 </div></section><p></p>
 
 <section><p>
-In continuare vom discuta despre <span class="s2"><a href="AIB_qry.html">Interogarea pe prefix</a></span>. Daca ati revizuit deja teoria, puteti studia in continuare:<br>
-A) <span class="s2"><a href="AIB_binsrch.html">Cautarea binara</a></span><br>
+În continuare vom discuta despre <span class="s2"><a href="AIB_qry.html">Interogarea pe prefix</a></span>. Dacă ați revizuit deja teoria, puteți studia în continuare:<br>
+A) <span class="s2"><a href="AIB_binsrch.html">Căutarea binară</a></span><br>
 B) <span class="s2"><a href="AIB_2d.html">AIB bidimensional</a></span>
 </p></section>
 </section></div>
 <p></p>
-<button class="back_button" onclick="location.href='AIB_introducere.html'">&ltInapoi</button>
-<button class="front_button" onclick="location.href='AIB_qry.html'">Inainte&gt</button>
+<button class="back_button" onclick="location.href='AIB_introducere.html'">&ltÎnapoi</button>
+<button class="front_button" onclick="location.href='AIB_qry.html'">Înainte&gt</button>
 <p></p>
 </main>
 <script src="../js/auxUpd.js"></script>
 <footer>
-Software educational realizat de Vlad Bogdan Cristian, Colegiul National Emil Racovita Iasi
+Software educațional realizat de Vlad Bogdan Cristian, Colegiul Național Emil Racovița Iași
 </footer>
 </body>
 </html>

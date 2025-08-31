@@ -156,7 +156,7 @@ async function submit_speed()
 		document.getElementById("type_animation").value=old_animation;
 		if(old_animation=="manual")document.getElementById("speed").style.visibility="hidden";
 		else document.getElementById("speed").style.visibility="visible";
-		alert("nu puteti schimba tipul de animatie cat timp are loc un proces")
+		alert("nu puteți schimba tipul de animație cât timp are loc un proces")
 		return;
 	}
 	if(animation=="manual")
@@ -212,7 +212,7 @@ function display_n(start=-1)
 	{
 		document.getElementById("n_value").value=0;
 		let element_target=document.getElementById("n_error_feedback");
-		element_target.innerHTML="* n trebuie să fie un numar natural între 1 și 32 ";
+		element_target.innerHTML="* n trebuie să fie un număr natural între 1 și 32 ";
 		element_target.style.display="block";
 		n=0;
 		return;
@@ -466,12 +466,12 @@ async function update(pos,value,showanimation=1)
 		queue_operations.enqueue([1,pos,2,pos,0,"Indexul curent este "+String(pos),5,2]);
 		//aib[pos]+=value;
 		if(aibtype==0){
-			queue_operations.enqueue([0,"Incrementam valoarea din aib["+String(pos)+"] cu "+String(value),3,pos,String(FPAfix(aib[pos]+value)),4,pos,value,5,4]);
-			queue_operations.enqueue([-3,pos,String(FPAfix(aib[pos]+value)),0,"Parintele pozitiei "+String(pos)+" este "+String(pos)+"+ (-"+String(pos)+"&"+String(pos)+")="+String(pos+(pos&-pos)),5,5]);
+			queue_operations.enqueue([0,"Incrementăm valoarea din aib["+String(pos)+"] cu "+String(value),3,pos,String(FPAfix(aib[pos]+value)),4,pos,value,5,4]);
+			queue_operations.enqueue([-3,pos,String(FPAfix(aib[pos]+value)),0,"Părintele poziției "+String(pos)+" este "+String(pos)+"+ (-"+String(pos)+"&"+String(pos)+")="+String(pos+(pos&-pos)),5,5]);
 		}
 		else if(aibtype==1){
-			queue_operations.enqueue([0,"Aplicam xor la valoarea din aib["+String(pos)+"] cu "+String(value),3,pos,String(FPAfix(aib[pos]^value)),4,pos,value,5,4]);
-			queue_operations.enqueue([-3,pos,String(FPAfix(aib[pos]^value)),0,"Parintele pozitiei "+String(pos)+" este "+String(pos)+"+ (-"+String(pos)+"&"+String(pos)+")="+String(pos+(pos&-pos)),5,5]);
+			queue_operations.enqueue([0,"Aplicăm xor la valoarea din aib["+String(pos)+"] cu "+String(value),3,pos,String(FPAfix(aib[pos]^value)),4,pos,value,5,4]);
+			queue_operations.enqueue([-3,pos,String(FPAfix(aib[pos]^value)),0,"Părintele poziției "+String(pos)+" este "+String(pos)+"+ (-"+String(pos)+"&"+String(pos)+")="+String(pos+(pos&-pos)),5,5]);
 		}
 		
 		let i=pos;
@@ -481,21 +481,21 @@ async function update(pos,value,showanimation=1)
 			i+=(i&-i);
 			if(i>n)
 			{
-				queue_operations.enqueue([0,String(i)+" este mai mare decat "+String(n),-2,prev_i,-1,prev_i,5,6]);
+				queue_operations.enqueue([0,String(i)+" este mai mare decât "+String(n),-2,prev_i,-1,prev_i,5,6]);
 				break;
 			}
 			queue_operations.enqueue([0,"Indexul curent este "+String(i),-1,prev_i,-2,prev_i,1,i,2,i,5,3]);
 			//aib[i]+=value; asta fac in functia de progress
 			if(aibtype==0){
-				queue_operations.enqueue([0,"Incrementam valoarea din aib["+String(i)+"] cu "+String(value),3,i,String(FPAfix(aib[i]+value)),4,i,value,5,4]);
-				queue_operations.enqueue([-3,i,String(FPAfix(aib[i]+value)),0,"Parintele pozitiei "+String(i)+" este "+String(i)+"+ (-"+String(i)+"&"+String(i)+")="+String(i+(i&-i)),5,5]);
+				queue_operations.enqueue([0,"Incrementăm valoarea din aib["+String(i)+"] cu "+String(value),3,i,String(FPAfix(aib[i]+value)),4,i,value,5,4]);
+				queue_operations.enqueue([-3,i,String(FPAfix(aib[i]+value)),0,"Părintele poziției "+String(i)+" este "+String(i)+"+ (-"+String(i)+"&"+String(i)+")="+String(i+(i&-i)),5,5]);
 			}
 			else if(aibtype==1){
-				queue_operations.enqueue([0,"Aplicam xor la valoarea din aib["+String(i)+"] cu "+String(value),3,i,String(FPAfix(aib[i]^value)),4,i,value,5,4]);
-				queue_operations.enqueue([-3,i,String(FPAfix(aib[i]^value)),0,"Parintele pozitiei "+String(i)+" este "+String(i)+"+ (-"+String(i)+"&"+String(i)+")="+String(i+(i&-i)),5,5]);
+				queue_operations.enqueue([0,"Aplicăm xor la valoarea din aib["+String(i)+"] cu "+String(value),3,i,String(FPAfix(aib[i]^value)),4,i,value,5,4]);
+				queue_operations.enqueue([-3,i,String(FPAfix(aib[i]^value)),0,"Părintele poziției "+String(i)+" este "+String(i)+"+ (-"+String(i)+"&"+String(i)+")="+String(i+(i&-i)),5,5]);
 			}
 		}
-		queue_operations.enqueue([0,"Actualizam vectorul original",7777777,pos,value,5,7]);
+		queue_operations.enqueue([0,"Actualizăm vectorul original",7777777,pos,value,5,7]);
 		queue_operations.enqueue([0,"",-7777777,5,0]);
 	}
 	else{//animation=="automatic" ---------------------------------------------------------------------------------------------------------------
@@ -514,8 +514,8 @@ async function update(pos,value,showanimation=1)
 		if(aibtype==0)aib[pos]+=value;
 		else if(aibtype==1)aib[pos]^=value;
 		aib[pos]=FPAfix(aib[pos]);
-		if(aibtype==0)write_text("Incrementam valoarea din aib["+String(pos)+"] cu "+String(value));
-		else if(aibtype==1)write_text("Aplicam xor la valoarea din aib["+String(pos)+"] cu "+String(value));
+		if(aibtype==0)write_text("Incrementăm valoarea din aib["+String(pos)+"] cu "+String(value));
+		else if(aibtype==1)write_text("Aplicăm xor la valoarea din aib["+String(pos)+"] cu "+String(value));
 		highlight_text(pos,String(aib[pos]));
 		H_update(4);
 		//await wait(timect/speed);
@@ -523,7 +523,7 @@ async function update(pos,value,showanimation=1)
 		//highlight_r(pos,1);
 		await wait(timect/speed);
 		highlight_text(pos,String(aib[pos]),1);
-		write_text("Parintele pozitiei "+String(pos)+" este "+String(pos)+"+ (-"+String(pos)+"&"+String(pos)+")="+String(pos+(pos&-pos)));
+		write_text("Părintele poziției "+String(pos)+" este "+String(pos)+"+ (-"+String(pos)+"&"+String(pos)+") = "+String(pos+(pos&-pos)));
 		H_update(5);
 		let i=pos;
 		while(i<=n)
@@ -532,7 +532,7 @@ async function update(pos,value,showanimation=1)
 			i+=(i&-i);
 			if(i>n)
 			{
-				write_text(String(i)+" este mai mare decat "+String(n));
+				write_text(String(i)+" este mai mare decât "+String(n));
 				H_update(6);
 				highlight_r(prev_i,1);
 				highlight_index(prev_i,1);
@@ -550,11 +550,11 @@ async function update(pos,value,showanimation=1)
 			
 			await wait(timect/speed);
 			if(aibtype==0){
-				write_text("Incrementam valoarea din aib["+String(i)+"] cu "+String(value));
+				write_text("Incrementăm valoarea din aib["+String(i)+"] cu "+String(value));
 				aib[i]+=value;
 			}
 			else if(aibtype==1){
-				write_text("Aplicam xor la valoarea din aib["+String(i)+"] cu "+String(value));
+				write_text("Aplicăm xor la valoarea din aib["+String(i)+"] cu "+String(value));
 				aib[i]^=value;
 			}
 			aib[i]=FPAfix(aib[i]);
@@ -562,7 +562,7 @@ async function update(pos,value,showanimation=1)
 			H_update(4);
 			await wait(timect/speed);
 			highlight_text(i,String(aib[i]),1);
-			write_text("Parintele pozitiei "+String(i)+" este "+String(i)+"+ (-"+String(i)+"&"+String(i)+")="+String(i+(i&-i)));
+			write_text("Părintele poziției "+String(i)+" este "+String(i)+"+ (-"+String(i)+"&"+String(i)+")="+String(i+(i&-i)));
 			H_update(5);
 		}
 		if(aibtype==0)v[pos]+=value;
@@ -571,7 +571,7 @@ async function update(pos,value,showanimation=1)
 		let s="v";
 		s+=pos;
 		document.getElementById(s).value=v[pos];
-		write_text("Actualizam vectorul original");
+		write_text("Actualizăm vectorul original");
 		H_update(7);
 		await wait(timect/speed);
 		write_text("");
@@ -604,25 +604,25 @@ async function query(pos)/*return sum of elements in [1,pos]*/
 		//op4: (4,oldsum,val){sum=oldsum+val} posibil sa nu folosesc
 		//nu am folosit pana acum 
 		queue_operations.enqueue([0,"Query("+String(pos)+")",5,1]);
-		queue_operations.enqueue([0,"Initializam suma cu 0",4,0,0,5,2]);
+		queue_operations.enqueue([0,"Inițializăm suma cu 0",4,0,0,5,2]);
 		let sum=0;
 		if(pos<=0)queue_operations.enqueue([0,"Indexul curent este "+String(pos),5,3]);
 		else queue_operations.enqueue([0,"Indexul curent este "+String(pos),1,pos,2,pos,5,3]);
 		if(pos==0)
 		{
-			queue_operations.enqueue([0,String(pos)+" este <=0",5,7]);
+			queue_operations.enqueue([0,String(pos)+" este <= 0",5,7]);
 			queue_operations.enqueue([0,"Query("+String(pos)+")=0",5,8]);
 			return 0;
 		}
 		if(aibtype==0){
-			queue_operations.enqueue([0,"Sum: "+String(sum)+" -> "+String(FPAfix(sum+aib[pos])),3,pos,String(aib[pos]),4,FPAfix(sum),FPAfix(sum+aib[pos]),5,5]);
+			queue_operations.enqueue([0,"Sumă: "+String(sum)+" -> "+String(FPAfix(sum+aib[pos])),3,pos,String(aib[pos]),4,FPAfix(sum),FPAfix(sum+aib[pos]),5,5]);
 			sum=FPAfix(sum+aib[pos]);
 		}
 		else if(aibtype==1){
-			queue_operations.enqueue([0,"Sum: "+String(sum)+" -> "+String(FPAfix(sum^aib[pos])),3,pos,String(aib[pos]),4,FPAfix(sum),FPAfix(sum^aib[pos]),5,5]);
+			queue_operations.enqueue([0,"Sumă: "+String(sum)+" -> "+String(FPAfix(sum^aib[pos])),3,pos,String(aib[pos]),4,FPAfix(sum),FPAfix(sum^aib[pos]),5,5]);
 			sum=FPAfix(sum^aib[pos]);
 		}
-		queue_operations.enqueue([-3,pos,String(aib[pos]),0,"Fratele stang pozitiei "+String(pos)+" este "+String(pos)+"- (-"+String(pos)+"&"+String(pos)+")="+String(pos-(pos&-pos)),5,6]);
+		queue_operations.enqueue([-3,pos,String(aib[pos]),0,"Fratele stâng poziției "+String(pos)+" este "+String(pos)+"- (-"+String(pos)+"&"+String(pos)+")="+String(pos-(pos&-pos)),5,6]);
 		let i=pos;
 		while(i>0)
 		{
@@ -630,19 +630,19 @@ async function query(pos)/*return sum of elements in [1,pos]*/
 			i-=(i&-i);
 			if(i<=0)
 			{
-				queue_operations.enqueue([0,String(i)+" este <=0",-1,prev_i,-2,prev_i,5,7]);
+				queue_operations.enqueue([0,String(i)+" este <= 0",-1,prev_i,-2,prev_i,5,7]);
 				break;
 			}
 			queue_operations.enqueue([0,"Indexul curent este "+String(i),-1,prev_i,-2,prev_i,1,i,2,i,5,4]);
 			if(aibtype==0){
-				queue_operations.enqueue([0,"Sum: "+String(sum)+" -> "+String(FPAfix(sum+aib[i])),3,i,String(aib[i]),4,FPAfix(sum),FPAfix(sum+aib[i]),5,5]);
+				queue_operations.enqueue([0,"Sumă: "+String(sum)+" -> "+String(FPAfix(sum+aib[i])),3,i,String(aib[i]),4,FPAfix(sum),FPAfix(sum+aib[i]),5,5]);
 				sum=FPAfix(sum+aib[i]);
 			}
 			else if(aibtype==1){
-				queue_operations.enqueue([0,"Sum: "+String(sum)+" -> "+String(FPAfix(sum^aib[i])),3,i,String(aib[i]),4,FPAfix(sum),FPAfix(sum^aib[i]),5,5]);
+				queue_operations.enqueue([0,"Sumă: "+String(sum)+" -> "+String(FPAfix(sum^aib[i])),3,i,String(aib[i]),4,FPAfix(sum),FPAfix(sum^aib[i]),5,5]);
 				sum=FPAfix(sum^aib[i]);
 			}
-			queue_operations.enqueue([0,"Fratele stang pozitiei "+String(i)+" este "+String(i)+"- (-"+String(i)+"&"+String(i)+")="+String(i-(i&-i)),-3,i,String(aib[i]),5,6]);
+			queue_operations.enqueue([0,"Fratele stâng poziției "+String(i)+" este "+String(i)+"- (-"+String(i)+"&"+String(i)+")="+String(i-(i&-i)),-3,i,String(aib[i]),5,6]);
 		}
 		queue_operations.enqueue([0,"Query("+String(pos)+")="+String(sum),5,8]);
 		//queue_operations.enqueue([0,""]);
@@ -653,7 +653,7 @@ async function query(pos)/*return sum of elements in [1,pos]*/
 		write_text("Query("+String(pos)+")");
 		H_query(1);
 		await wait(timect/speed);
-		write_text("Initializam suma cu 0");
+		write_text("Inițializăm suma cu 0");
 		H_query(2);
 		let sum=0;
 		await wait(timect/speed);
@@ -668,15 +668,15 @@ async function query(pos)/*return sum of elements in [1,pos]*/
 		await wait(timect/speed);
 		if(pos==0)
 		{
-			write_text(String(pos)+" este <=0");
+			write_text(String(pos)+" este <= 0");
 			H_query(7);
 			await wait(timect/speed);
 			write_text("Query("+String(pos)+")=0");
 			H_query(8);
 			return 0;
 		}
-		if(aibtype==0)write_text("Sum: "+String(sum)+" -> "+String(FPAfix(sum+aib[pos])));
-		else if(aibtype==1)write_text("Sum: "+String(sum)+" -> "+String(FPAfix(sum^aib[pos])));
+		if(aibtype==0)write_text("Sumă: "+String(sum)+" -> "+String(FPAfix(sum+aib[pos])));
+		else if(aibtype==1)write_text("Sumă: "+String(sum)+" -> "+String(FPAfix(sum^aib[pos])));
 		H_query(5);
 		highlight_text(pos,aib[pos]);
 		if(aibtype==0)sum+=aib[pos];
@@ -684,7 +684,7 @@ async function query(pos)/*return sum of elements in [1,pos]*/
 		sum=FPAfix(sum);
 		await wait(timect/speed);
 		highlight_text(pos,aib[pos],1);
-		write_text("Fratele stang pozitiei "+String(pos)+" este "+String(pos)+"- (-"+String(pos)+"&"+String(pos)+")="+String(pos-(pos&-pos)));
+		write_text("Fratele stâng poziției "+String(pos)+" este "+String(pos)+"- (-"+String(pos)+"&"+String(pos)+")="+String(pos-(pos&-pos)));
 		H_query(6);
 		let i=pos;
 		while(i>0)
@@ -694,7 +694,7 @@ async function query(pos)/*return sum of elements in [1,pos]*/
 			if(i<=0)
 			{
 				await wait(timect/speed);
-				write_text(String(i)+" este <=0");
+				write_text(String(i)+" este <= 0");
 				H_query(7);
 				highlight_r(prev_i,1);
 				highlight_index(prev_i,1);
@@ -710,8 +710,8 @@ async function query(pos)/*return sum of elements in [1,pos]*/
 			highlight_index(i);
 			highlight_r(i);
 			await wait(timect/speed);
-			if(aibtype==0)write_text("Sum: "+String(sum)+" -> "+String(FPAfix(sum+aib[i])));
-			else if(aibtype==1)write_text("Sum: "+String(sum)+" -> "+String(FPAfix(sum^aib[i])));
+			if(aibtype==0)write_text("Sumă: "+String(sum)+" -> "+String(FPAfix(sum+aib[i])));
+			else if(aibtype==1)write_text("Sumă: "+String(sum)+" -> "+String(FPAfix(sum^aib[i])));
 			H_query(5);
 			if(aibtype==0)sum+=aib[i];
 			else if(aibtype==1)sum^=aib[i];
@@ -719,7 +719,7 @@ async function query(pos)/*return sum of elements in [1,pos]*/
 			highlight_text(i,String(aib[i]));
 			await wait(timect/speed);
 			highlight_text(i,String(aib[i]),1);
-			write_text("Fratele stang pozitiei "+String(i)+" este "+String(i)+"- (-"+String(i)+"&"+String(i)+")="+String(i-(i&-i)));
+			write_text("Fratele stâng poziției "+String(i)+" este "+String(i)+"- (-"+String(i)+"&"+String(i)+")="+String(i-(i&-i)));
 			H_query(6);
 		}
 		write_text("Query("+String(pos)+")="+String(sum));
@@ -745,9 +745,9 @@ async function range_query(pos1,pos2)/*return sum of elements in [pos1,pos2], po
 	H_query(0);
 	if(animation=="manual")
 	{
-		write_text("Apasati butonul de continuare adiacent pozei");
-		if(aibtype==0)queue_operations.enqueue([0,"Σ("+String(pos1)+","+String(pos2)+")=query("+String(pos2)+")-query("+String(pos1-1)+")"]);
-		else if(aibtype==1)queue_operations.enqueue([0,"⊕("+String(pos1)+","+String(pos2)+")=query("+String(pos2)+")⊕query("+String(pos1-1)+")"]);
+		write_text("Apăsați butonul de continuare adiacent pozei");
+		if(aibtype==0)queue_operations.enqueue([0,"Σ("+String(pos1)+", "+String(pos2)+") = query("+String(pos2)+") - query("+String(pos1-1)+")"]);
+		else if(aibtype==1)queue_operations.enqueue([0,"⊕("+String(pos1)+", "+String(pos2)+") = query("+String(pos2)+") ⊕ query("+String(pos1-1)+")"]);
 		//queue_operations.enqueue([0,"Calculam valoarea query("+String(pos2)+")"]);
 		let s1= await query(pos2);//why does await fix it??? im not promising on that branch??? it's probably because the function is async and it doesn't matter if it actually reaches the await wait there
 		H_query(0);
@@ -755,18 +755,18 @@ async function range_query(pos1,pos2)/*return sum of elements in [pos1,pos2], po
 		let s2=await query(pos1-1);
 		H_query(0);
 		if(aibtype==0){
-			queue_operations.enqueue([0,"Σ("+String(pos1)+","+String(pos2)+")=("+String(s1)+")-("+String(s2)+")="+String(FPAfix(s1-s2))]);
+			queue_operations.enqueue([0,"Σ("+String(pos1)+", "+String(pos2)+") = ("+String(s1)+") - ("+String(s2)+") = "+String(FPAfix(s1-s2))]);
 			queue_operations.enqueue([0,"",-7777777,FPAfix(s1-s2)]);
 		}
 		else if(aibtype==1){
-			queue_operations.enqueue([0,"⊕("+String(pos1)+","+String(pos2)+")=("+String(s1)+")⊕("+String(s2)+")="+String(FPAfix(s1^s2))]);
+			queue_operations.enqueue([0,"⊕("+String(pos1)+", "+String(pos2)+") = ("+String(s1)+") ⊕ ("+String(s2)+") = "+String(FPAfix(s1^s2))]);
 			queue_operations.enqueue([0,"",-7777777,FPAfix(s1^s2)]);
 		}
 	}
 	else if(animation=="automatic")
 	{
-		if(aibtype==0)write_text("Σ("+String(pos1)+","+String(pos2)+")=query("+String(pos2)+")-query("+String(pos1-1)+")");
-		else if(aibtype==1)write_text("⊕("+String(pos1)+","+String(pos2)+")=query("+String(pos2)+")⊕query("+String(pos1-1)+")");
+		if(aibtype==0)write_text("Σ("+String(pos1)+", "+String(pos2)+") = query("+String(pos2)+") - query("+String(pos1-1)+")");
+		else if(aibtype==1)write_text("⊕("+String(pos1)+", "+String(pos2)+") = query("+String(pos2)+") ⊕ query("+String(pos1-1)+")");
 		await wait(timect/speed);
 		//write_text("Calculam valoarea query("+String(pos2)+")");
 		await wait(timect/speed);
@@ -777,8 +777,8 @@ async function range_query(pos1,pos2)/*return sum of elements in [pos1,pos2], po
 		await wait(timect/speed);
 		let s2=await query(pos1-1);
 		
-		if(aibtype==0)write_text("Σ("+String(pos1)+","+String(pos2)+")=("+String(s1)+")-("+String(s2)+")="+String(FPAfix(s1-s2)));
-		else if(aibtype==1)write_text("⊕("+String(pos1)+","+String(pos2)+")=("+String(s1)+")⊕("+String(s2)+")="+String(FPAfix(s1^s2)));
+		if(aibtype==0)write_text("Σ("+String(pos1)+", "+String(pos2)+") = ("+String(s1)+") - ("+String(s2)+") = "+String(FPAfix(s1-s2)));
+		else if(aibtype==1)write_text("⊕("+String(pos1)+", "+String(pos2)+") = ("+String(s1)+") ⊕ ("+String(s2)+") = "+String(FPAfix(s1^s2)));
 		await wait(timect/speed);
 		write_text("");
 		if(aibtype==0)document.getElementById("Qresult").innerHTML=String(FPAfix(s1-s2));
@@ -904,7 +904,7 @@ function make_upd()
 	let error_string="";
 	if(aibexist_flag==false)
 	{
-		error_string+="creeaza vectorul\n";
+		error_string+="creează vectorul\n";
 	}
 	if(animation_flag=="red")
 	{
@@ -916,7 +916,7 @@ function make_upd()
 	let error_object=document.getElementById("upd_error_feedback");
 	if(given_pos<=0 || given_pos>n || typeof n === 'undefined')
 	{
-		error_string+="*pos trebuie sa fie un numar natural intre 1 si n";
+		error_string+="*pos trebuie să fie un număr natural între 1 și n";
 		given_pos=0;
 	}
 	upd_object.value=given_pos;
@@ -927,7 +927,7 @@ function make_upd()
 	upd_object.value=given_val;
 	if(aibexist_flag==false)
 	{
-		error_string="*creeaza vectorul\n";
+		error_string="*creează vectorul\n";
 	}
 	if(error_string!="")
 	{
@@ -962,7 +962,7 @@ function make_query()
 	let error_object=document.getElementById("qry_error_feedback");
 	if(given_pos1<=0 || given_pos1>n || typeof n === 'undefined')
 	{
-		error_string+="*pos1 trebuie sa fie un numar natural intre 1 si n\n";
+		error_string+="*pos1 trebuie să fie un număr natural între 1 și n\n";
 		given_pos1=0;
 	}
 	upd_object.value=given_pos1;
@@ -973,13 +973,13 @@ function make_query()
 	let c2=given_pos2;
 	if(given_pos2<=0 || given_pos2>n || typeof n === 'undefined')
 	{
-		error_string+="*pos2 trebuie sa fie un numar natural intre 1 si n\n";
+		error_string+="*pos2 trebuie să fie un număr natural între 1 și n\n";
 		given_pos2=0;
 	}
 	upd_object.value=given_pos2;
 	if(c1>c2)
 	{
-		error_string+="*pos1 trebuie sa fie mai mic sau egal decat pos2";
+		error_string+="*pos1 trebuie să fie mai mic sau egal decât pos2";
 		given_pos1=0;
 		given_pos2=0;
 		document.getElementById("query_pos1").value=0;
@@ -987,7 +987,7 @@ function make_query()
 	}
 	if(aibexist_flag==false)
 	{
-		error_string="*creeaza vectorul\n";
+		error_string="*creează vectorul\n";
 	}
 	if(error_string!="")
 	{

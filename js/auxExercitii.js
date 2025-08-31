@@ -4,12 +4,12 @@ function schi_h()
 	schi_state=1-schi_state;
 	if(schi_state==1)
 	{
-		document.getElementById("schi_box").innerHTML="Descriere solutie🞁";
+		document.getElementById("schi_box").innerHTML="Descriere soluție🞁";
 		document.getElementById("schi_sol").style.display="block";
 	}
 	else if(schi_state==0)
 	{
-		document.getElementById("schi_box").innerHTML="Descriere solutie🞃";
+		document.getElementById("schi_box").innerHTML="Descriere soluție🞃";
 		document.getElementById("schi_sol").style.display="none";
 	}
 	return;
@@ -21,12 +21,12 @@ function evantai_h()
 	evantai_state=1-evantai_state;
 	if(evantai_state==1)
 	{
-		document.getElementById("evantai_box").innerHTML="Descriere solutie🞁";
+		document.getElementById("evantai_box").innerHTML="Descriere soluție🞁";
 		document.getElementById("evantai_sol").style.display="block";
 	}
 	else if(evantai_state==0)
 	{
-		document.getElementById("evantai_box").innerHTML="Descriere solutie🞃";
+		document.getElementById("evantai_box").innerHTML="Descriere soluție🞃";
 		document.getElementById("evantai_sol").style.display="none";
 	}
 	return;
@@ -38,12 +38,12 @@ function calafat_h()
 	calafat_state=1-calafat_state;
 	if(calafat_state==1)
 	{
-		document.getElementById("calafat_box").innerHTML="Descriere solutie🞁";
+		document.getElementById("calafat_box").innerHTML="Descriere soluție🞁";
 		document.getElementById("calafat_sol").style.display="block";
 	}
 	else if(calafat_state==0)
 	{
-		document.getElementById("calafat_box").innerHTML="Descriere solutie🞃";
+		document.getElementById("calafat_box").innerHTML="Descriere soluție🞃";
 		document.getElementById("calafat_sol").style.display="none";
 	}
 	return;
@@ -55,12 +55,12 @@ function spoiler_h()
 	spoiler_state=1-spoiler_state;
 	if(spoiler_state==1)
 	{
-		document.getElementById("spoiler_warning").innerHTML="Afisati🞁";
+		document.getElementById("spoiler_warning").innerHTML="Afișați🞁";
 		document.getElementById("spoiler").style.display="block";
 	}
 	else if(spoiler_state==0)
 	{
-		document.getElementById("spoiler_warning").innerHTML="Afisati🞃";
+		document.getElementById("spoiler_warning").innerHTML="Afișați🞃";
 		document.getElementById("spoiler").style.display="none";
 		return;
 	}

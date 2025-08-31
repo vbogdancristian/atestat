@@ -8,17 +8,17 @@ function send()
 	if(Number.isInteger(p)==false || p<=0 || p>=134217728+1)
 	{
 		p_obj.value=736;
-		result_obj.innerHTML="Σ(1,[1011100000])=AIB[736]+ AIB[704]+ AIB[640]+ AIB[512];";
+		result_obj.innerHTML="Σ(1, [1011100000]) = AIB[736] + AIB[704] + AIB[640] + AIB[512];";
 		error_obj.style.display="block";
-		error_obj.innerHTML="*indexul trebuie sa fie un numar natural mai mare sau egal cu 1 si mai mic sau egal cu 134217728";
+		error_obj.innerHTML="*indexul trebuie să fie un număr natural mai mare sau egal cu 1 și mai mic sau egal cu 134217728";
 		return;
 	}
 	error_obj.style.display="none";
 	error_obj.innerHTML="";
-	let s="Σ(1,["+p.toString(2)+"])=";//why not work
+	let s="Σ(1, ["+p.toString(2)+"]) = ";//why not work
 	for(let i=p;i>0;i-=(i&-i))
 	{
-		if(i-(i&-i)>0)s+="AIB["+String(i)+"]+ ";
+		if(i-(i&-i)>0)s+="AIB["+String(i)+"] + ";
 		else s+="AIB["+String(i)+"];";
 	}
 	result_obj.innerHTML=s;
@@ -70,7 +70,7 @@ function copycode_in()
 function copycode_out()
 {
 	let tooltip = document.getElementById("idtooltip");
-	tooltip.innerHTML = "Copiaza pe clipboard";
+	tooltip.innerHTML = "Copiază pe clipboard";
 	return;
 }
 let proofstate=0;
@@ -79,12 +79,12 @@ function hhh()
 	proofstate=1-proofstate;
 	if(proofstate==1)
 	{
-		document.getElementById("bonus").innerHTML="Alte demonstratii🞁";
+		document.getElementById("bonus").innerHTML="Alte demonstrații🞁";
 		document.getElementById("moreproofs").style.display="block";
 	}
 	else if(proofstate==0)
 	{
-		document.getElementById("bonus").innerHTML="Alte demonstratii🞃";
+		document.getElementById("bonus").innerHTML="Alte demonstrații🞃";
 		document.getElementById("moreproofs").style.display="none";
 	}
 	return;

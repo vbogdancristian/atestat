@@ -37,51 +37,51 @@
 </ul>
 </nav>
 <main>
-<button class="back_button" onclick="location.href='AIB_exercitii.html'">&ltInapoi</button>
-<button class="front_button" onclick="location.href='AIB_minmax.html'">Inainte&gt</button>
+<button class="back_button" onclick="location.href='AIB_exercitii.html'">&ltÎnapoi</button>
+<button class="front_button" onclick="location.href='AIB_minmax.html'">Înainte&gt</button>
 <p></p>
 <section class="prereq"><div>
-*Pentru a intelege acest articol este necesara familiarizarea cu <a href="AIB_introducere.html">structura unui AIB</a> si <a href="AIB_upd.html" target="_blank">functia de actualizare</a>.
+*Pentru a ințelege acest articol este necesară familiarizarea cu <a href="AIB_introducere.html">structura unui AIB</a> și <a href="AIB_upd.html" target="_blank">funcția de actualizare</a>.
 </div></section>
 <p></p>
 <section>
-<h1>Functia de construire eficienta</h1>
-<p>Adesea atunci cand vrem sa cream un AIB pe baza unui vector de lungime n vom apela functia de actualizare de n ori pentru fiecare index.</p>
+<h1>Funcția de construire eficientă</h1>
+<p>Adesea atunci când vrem să creăm un AIB pe baza unui vector de lungime n vom apela funcția de actualizare de n ori pentru fiecare index.</p>
 <pre class="codebox">for(int i=1;i<=n;i++)
 {
 	fin>>v[i];
 	update(i,v[i]);
 }</pre>
-<p>Daca AIB-ul are deja valorile corespunzatoare unui alt vector w:</p>
+<p>Dacă AIB-ul are deja valorile corespunzătoare unui alt vector w:</p>
 <pre class="codebox">for(int i=1;i<=n;i++)
 {
 	fin>>v[i];
 	update(i,v[i]-w[i]);
 }</pre>
-<p>In cele mai multe cazuri cand folosim AIB nu ne incurca complexitatea de O(nlog n), dar se poate construi in timp liniar dupa urmatoarea recurenta:</p>
+<p>În cele mai multe cazuri când folosim AIB nu ne încurcă complexitatea de O(nlog n), dar se poate construi în timp liniar după urmatoarea recurență:</p>
 <pre class="codebox">for(int i=1; i&lt=n; i++)
 {
-    AIB[i]+=v[i];///evenual -w[i] daca este cazul
+    AIB[i]+=v[i];///eventual -w[i]
     if(i+(i&-i)&lt=n)AIB[i+(i&-i)]+=AIB[i];
 }
 </pre>
 <span class="tooltip" >
 <button onclick="copycode_in()" onmouseout="copycode_out()" class="button">
-<span class="tooltiptext" id="idtooltip">Copiaza pe clipboard</span>
-Copiaza codul direct
+<span class="tooltiptext" id="idtooltip">Copiază pe clipboard</span>
+Copiază codul direct
 </button></span><br>
-<p>Indexul i trebuie adaugat la AIB[i], AIB[i+(i&-i)], AIB[i+(i&-i)+(i+(i&-i)&-(i+(i&-i)))] etc. In AIB[i] vor intra mai multe elemente ce se regasesc si AIB[i+(i&-i), acestea la randul lor se regasesc in <span class="groupUp">AIB[i+(i&-i)+(i+(i&-i)&-(i+(i&-i)))]</span>, deci ar avea mai mult sens sa adaugam la AIB[i+(i&-i)] suma tuturor indecsilor determinati de AIB[i] decat sa ii luam pe rand.</p>
-<p>Recurenta fiind liniara vom avea complexitatea finala O(n).</p>
+<p>Indexul i trebuie adăugat la AIB[i], AIB[i+(i&-i)], AIB[i+(i&-i)+(i+(i&-i)&-(i+(i&-i)))] etc. În AIB[i] vor intra mai multe elemente ce se regasesc și în AIB[i+(i&-i)], acestea la rândul lor se regasesc în <span class="groupUp">AIB[i+(i&-i)+(i+(i&-i)&-(i+(i&-i)))]</span>, deci ar avea mai mult sens să adăugam la AIB[i+(i&-i)] suma tuturor pozițiilor din AIB[i] decât să îi luăm pe rând.</p>
+<p>Recurența fiind liniară vom avea complexitatea finală O(n).</p>
 
 </section>
 <p></p>
-<button class="back_button" onclick="location.href='AIB_exercitii.html'">&ltInapoi</button>
-<button class="front_button" onclick="location.href='AIB_minmax.html'">Inainte&gt</button>
+<button class="back_button" onclick="location.href='AIB_exercitii.html'">&ltÎnapoi</button>
+<button class="front_button" onclick="location.href='AIB_minmax.html'">Înainte&gt</button>
 <p></p>
 </main>
 <script src="../js/auxBuild.js"></script>
 <footer>
-Software educational realizat de Vlad Bogdan Cristian, Colegiul National Emil Racovita Iasi
+Software educațional realizat de Vlad Bogdan Cristian, Colegiul Național Emil Racovița Iași
 </footer>
 </body>
 </html>

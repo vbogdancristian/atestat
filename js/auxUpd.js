@@ -18,7 +18,7 @@ function send()
 		pos_obj.value=398;
 		result_obj.innerHTML="AIB[398, 400, 416, 448, 512, 1024].";
 		error_obj.style.display="block";
-		error_obj.innerHTML="*n si pos sunt numere naturale nenule astfel incat pos<=n, ambele mai mici decat 134217728 + 1";
+		error_obj.innerHTML="*n și pos sunt numere naturale nenule astfel încât pos ≤ n, ambele mai mici decât 134217728 + 1";
 		return;
 	}
 	error_obj.style.display="none";
@@ -83,7 +83,7 @@ function copycode_in()
 function copycode_out()
 {
 	let tooltip = document.getElementById("idtooltip");
-	tooltip.innerHTML = "Copiaza pe clipboard";
+	tooltip.innerHTML = "Copiază pe clipboard";
 	return;
 }
 let proofstate=0;
@@ -92,12 +92,12 @@ function hhh()
 	proofstate=1-proofstate;
 	if(proofstate==1)
 	{
-		document.getElementById("bonus").innerHTML="Alte demonstratii🞁";
+		document.getElementById("bonus").innerHTML="Alte demonstrații🞁";
 		document.getElementById("moreproofs").style.display="block";
 	}
 	else if(proofstate==0)
 	{
-		document.getElementById("bonus").innerHTML="Alte demonstratii🞃";
+		document.getElementById("bonus").innerHTML="Alte demonstrații🞃";
 		document.getElementById("moreproofs").style.display="none";
 	}
 	return;

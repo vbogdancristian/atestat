@@ -38,34 +38,34 @@
 </ul>
 </nav>
 <main>
-<button class="back_button" onclick="location.href='AIB_2d.html'">&ltInapoi</button>
-<button class="front_button" onclick="location.href='AIB_build.html'">Inainte&gt</button>
+<button class="back_button" onclick="location.href='AIB_2d.html'">&ltÎnapoi</button>
+<button class="front_button" onclick="location.href='AIB_build.html'">Înainte&gt</button>
 <p></p>
 <section class="prereq"><div>
-*Pentru a intelege acest articol este necesara familiarizarea cu <a href="AIB_introducere.html" target="_blank">toata teoria</a>.
+*Pentru a ințelege acest articol este necesară familiarizarea cu <a href="AIB_introducere.html" target="_blank">toată teoria</a>.
 </div></section>
 <p></p>
 <section>
 <h1>Probleme rezolvate cu AIB</h1>
-<p>In acest articol vom descrie solutia la cateva probleme selectate folosind cele invatate anterior. Daca ati stat mai mult timp la o problema si doriti sa vedeti sursa de 100 de puncte, am inclus-o la finalul paginii in sectia de rezolvari. Problemele sunt sortate crescator dupa dificultate:</p>
+<p>În acest articol vom descrie soluția la câteva probleme selectate folosind cele învățate anterior. Dacă ați stat mai mult timp la o problemă și doriți să vedeți sursa de 100 de puncte, am inclus-o la finalul paginii în secția de rezolvări. Problemele sunt sortate crescător după dificultate:</p>
 </section><p></p>
 
 <section>
 <h1>Problema <span class="s1">schi</span> de pe Infoarena</h1>
-<p>Cerinta o mai puteti gasi si <a href="https://www.infoarena.ro/problema/schi" target="_blank">aici</a>.<br>
-La un concurs de schi, are loc o proba contra-cronometru, concurentii trebuind sa termine traseul in cel mai scurt timp cu putinta. Acestia vor evolua consecutiv si, dupa finish, li se va comunica locul ocupat in clasamentul intermediar. Mai exact, dupa evolutia celui de-al p-lea concurent, acesta va sti locul sau in clasamentul format de primii p concurenti. Cunoscand pozitiile intermediare, se cere sa se determine clasamentul final al competitiei.<br>
+<p>Cerința o mai puteți găsi și <a href="https://www.infoarena.ro/problema/schi" target="_blank">aici</a>.<br>
+La un concurs de schi, are loc o proba contra-cronometru, concurenții trebuind să termine traseul în cel mai scurt timp cu putință. Aceștia vor evolua consecutiv și, după finish, li se va comunica locul ocupat în clasamentul intermediar. Mai exact, după evoluția celui de-al p-lea concurent, acesta va ști locul său în clasamentul format de primii p concurenți. Cunoscând pozițiile intermediare, se cere să se determine clasamentul final al competiției.<br>
 Date de intrare:<br>
-Pe prima linie a fisierului de intrare schi.in se afla N, reprezentand numarul de concurenti aliniati la startul concursului. Pe urmatoarele N linii se afla cate o valoare intreaga, indicand locul ocupat de fiecare concurent in clasamentul intermediar, actualizat dupa evolutia sa.<br>
-Date de iesire:<br>
-Fisierul de iesire schi.out va avea N linii. Pe linia i se va afisa numarul de ordine al concurentului care ocupa locul i in clasamentul final.<br>
-Restrictii:<br>
+Pe prima linie a fișierului de intrare schi.in se află N, reprezentând numărul de concurenți aliniați la startul concursului. Pe urmatoarele N linii se află câte o valoare întreagă, indicând locul ocupat de fiecare concurent în clasamentul intermediar, actualizat după evoluția sa.<br>
+Date de ieșire:<br>
+Fișierul de ieșire schi.out va avea N linii. Pe linia i se va afișa numărul de ordine al concurentului care ocupă locul i în clasamentul final.<br>
+Restricții:<br>
 1 ≤ N ≤ 30000<br>
 </p>
-<h3 class="boxType" id="schi_box" onclick="schi_h()">Descriere solutie🞃</h3>
+<h3 class="boxType" id="schi_box" onclick="schi_h()">Descriere soluție🞃</h3>
 <div class="solType" id="schi_sol">
-<p>Notam v[i] pozitia concurentului i la momentul i (ce se da) si pos[i] concurentul de pe pozitia i la finalul concursului (ce se cere). Observam faptul ca pozitia finala a concurentului final este chiar v[n], acesta neavand ocazia sa intreaca sau sa fie intrecut de altcineva in ultimul moment. Pentru penultimul concurent avem mai multe cazuri: daca v[n-1]&ltv[n] (are o pozitie mai buna decat concurentul n), atunci acelasi argument se aplica. Daca in schimb v[n-1]&gt=v[n], inseamna ca in momentul n acesta va cobori cu exact o pozitie, fiind in urma concurentului n. Ne putem gandi atunci ca vom simula procesul de la coada la cap si vom cauta pentru fiecare concurent x a v[x]-a pozitie libera in clasament, dupa care vom marca pozitia ca fiind ocupata de x. Vom folosi structura de date invatata astfel: la inceput initializam toate pozitiile cu 1, iar pentru a marca o pozitie ca fiind indisponibila facem update(pos,-1). Cand cautam binar cel mai mare index mai mic sau egal decat v[x], cautam de fapt care este a v[x]-a pozitie neocupata. Pentru fiecare concurent facem o cautare si o actualizare, facand complexitatea totala O(n*log n).</p>
-<p>Exemplul rezolvat pas cu pas:<br><br>
-initial, <br>
+<p>Notăm v[i] poziția concurentului i la momentul i (inputul) și pos[i] numărul de ordine a concurentului de pe poziția i la finalul concursului (outputul). Observăm faptul că poziția finală a concurentului final este chiar v[n], acesta neavând ocazia să întreacă sau să fie întrecut de altcineva în ultimul moment. Pentru penultimul concurent avem mai multe cazuri: dacă v[n-1] &lt v[n] (are o poziție mai bună decât concurentul n), atunci același argument se aplică. Dacă în schimb v[n-1] ≥ v[n], înseamnă că în momentul n acesta va coborî cu exact o poziție, fiind în urma concurentului n. Ne putem gândi atunci că vom simula procesul de la coadă la cap și vom căuta pentru fiecare concurent x a v[x]-a poziție liberă în clasament, după care vom marca poziția ca fiind ocupată de x. Vom folosi structura de date invățată astfel: la început inițializăm toate pozițiile cu 1, iar pentru a marca o poziție ca fiind indisponibilă facem update(pos,-1). Când căutam binar cel mai mare index mai mic sau egal decat v[x], căutam de fapt care este a v[x]-a poziție neocupată. Pentru fiecare concurent facem o căutare și o actualizare, făcând complexitatea totală O(n*log n).</p>
+<p>Exemplul (n = 8, v = [1, 1, 3, 4, 4, 2, 1, 3]) rezolvat:<br><br>
+inițial, <br>
 <table class="normalTable"><tr class="normaltr">
 <td>pos[i]</td>
 <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
@@ -97,7 +97,7 @@ v[7]=1<br>
 <tr class="normaltr"><td>i</td>
 <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td></tr></table>
 <br>
-v[6]=2 ; A 2-a pozitie libera este 4<br>
+v[6]=2 ; A 2-a poziție liberă este 4<br>
 <br>
 <table class="normalTable"><tr class="normaltr">
 <td>pos[i]</td>
@@ -108,7 +108,7 @@ v[6]=2 ; A 2-a pozitie libera este 4<br>
 <tr class="normaltr"><td>i</td>
 <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td></tr></table>
 <br>
-Repetam procesul pana la v[1]=1. Vectorul final este:<br>
+Repetăm procesul până la v[1]=1. Vectorul final este:<br>
 <br>
 <table class="normalTable"><tr class="normaltr">
 <td>pos[i]</td>
@@ -124,11 +124,11 @@ Repetam procesul pana la v[1]=1. Vectorul final este:<br>
 <p></p>
 
 <section>
-<h1>Problema <span class="s1">calafat</span> data la ONI in 2016</h1>
-<p>Cerinta o mai puteti gasi si <a href="https://www.pbinfo.ro/probleme/1692/calafat" target="_blank">aici</a>.<br>
-Se dă un șir format din N numere naturale. Pentru fiecare valoare distinctă dintr-o subsecvență cuprinsă între doi indici st si dr considerăm distanța dintre indicii primei și ultimei apariții ale acesteia în cadrul subsecvenței. Dându-se M subsecvențe de forma [st, dr], se cere să se calculeze suma distanțelor corespunzătoare tuturor valorilor distincte din subsecvență.<br>
+<h1>Problema <span class="s1">calafat</span> dată la ONI în 2016</h1>
+<p>Cerința o mai puteți găsi și <a href="https://www.pbinfo.ro/probleme/1692/calafat" target="_blank">aici</a>.<br>
+Se dă un șir format din N numere naturale. Pentru fiecare valoare distinctă dintr-o subsecvență cuprinsă între doi indici st și dr considerăm distanța dintre indicii primei și ultimei apariții ale acesteia în cadrul subsecvenței. Dându-se M subsecvențe de forma [st, dr], se cere să se calculeze suma distanțelor corespunzătoare tuturor valorilor distincte din subsecvență.<br>
 Date de intrare:<br>
-Fișierul de intrare calafat.in conține pe prima linie două numere natural N și M. Pe a doua linie se vor afla cele N numere din șirul dat. Pe următoarele M linii se vor afla câte două numere st și dr, cu semnificația că vrem să calculăm suma menționată mai sus pentru subsecvența [st,dr].<br>
+Fișierul de intrare calafat.in conține pe prima linie două numere naturale N și M. Pe a doua linie se vor afla cele N numere din șirul dat. Pe următoarele M linii se vor afla câte două numere st și dr, cu semnificația că vrem să calculăm suma menționată mai sus pentru subsecvența [st,dr].<br>
 Date de ieșire:<br>
 Fișierul de ieșire calafat.out va conține M numere naturale, câte unul pe fiecare linie, reprezentând cele M sume cerute.<br>
 Restricții și precizări:<br>
@@ -136,14 +136,14 @@ Restricții și precizări:<br>
 1 ≤ st ≤ dr ≤ N<br>
 Valorile din șir se vor afla în intervalul [1, N]<br>
 </p>
-<h3 class="boxType" id="calafat_box" onclick="calafat_h()">Descriere solutie🞃</h3>
+<h3 class="boxType" id="calafat_box" onclick="calafat_h()">Descriere soluție🞃</h3>
 <div class="solType" id="calafat_sol">
-<p>Vom sorta subsecventele date crescator dupa capatul drept si vom crea vectorul <span class="s1">st[i]</span> = cea mai apropiata pozitie mai mica ca i astfel incat v[i] = v[st[i]]. Pe baza urmatoarei informatii va functiona AIB-ul:<br>
+<p>Vom sorta subsecvențele date crescător după capătul drept și vom crea vectorul <span class="s1">st[i]</span> = cea mai apropiată poziție mai mică ca i astfel încât v[i] = v[st[i]]. Datorită următoarei precizări va funcționa AIB-ul:<br>
 ...x...x...x...<br>
 ..i1..i2..i3...<br>
 dist(i1,i3)=dist(i1,i2)+dist(i2,i3)<br>
-Vom parcurge vectorul de la 1 la n si vom actualiza la fiecare pas pozitia st[i] cu i-st[i] (desigur, daca exista). Cu un al 2-lea index raspundem in vectorul sortat de subsecvente la toate intrebarile la care avem acces (care au dr&lt=i). In cazul unei situatii precum v=11121..., i=5, functia de interogare va aduna {st[st[st[5]]]} + {st[st[5]]} + {st[5]} = 1 + 1 + 2. Capatul st fiind mai mic decat dr garanteaza faptul ca putem calcula Σ(st,dr) = Σ(1,dr) - Σ(1,st-1).<br>
-Complexitatea totala este O(nlog n + mlog m), al doilea termen venind de la sortarea initiala.
+Vom parcurge vectorul de la 1 la n și vom actualiza la fiecare pas poziția st[i] cu i-st[i] (desigur, dacă există). Cu un al 2-lea index răspundem în vectorul sortat de subsecvențe la toate întrebările la care avem acces (care au dr&lt=i). În cazul unei situații precum v = [1, 1, 1, 2, 1, ...], i=5, funcția de interogare va aduna {st[st[st[5]]]} + {st[st[5]]} + {st[5]} = 1 + 1 + 2. Capătul st fiind mai mic decât dr garantează că putem calcula Σ(st,dr) = Σ(1,dr) - Σ(1,st-1).<br>
+Complexitatea totală este O(nlog n + mlog m), al doilea termen venind de la sortarea inițială.
 </p>
 </div>
 </section>
@@ -152,28 +152,28 @@ Complexitatea totala este O(nlog n + mlog m), al doilea termen venind de la sort
 
 <section>
 <h1>Problema <span class="s1">evantai</span> data la ONI in 2005</h1>
-<p>Cerinta o mai puteti gasi si <a href="https://www.infoarena.ro/problema/evantai" target="_blank">aici</a>.<br>
-Lui Algorel ii plac mult sirurile de numere naturale cu proprietati cat mai ciudate. Cautand astfel de ciudatenii ale informaticii, a gasit printr-o carte prafuita de vreme un nou tip de sir denumit evantai. Un evantai este un sir cu un numar par de termeni, E<sub>1</sub> E<sub>2</sub> ... E<sub>2K</sub>, cu urmatoarea proprietate:<br>
+<p>Cerința o mai puteți găsi și <a href="https://www.infoarena.ro/problema/evantai" target="_blank">aici</a>.<br>
+Lui Algorel îi plac mult șirurile de numere naturale cu proprietăți cât mai ciudate. Căutand astfel de ciudățenii ale informaticii, a gasit printr-o carte prăfuită de vreme un nou tip de șir denumit evantai. Un evantai este un șir cu un număr par de termeni, E<sub>1</sub> E<sub>2</sub> ... E<sub>2K</sub>, cu următoarea proprietate:<br>
 E<sub>1</sub> + E<sub>2K</sub> > E<sub>2</sub> + E<sub>2K-1</sub> > ... > E<sub>K</sub> + <sub>EK+1</sub><br>
-Cerinta:<br>
-Fiind dat un sir de numere naturale distincte A<sub>1</sub> <sub>A2</sub> ... A<sub>N</sub>, Algorel vrea sa afle cate subsiruri ale acestuia sunt evantaie.<br>
+Cerința:<br>
+Fiind dat un șir de numere naturale distincte A<sub>1</sub> <sub>A2</sub> ... A<sub>N</sub>, Algorel vrea să afle câte subșiruri ale acestuia sunt evantaie.<br>
 Date de intrare:<br>
-Prima linie a fisierului evantai.in contine numarul intreg N, reprezentand numarul de elemente ale sirului. Urmatoarele N linii contin, in ordine, elementele sirului A.<br>
-Date de iesire:<br>
-Pe prima linie a fisierului evantai.out se va afla un singur numar intreg C, reprezentand numarul de subsiruri evantai. Rezultatul va fi afisat modulo 30103.<br>
-Restrictii si precizari:<br>
+Prima linie a fișierului evantai.in conține numărul întreg N, reprezentând numărul de elemente ale șirului. Urmatoarele N linii conțin, în ordine, elementele șirului A.<br>
+Date de ieșire:<br>
+Pe prima linie a fișierului evantai.out se va afla un singur număr întreg C, reprezentând numărul de subșiruri evantai. Rezultatul va fi afișat modulo 30103.<br>
+Restricții și precizări:<br>
 2 ≤ N ≤ 700<br>
-Elementele sirului sunt numere intregi distincte cuprinse intre 1 si 1000<br>
-Prin subsir se intelege orice insiruire de termeni A<sub>i1</sub> A<sub>i2</sub> ... A<sub>ik</sub> astfel incat i<sub>1</sub> &lt i<sub>2</sub> &lt ... &lt i<sub>k</sub> <br>
+Elementele șirului sunt numere întregi distincte cuprinse între 1 și 1000<br>
+Prin subșir se întelege orice înșiruire de termeni A<sub>i1</sub> A<sub>i2</sub> ... A<sub>ik</sub> astfel incat i<sub>1</sub> &lt i<sub>2</sub> &lt ... &lt i<sub>k</sub> <br>
 </p>
-<h3 class="boxType" id="evantai_box" onclick="evantai_h()">Descriere solutie🞃</h3>
+<h3 class="boxType" id="evantai_box" onclick="evantai_h()">Descriere soluție🞃</h3>
 <div class="solType" id="evantai_sol">
-<p>La o prima vedere problema pare a fi de programare dinamica, dar are o rezolvare eleganta doar cu AIB. Consideram nr[i][j] = numarul de siruri "evantai" ce putem forma folosind elemente din subsirul [i,j] si avand capetele in i si in j. Ultima conditie este importanta, deoarece vrem ca sirul A<sub>i1</sub>, A<sub>i2</sub>, ... , A<sub>ik</sub> sa fie tratat separat de sirul A<sub>i1</sub>, A<sub>i2</sub>, ... , A<sub>ik+1</sub>. Vom considera nr[1][5]:<br>
+<p>La o primă vedere problema pare a fi de programare dinamică, dar are o rezolvare elegantă doar cu AIB. Considerăm nr[i][j] = numărul de șiruri "evantai" ce putem forma folosind elemente din subșirul [i,j] și având capetele în i și în j. Ultima condiție este importantă, deoarece vrem ca șirul A<sub>i1</sub>, A<sub>i2</sub>, ... , A<sub>ik</sub> să fie tratat separat de șirul A<sub>i1</sub>, A<sub>i2</sub>, ... , A<sub>ik+1</sub>. Vom considera nr[1][5]:<br>
 <span class="s2">A<sub>1</sub></span>, A<sub>2</sub>, A<sub>3</sub>, A<sub>4</sub>, <span class="s2">A<sub>5</sub></span>;<br>
-Observam faptul ca va exista mereu secventa evantai formata din capetele sirului: A<sub>1</sub>, A<sub>5</sub>. Intrebarea este: cum ramane cu A<sub>2</sub>, A<sub>3</sub>, A<sub>4</sub> ? In cate moduri putem cupla 2 elemente din sirul [1+1,5-1] astfel incat suma acestora sa nu depaseasca A<sub>1</sub>+A<sub>5</sub>? <br>
-Vom itera prin toate capetele posibile in O(n<sup>2</sup>) cu i si j si vom calcula pentru fiecare nr[i][j]= 1 + #moduri([i+1,j-1],A[i]+A[j]-1), adaugam rezultatul la rezultatul total, dupa care transmitem pentru urmatoarele secvente mai mari rezultatul. Vom folosi un AIB 2d - prima stare pentru index si a doua stare pentru suma. Pentru a simplifica lucrurile putem parcurge in ordine inversa (i=<span class="numarNatural">n,1</span>,j=<span class="numarNatural">n,i+1</span>) ceea ce inseamna ca in pozitiile (i,j) putem scrie #moduri([i+1,j-1], A[i]+A[j]-1) drept query( j-1 , A[i]+A[j]-1) (pozitiile 1, 2, ..., i nu au fost actualizate, deci raman 0 si nu au efect asupra calculului). Transmiterea informatiei se face simplu printr-o actualizare de tipul: update(posX = j, posY = A[i] + A[j], val =  nr[i][j]). Rezultatul final va fi nr[1][1] + nr[1][2] + ... + nr[n][n], pe care il putem calcula pe parcurs, deci putem renunta la matricea nr cand implementam.</p>
-<p>Complexitatea finala este O(n<sup>2</sup>log n log summax), unde summax reprezinta suma maxima a 2 elemente din sir (in problema summax = 2000, nmax = 700);</p>
-<p>*Observatie: daca nu vrem o parcurgere inversa va trebui sa implementam update pe prefix si query pe sufix. Acesta functioneaza pe acelasi principiu in mare, modificarile fiind: AIB[x]=[x,x+(x&-x)-1], functia de actualizare foloseste parcurgerea pe prefix (x -> x-(x&-x)), functia de interogare foloseste parcurgerea pe sufix (x -> x+(x&-x)). Am inclus pentru cei curiosi codul alternativ la sectia de rezolvari mai jos;</p> 
+Observăm faptul că va exista mereu secvența evantai formata din capetele șirului: A<sub>1</sub>, A<sub>5</sub>. Întrebarea este: cum rămâne cu A<sub>2</sub>, A<sub>3</sub>, A<sub>4</sub> ? În câte moduri putem cupla 2 elemente din șirul [1+1,5-1] astfel încat suma acestora sa nu depaseasca A<sub>1</sub>+A<sub>5</sub>? <br>
+Vom itera prin toate capetele posibile în O(n<sup>2</sup>) cu i si j și vom calcula pentru fiecare nr[i][j]= 1 + #moduri([i+1,j-1],A[i]+A[j]-1), adăugăm rezultatul la numărul total de șiruri, după care transmitem pentru următoarele secvențe mai mari rezultatul. Vom folosi un AIB 2d - prima stare pentru index și a doua stare pentru sumă. Pentru a simplifica lucrurile putem parcurge în ordine inversă (i = <span class="numarNatural">n,1</span>, j = <span class="numarNatural">n,i+1</span>) ceea ce înseamna că în pozitiile (i,j) putem scrie #moduri([i+1,j-1], A[i]+A[j]-1) drept query( j-1 , A[i]+A[j]-1) (pozitiile 1, 2, ..., i nu au fost actualizate, deci raman 0 si nu au efect asupra calculului). Transmiterea informației se face simplu printr-o actualizare de tipul: update(posX = j, posY = A[i] + A[j], val =  nr[i][j]). Rezultatul final va fi nr[1][1] + nr[1][2] + ... + nr[n][n], pe care îl putem calcula pe parcurs, deci putem renunța la matricea nr când implementăm.</p>
+<p>Complexitatea finală este O(n<sup>2</sup>log n log summax), unde summax reprezintă suma maximă a 2 elemente din sir (in problemă summax = 2000, nmax = 700);</p>
+<p>*Observație: dacă nu vrem o parcurgere inversă va trebui să implementăm update pe prefix și query pe sufix. Această variantă AIB funcționeaza pe același principiu în mare, modificările fiind: AIB[x]=[x,x+(x&-x)-1], funcția de actualizare folosește parcurgerea pe prefix (x -> x-(x&-x)), funcția de interogare folosește parcurgerea pe sufix (x -> x+(x&-x)). Am inclus pentru cei curioși codul alternativ la secția de rezolvări mai jos;</p> 
 </p>
 </div>
 </section>
@@ -185,27 +185,27 @@ Vom itera prin toate capetele posibile in O(n<sup>2</sup>) cu i si j si vom calc
 <p>Inversiuni de pe NerdArena: <a href="https://www.nerdarena.ro/problema/inversiuni">https://www.nerdarena.ro/problema/inversiuni</a></p>
 <p>Tokitsukaze and Strange Inequality de pe codeforces: <a href="https://codeforces.com/problemset/problem/1677/A">https://codeforces.com/problemset/problem/1677/A</a></p></section>
 <p></p>
-<section><h1>Rezolvari</h1><p>Se recomanda incercarea problemei un timp indelungat inainte de a vedea sursa de 100 de puncte.</p>
-<h3 class="boxType" id="spoiler_warning" onclick="spoiler_h()">Afisati🞃</h3>
+<section><h1>Rezolvări</h1><p>Se recomandă încercarea problemei un timp îndelungat înainte de a vedea sursa de 100 de puncte.</p>
+<h3 class="boxType" id="spoiler_warning" onclick="spoiler_h()">Afișați🞃</h3>
 <div class="solType" id="spoiler">
-<p>codul sursa - schi:</p>
+<p>codul sursă - schi:</p>
 <pre class="codebox" id="code_schi"></pre>
-<p>codul sursa - calafat</p>
+<p>codul sursă - Calafat</p>
 <pre class="codebox" id="code_calafat"></pre>
-<p>codul sursa - evantai</p>
+<p>codul sursă - evantai</p>
 <pre class="codebox" id="code_evantai"></pre>
 cod alternativ pentru evantai:
 <pre class="codebox" id="code_evantai_alt"></pre>
 </div>
 </section>
 <p></p>
-<button class="back_button" onclick="location.href='AIB_2d.html'">&ltInapoi</button>
-<button class="front_button" onclick="location.href='AIB_build.html'">Inainte&gt</button>
+<button class="back_button" onclick="location.href='AIB_2d.html'">&ltÎnapoi</button>
+<button class="front_button" onclick="location.href='AIB_build.html'">Înainte&gt</button>
 <p></p>
 </main>
 <script src="../js/auxExercitii.js"></script>
 <footer>
-Software educational realizat de Vlad Bogdan Cristian, Colegiul National Emil Racovita Iasi
+Software educațional realizat de Vlad Bogdan Cristian, Colegiul Național Emil Racovița Iași
 </footer>
 </body>
 </html>
