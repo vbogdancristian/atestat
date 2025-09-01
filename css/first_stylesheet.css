@@ -308,7 +308,7 @@ table, th, td {
 }
 .prereq{
 	font-size: 16px;
-	background-color:var(--dark_purple);
+	background-color:var(--active_color);
 	color:var(--white);
 }
 .prereq a{
@@ -495,7 +495,7 @@ table, th, td {
 	margin-top:10px;
 }
 #banner{
-	height:25vw;
+	height:30vw;
 }
 #links_box{
 	cursor:pointer;
@@ -524,4 +524,7 @@ footer {
 }
 #ghid_text{
 	height:50px;
+}
+a{
+	color:var(--dark_purple);
 }
