@@ -55,7 +55,7 @@ let crtop="none";
 const code_obj=document.getElementById("code_H");
 function newop(optype)
 {
-	speed=document.getElementById("speed");///definition of bandaid fix
+	speed=document.getElementById("speed").value;///definition of bandaid fix
 	crtop=optype;
 	display_newop();
 	button_manage();
@@ -769,7 +769,7 @@ async function range_query(pos1,pos2)/*return sum of elements in [pos1,pos2], po
 		else if(aibtype==1)write_text("⊕("+String(pos1)+", "+String(pos2)+") = query("+String(pos2)+") ⊕ query("+String(pos1-1)+")");
 		await wait(timect/speed);
 		//write_text("Calculam valoarea query("+String(pos2)+")");
-		await wait(timect/speed);
+		//await wait(timect/speed);
 		let s1= await query(pos2);
 		//await wait(timect/speed);
 		
