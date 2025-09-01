@@ -31,8 +31,10 @@
   <a href="AIB_apl.html">Aplicații</a>
   </div>
   </li>
-  <li class="dropdown"><a class="active" class="dropbtn" style="cursor: pointer">Generator</a>
+  <li class="dropdown"><a class="active" class="dropbtn" style="cursor: pointer">Modelator</a>
   <div class="dropdown-content">
+    <a href="AIB_genInstruct.html"> Ghid de utilizare </a>
+
   <a href="AIB_gen1.html"> AIB clasic </a>
   <a href="AIB_gen2.html">AIB xor </a><!--  # = AIB_gen2.html -->
   <!--<a href="#"> AIB 2d</a>-->
@@ -56,7 +58,7 @@ am decis sa am 32 de elemente intr-un final, deci 6 dreptunghiuri (log2(32)+1). 
 voi avea functiile reale de update si query si voi mai avea nevoie de functii care primesc ca input vectorul de pe site (din form) si transforma asta in input pentru functie
 adica form data -> make_query() -> query (voi mai si desena aici dar asta implementez dupa)
 -->
-<table id="debugtable"><tr><td id="instructions">Selectează n și navighează cu TAB !</td><td id="mention">AIB clasic cu precizie până la 1e-9</td></tr></table>
+<table id="debugtable"><tr><td id="instructions">Introdu n și navighează cu TAB !</td></tr><tr><td id="mention">AIB clasic cu precizie până la 1e-9</td></tr></table>
 <div class="vector_UI">
 	
 	<table class="datavector" style="display:inline-table" ><tbody>
@@ -137,7 +139,7 @@ adica form data -> make_query() -> query (voi mai si desena aici dar asta implem
 	</tbody></table>
 	
 </div>
-<button class="button" id="buildbutton" style="margin-left:30px;margin-right:20px;margin-bottom:10px;" onclick="make_v()">Creează</button>
+<button class="button" id="buildbutton" style="margin-left:30px;margin-right:20px;margin-bottom:10px;" onclick="make_v()">Creează vectorul</button>
 <p id="n_error_feedback"></p>
 
 
