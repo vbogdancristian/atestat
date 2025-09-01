@@ -29,7 +29,7 @@ function loadpage(nrpage)
 	}
 	else if(nrpage==3)
 	{
-		text_obj.innerHTML="Mărimea vectorului se va schimba odată cu setarea valorii lui n. Dacă nu s-a schimbat, apăsați ENTER sau dați click în afara cutiei de text. Selectați-vă valorile vectorului peste care vom forma AIB-ul. Valorile introduse ce nu sunt numere vor fi interpretate ca având valoarea 0." ;
+		text_obj.innerHTML="Mărimea vectorului se va schimba odată cu setarea valorii lui n. Dacă nu s-a schimbat, apăsați ENTER sau dați click în afara cutiei de text. Introduceți valorile vectorului pentru care vom forma AIB-ul. Textele non-numerice vor fi interpretate ca având valoarea 0." ;
 	}
 	else if(nrpage==4)
 	{
@@ -45,7 +45,7 @@ function loadpage(nrpage)
 	}
 	else if(nrpage==7)
 	{
-		text_obj.innerHTML=`În continuare puteți selecta modul în care vreți să fie animate cele 2 funcții (mai multe despre ele în următoarele pagini). Valoarea deja selectată este animația de tip "manuală", dar există și varianta de animație "automată". Dacă selectați a 2-a variantă va apărea o altă căsuță în care puteți selecta viteza animației. Pentru a salva modificările apăsați pe butonul "salvează preferințele". Textul alăturat indică tipul de operație începută.`;
+		text_obj.innerHTML=`În continuare puteți selecta modul în care vreți să fie animate cele 2 funcții (mai multe despre ele în următoarele pagini). Valoarea deja selectată este animația de tip "manuală", dar există și varianta de animație "automată". Dacă selectați a 2-a variantă va apărea o altă căsuță în care puteți selecta viteza animației. Pentru a salva modificările apăsați pe butonul "Salvează preferințele". Textul alăturat indică tipul de operație începută.`;
 	}
 	else if(nrpage==8)
 	{
@@ -53,7 +53,7 @@ function loadpage(nrpage)
 	}
 	else if(nrpage==9)
 	{
-		text_obj.innerHTML=`Dacă ați selectat animația de tip "manuală" va aparea în josul paginii un buton de progresare a animației. Veți putea vedea nodurile actualizate de funcție. Lângă buton va fi și poza cu codul C++ care descrie funcția, linia subliniată în cod arată pasul la care a ajuns animația. De asemenea, butoanele pentru inițierea altor procese vor fi ascunse, precum și butonul de schimbarea tipului de animație.`;
+		text_obj.innerHTML=`Dacă ați selectat animația de tip "manuală" va apărea în josul paginii un buton de progresare a animației. Veți putea vedea nodurile actualizate de funcție. Lângă buton va fi și poza cu codul C++ care descrie funcția, linia subliniată în cod arată pasul la care a ajuns animația. De asemenea, butoanele pentru inițierea altor procese vor fi ascunse, precum și butonul de schimbarea tipului de animație.`;
 	}
 	else if(nrpage==10)
 	{
@@ -69,7 +69,7 @@ function loadpage(nrpage)
 	}
 	else if(nrpage==13)
 	{
-		text_obj.innerHTML=`Dacă ați selectat animația de tip "manuală" va aparea în josul paginii un buton de progresare a animației. Veți putea vedea nodurile din care se calculează suma. Lângă buton va fi și poza cu codul C++ care descrie funcția, linia subliniată în cod arată pasul la care a ajuns animația. De asemenea, butoanele pentru inițierea altor procese vor fi ascunse, precum și butonul de schimbarea tipului de animație.`;
+		text_obj.innerHTML=`Dacă ați selectat animația de tip "manuală" va apărea în josul paginii un buton de progresare a animației. Veți putea vedea nodurile din care se calculează suma. Lângă buton va fi și poza cu codul C++ care descrie funcția, linia subliniată în cod arată pasul la care a ajuns animația. De asemenea, butoanele pentru inițierea altor procese vor fi ascunse, precum și butonul de schimbarea tipului de animație.`;
 	}
 	else if(nrpage==14)
 	{
