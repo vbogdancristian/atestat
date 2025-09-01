@@ -19,7 +19,7 @@
   <a href="AIB_introducere.html">Introducere</a>
   <a href="AIB_upd.html">Funcția de actualizare</a>
   <a href="AIB_qry.html">Funcția de interogare</a>
-  <a href="AIB_binsrch.html">Căutare binara eficienta</a>
+  <a href="AIB_binsrch.html">Căutare binară eficientă</a>
   <a href="AIB_2d.html">Generalizare 2D</a>
   </div>
   </li>
@@ -187,8 +187,7 @@ adica form data -> make_query() -> query (voi mai si desena aici dar asta implem
 <input class="input_text_other" autocomplete='off' type="text" id="query_pos2" name="query_pos2" value="0" onmouseover="value_range_tooltip(3)" onmouseout="value_range_tooltip(-3)"></span>
 </td>
 <td style="width:20%;" id="Qresultbox">
-<p style="font-size:16px">⊕(pos1,pos2):&nbsp</p>
-<p id="Qresult" style="font-size:14px"></p></td></tr>
+<p style="font-size:16px">Σ(pos1,pos2):&nbsp<br><span id="Qresult" style="font-size:14px"></span></p></td></tr>
 </tbody></table>
 </div>
 <p id="qry_error_feedback"></p>
@@ -220,8 +219,6 @@ adica form data -> make_query() -> query (voi mai si desena aici dar asta implem
 <option value="5">5x</option>
 <option value="10">10x</option>
 <option value="25">25x</option>
-<option value="50">50x</option>
-<option value="100">100x</option>
 <option value="2000">2000x</option>
 </select>
 <button id="speed_button" onclick="submit_speed()">Salvează preferințele</button>

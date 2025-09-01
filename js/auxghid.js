@@ -41,7 +41,7 @@ function loadpage(nrpage)
 	}
 	else if(nrpage==6)
 	{
-		text_obj.innerHTML="Vectorul poate fi modificat pe parcurs. În imagine am setat valoarea elementului 3 a vectorului la 48, ceea ce nu se reflectă în reprezentarea grafică. Textul de sus indică dacă structura vectorului coincide sau nu cu cea a reprezentării. Pentru a face reprezentarea grafică să coincidă cu vectorul apăsa-ți din nou pe butonul de creare.";
+		text_obj.innerHTML="Vectorul poate fi modificat pe parcurs. În imagine am setat valoarea elementului 3 a vectorului la 48, ceea ce nu se reflectă în reprezentarea grafică. Textul de sus indică dacă structura vectorului coincide sau nu cu cea a reprezentării. Pentru a face reprezentarea grafică să coincidă cu vectorul apăsați din nou pe butonul de creare.";
 	}
 	else if(nrpage==7)
 	{
@@ -65,7 +65,7 @@ function loadpage(nrpage)
 	}
 	else if(nrpage==12)
 	{
-		text_obj.innerHTML="A doua funcție pe care o vom descrie este cea de interogare. Cele 2 valori cerute sunt numere naturale între 1 și n. De asemenea, valoarea din prima căsuță trebuie să fie mai mică decât cea din a 2-a căsuță. Dacă valorile introduse nu corespund cerințelor vor fi setate înapoi la 0 și funcția nu va derula."
+		text_obj.innerHTML="A doua funcție pe care o vom descrie este cea de interogare. Cele 2 valori cerute sunt numere naturale între 1 și n. De asemenea, valoarea din prima căsuță trebuie să fie mai mică sau egală cu cea din a 2-a căsuță. Dacă valorile introduse nu corespund cerințelor vor fi setate înapoi la 0 și funcția nu va derula."
 	}
 	else if(nrpage==13)
 	{

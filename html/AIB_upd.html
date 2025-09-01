@@ -18,7 +18,7 @@
   <a href="AIB_introducere.html">Introducere</a>
   <a href="AIB_upd.html">Funcția de actualizare</a>
   <a href="AIB_qry.html">Funcția de interogare</a>
-  <a href="AIB_binsrch.html">Căutare binara eficienta</a>
+  <a href="AIB_binsrch.html">Căutare binară eficientă</a>
   <a href="AIB_2d.html">Generalizare 2D</a>
   </div>
   </li>
@@ -50,13 +50,13 @@
 <p></p>
 <section><div>
 <h1>Funcția de actualizare pe sufix</h1>
-<p>Dacă dorim să actualizam valoarea de pe poziția <span class="s1">pos</span>, va trebui să actualizam toate nodurile din AIB care o conțin. Amintim faptul că nodul i conține suma subsecvenței [i - (i&-i) + 1, i] a vectorului, deci prin actualizarea elementului v[<span class="s1">pos</span>] vom actualiza de fapt fiecare nod i astfel încât<br> <span class="s1">pos</span> ∈ [i - (i&-i) + 1, i]. Vom demonstra mai târziu în articol că există maxim log<sub>2</sub>n astfel de noduri, făcând funcția să aibă complexitate de O(log n).</p>
+<p>Dacă dorim să actualizăm valoarea de pe poziția <span class="s1">pos</span>, va trebui să actualizăm toate nodurile din AIB care o conțin. Amintim faptul că nodul i conține suma subsecvenței [i - (i&-i) + 1, i] a vectorului, deci prin actualizarea elementului v[<span class="s1">pos</span>] vom actualiza de fapt fiecare nod i astfel încât <span class="s1">pos</span> ∈ [i - (i&-i) + 1, i]. Vom demonstra mai târziu în articol că există maxim log<sub>2</sub>n astfel de noduri, făcând funcția să aibă complexitate de O(log n).</p>
 <h3>Intrebarea rămâne: cum putem identifica aceste poziții?</h3>
-<!--<p>Ei bine, este clar ca nu trebuie verificate numerele din intervalul [1,pos-1], deoarece acestea nu includ elemente din intervalul [pos,n]. De asemenea, orice index se va include pe el insusi, deci putem incepe de aici. In continuare trebuie sa cautam indecsi mai mari decat pos si mai mici sau egali decat n. Poate fi demonstrat matematic faptul ca toti indecsii care contin pozitia pos in interval apartin sirului x<sub>0</sub>=pos, x<sub>i+1</sub>=x<sub>i</sub>+(x<sub>i</sub>&-x<sub>i</sub>), ceea ce va avea mai mult sens dupa analiza reprezentarilor grafice ale structurii de date. </p>-->
+<!--<p>Ei bine, este clar ca nu trebuie verificate numerele din intervalul [1,pos-1], deoarece acestea nu includ elemente din intervalul [pos,n]. De asemenea, orice index se va include pe el insusi, deci putem incepe de aici. In continuare trebuie sa cautam indecsi mai mari decat pos si mai mici sau egali cu n. Poate fi demonstrat matematic faptul ca toti indecsii care contin pozitia pos in interval apartin sirului x<sub>0</sub>=pos, x<sub>i+1</sub>=x<sub>i</sub>+(x<sub>i</sub>&-x<sub>i</sub>), ceea ce va avea mai mult sens dupa analiza reprezentarilor grafice ale structurii de date. </p>-->
 <p>Este greu de intuit logic motivul, dar prin aplicarea repetată a operației <span class="s2">x = x + (x&-x)</span> începând cu x = pos putem atinge toate nodurile importante. Vom folosi drept reper <span class="s1">vizualizarea arborelui indexat binar</span> pentru a deduce formula folosită, dupa care îi vom demonstra validitatea matematic. Iată câteva exemple:<br><br>
 Pentru n = 16 și <span class="s1">pos</span> = 3 vom actualiza următoarele noduri:<br><br>
 AIB[3] = <span class="s2">v[3]</span> + val;<br>
-AIB[4] = <span class="s2">v[3]</span> + v[4] + val;<br>
+AIB[4] = v[1] + v[2] + <span class="s2">v[3]</span> + v[4] + val;<br>
 AIB[8] = v[1] + v[2] + <span class="s2">v[3]</span> + v[4] + v[5] + v[6] + v[7] + v[8] + val;<br>
 AIB[16] = v[1] + v[2] + <span class="s2">v[3]</span> + v[4] + v[5] + v[6] + v[7] + v[8] + v[9] + v[10] + v[11] + v[12] + v[13] + v[14] + v[15] + v[16] + val;<br><br>
 Pentru n = 32 și <span class="s1">pos</span> = 21 vom actualiza următoarele noduri:<br><br>
@@ -92,7 +92,7 @@ Nodul y este părintele nodului x ⇔ <span class="s2">y = x + (x&-x)</span> sau
 </section><p></p></div>
 <div id="segstyle"><section>
 <h1>Reprezentarea prin segmente</h1>
-<p>Nodurile arborelui vor avea 2 valori: indexul unic și valoarea propriu-zisă. Când spunem <span class="s1">nodul a</span> ne referim la nodul care are indexul egal cu <span class="s1">a</span>. Spre deosebire de reprezentarea clasică, reprezentarea prin segmente este mai compactă, motiv pentru care am păstrat mai multe informații. Principiul este urmatorul: pe primul nivel se află nodurile care au lungimea intervalului (dr-st+1) egală cu 1, pe al doilea nivel se află nodurile cu lungimea intervalului egală cu 2, ..., pe al k-lea nivel se află nodurile cu lungimea intervalului egală cu 2<sup>k-1</sup>. Definim astfel arborele de actualizare pe <span class="s2">sufix</span>:<br>
+<p>Nodurile arborelui vor avea 2 valori: indexul unic și valoarea propriu-zisă. Când spunem <span class="s1">nodul a</span> ne referim la nodul care are indexul egal cu <span class="s1">a</span>. Spre deosebire de reprezentarea clasică, reprezentarea prin segmente este mai compactă, motiv pentru care am păstrat mai multe informații. Principiul este urmatorul: pe primul nivel se află nodurile care au lungimea intervalului (dr - st + 1) egală cu 1, pe al doilea nivel se află nodurile cu lungimea intervalului egală cu 2, ..., pe al k-lea nivel se află nodurile cu lungimea intervalului egală cu 2<sup>k-1</sup>. Definim astfel arborele de actualizare pe <span class="s2">sufix</span>:<br>
 Nodul y este părintele nodului x ⇔ <span class="s2">y = x + (x&-x)</span>.</p>
  <table class="imgtable"><tr><td><img class="plain_img" src="../img/AIB_segment_0.png"></td>
 <td><img class="plain_img" src="../img/AIB_segment_1.png"></td></tr></table>

@@ -31,7 +31,7 @@ function nr_send()
 	if(Number.isInteger(nr)==false || nr<=0 || nr>=134217728+1)
 	{
 		nr_obj.value=24;
-		nr_result_obj.innerHTML="UB([11000] = 3;";
+		nr_result_obj.innerHTML="UB([11000] = 3";
 		nr_error_obj.style.display="block";
 		nr_error_obj.innerHTML="*valoarea trebuie să fie un număr natural mai mare sau egal cu 1 și mai mic sau egal cu 134217728";
 		return;
@@ -42,7 +42,6 @@ function nr_send()
 	s+=nr.toString(2);
 	s+="] = ";
 	s+=Math.log2(nr&-nr);
-	s+=";"
 	nr_result_obj.innerHTML=s;
 	return;
 }

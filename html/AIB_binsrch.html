@@ -18,7 +18,7 @@
   <a href="AIB_introducere.html">Introducere</a>
   <a href="AIB_upd.html">Funcția de actualizare</a>
   <a href="AIB_qry.html">Funcția de interogare</a>
-  <a href="AIB_binsrch.html">Căutare binara eficienta</a>
+  <a href="AIB_binsrch.html">Căutare binară eficientă</a>
   <a href="AIB_2d.html">Generalizare 2D</a>
   </div>
   </li>
@@ -49,16 +49,16 @@
 </div></section>
 <p></p>
 <section>
-<h1>Functia de căutare binară eficientă</h1>
-<p>Se adaugă în <a href="AIB_introducere.html" target="_blank">problema originală</a> restricția ca toate elementele vectorului original să fie pozitive (astfel încât vectorul de sume parțiale să fie crescător) și urmatorul tip de operație: <br>
-C) Afișeaza cel mai mare index <span class="s1">k</span> astfel încât Σ(1,<span class="s1">k</span>) este mai mic decât o valoare dată <span class="s1">val</span>. 
-O primă abordare este să cautam binar rezultatul: verificăm pentru un index <span class="s1">ind</span> dacă Σ(1,<span class="s1">ind</span>) &lt val și în funcție de rezultat îl mărim sau îl scădem pe <span class="s1">ind</span>. Pentru a calcula Σ(1,<span class="s1">ind</span>) vom folosi funcția de interogare care rulează în O(log n), iar aceasta trebuie apelată pentru fiecare <span class="s1">ind</span> testat, ducând la o complexitate de O(log<sup>2</sup> n). În continuare vom prezenta un algoritm care efectuează operația în <span class="s2">O(log n)</span>;
+<h1>Funcția de căutare binară eficientă</h1>
+<p>Se adaugă în <a href="AIB_introducere.html" target="_blank">problema originală</a> restricția ca toate elementele vectorului original să fie pozitive (astfel încât vectorul de sume parțiale să fie crescător) și următorul tip de operație: <br>
+C) Afișează cel mai mare index <span class="s1">k</span> astfel încât Σ(1,<span class="s1">k</span>) este mai mic decât o valoare dată <span class="s1">val</span>. 
+O primă abordare este să căutam binar rezultatul: verificăm pentru un index <span class="s1">ind</span> dacă Σ(1,<span class="s1">ind</span>) &lt val și în funcție de rezultat îl mărim sau îl scădem pe <span class="s1">ind</span>. Pentru a calcula Σ(1,<span class="s1">ind</span>) vom folosi funcția de interogare care rulează în O(log n), iar aceasta trebuie apelată pentru fiecare <span class="s1">ind</span> testat, ducând la o complexitate de O(log<sup>2</sup> n). În continuare vom prezenta un algoritm care efectuează operația în <span class="s2">O(log n)</span>;
 </p>
 </section>
 <p></p>
 <section>
 <h1>Reprezentarea grafică a unui AIB</h1>
-<p>În continuare puteți apasă pe reprezentarea AIB pe care o preferați:</p>
+<p>În continuare puteți apăsa pe reprezentarea AIB pe care o preferați:</p>
 <table class="imgtable"><tr>
 <td><img id="choose_arb" src="../img/AIB_arb_both.png" onclick="choose(0)"></td>
 <td><img id="choose_seg" src="../img/AIB_segment_0_nrs.png" onclick="choose(1)"></td>
@@ -69,25 +69,25 @@ O primă abordare este să cautam binar rezultatul: verificăm pentru un index <
 <div id="arbstyle"><section>
 <h1>Reprezentarea clasică</h1>
 <p>Nodurile arborelui vor avea 2 valori: indexul unic și valoarea propriu-zisă (AIB[index]) pe care o vom ignora când reprezentăm grafic anumite noduri. Când spunem <span class="s1">nodul a</span> ne referim la nodul care are indexul egal cu <span class="s1">a</span>. Definim astfel arborele de interogare pe <span class="s2">prefix</span>:<br>
-Nodul y este părintele nodului x ⇔ <span class="s2">y=x-(x&-x)</span>;<br>
+Nodul y este părintele nodului x ⇔ <span class="s2">y = x - (x&-x)</span>;<br>
 *Rădăcina arborelui va fi nodul imaginar 0, acesta nu corespunde unei subsecvențe din vector și are doar rolul de a uni mulțimile disjuncte create prin ignorarea nodurilor cu index mai mare decât n.</p>
 <table class="imgtable"><tr><td><img class="plain_img" src="../img/AIB_arb_r0_0.png"></td>
 <td><img class="plain_img" src="../img/AIB_arb_r0_2.png"></td></table>
-<p style="text-align:left">După cum puteți vedea, vom împrumuta arborele de interogare pe prefix și pentru căutarea binară, dar îl vom parcurge în sens opus. În functie de suma curentă, vom coborî în fiul cu cel mai mare index care să nu depășească suma dacă îl adăugăm, după care ignorăm toate nodurile din spatele său și repetăm procesul avându-l pe el ca punct de plecare. <br><br>
-Prin această parcurgere avem acces in O(1) la sumele din fii rădăcinelor, deci avem de căutat în timp constant log<sub>2</sub> nod_curent fii. Am văzut în articolele anterioare faptul că arborele are o înălțime de log<sub>2</sub> n, egal de asemenea cu numărul de fii ai rădăcinii. Dacă ne aflăm în nodul r putem alege cel mai mare index instant, iar subarborele acesta va avea o înaltime mai mare, sau putem alege un fiu mai mic după mai multe încercări, dar subarborele acestuia va fi mai mic. Dacă valoarea căutata este foarte mare astfel încât mereu vom lua primul fiu, atunci vom avea log n operații. La fel, dacă ne alegem valoarea căutata un număr mic, atunci vom încerca fiecare putere de 2 mai mică ca n până ajungem în nodul 1, ducând tot la log n pași. <br><br>
+<p style="text-align:left">După cum puteți vedea, vom împrumuta arborele de interogare pe prefix și pentru căutarea binară, dar îl vom parcurge în sens opus. În functie de suma curentă, vom coborî în fiul cu cel mai mare index care să nu depășească suma dacă îl adăugăm, după care ignorăm toate nodurile din spatele său și repetăm procesul avându-l pe el ca rădăcină. <br><br>
+Am văzut în articolele anterioare faptul că arborele are o înălțime de log<sub>2</sub> n, egal de asemenea cu numărul de fii ai rădăcinii. Prin această parcurgere avem acces in O(1) la sumele din fii rădăcinelor, deci avem de căutat în timp constant log<sub>2</sub>nod_curent fii. Dacă ne aflăm în nodul r putem alege cel mai mare index instant, iar subarborele acesta va avea o înaltime mai mare, sau putem alege un fiu mai mic după mai multe încercări, dar subarborele acestuia va fi mai mic. Dacă valoarea căutata este foarte mare astfel încât mereu vom lua primul fiu, atunci vom avea log n operații. La fel, dacă ne alegem valoarea căutata un număr mic, atunci vom încerca fiecare putere de 2 mai mică decât n până ajungem în nodul 1, ducând tot la log n pași. <br><br>
 Ce s-ar întampla dacă drumul o ia prin mijloc? Ei bine, vom căuta (log n)/2 fii până ajungem în nodul nou, care va avea în cel mai rău caz (log n)/2 fii de cautat. Luând mijlocul acestuia rezultă un nou subarbore de înălțime = (log n)/4 = numărul de fii ai rădăcinei, iar numărul de operații până acum este (log n)/2 + (log n)/4. Repetând procesul până ajungem la o frunză va rezulta <span class="groupUp">numărul de operații finale = (log n)/2 + (log n)/4 + ... +(log n)/2<sup>h</sup> ≈ log n.</span>  Indiferent de ce valoare primim, algoritmul va vizita mereu maxim log n noduri, făcând funcția să aibă complexitate <span class="s2">O(log n)</span>.</p>
 </section><p></p>
 </div>
 
 <div id="segstyle"><section>
 <h1>Reprezentarea prin segmente</h1>
-<p>Nodurile arborelui vor avea 2 valori: indexul unic și valoarea propriu-zisă. Când spunem <span class="s1">nodul a</span> ne referim la nodul care are indexul egal cu <span class="s1">a</span>. Spre deosebire de reprezentarea clasica, reprezentarea prin segmente este mai compacta, motiv pentru care am păstrat mai multe informații. Principiul este următorul: pe primul nivel se află nodurile care au lungimea intervalului (dr-st+1) egală cu 1, pe al doilea nivel se află nodurile cu lungimea intervalului egala cu 2, ..., pe al k-lea nivel se află nodurile cu lungimea intervalului egala cu 2<sup>k-1</sup>. Definim astfel arborele de interogare pe <span class="s2">prefix</span>:<br>
-Nodul y este "fratele stang" nodului x ⇔ <span class="s2">y=x-(x&-x)</span>.<br>
+<p>Nodurile arborelui vor avea 2 valori: indexul unic și valoarea propriu-zisă. Când spunem <span class="s1">nodul a</span> ne referim la nodul care are indexul egal cu <span class="s1">a</span>. Spre deosebire de reprezentarea clasică, reprezentarea prin segmente este mai compacta, motiv pentru care am păstrat mai multe informații. Principiul este următorul: pe primul nivel se află nodurile care au lungimea intervalului (dr-st+1) egală cu 1, pe al doilea nivel se află nodurile cu lungimea intervalului egala cu 2, ..., pe al k-lea nivel se află nodurile cu lungimea intervalului egala cu 2<sup>k-1</sup>. Definim astfel arborele de interogare pe <span class="s2">prefix</span>:<br>
+Nodul y este "fratele stâng" nodului x ⇔ <span class="s2">y = x - (x&-x)</span>.<br>
 Cu toate că nu există conceptul de frați "stângi" sau "drepți" atunci când discutăm despre arbori, ne putem gândi la muchiile arborelui în acest mod pentru a păstra aceeași figură la ambii arbori (de sufix și de prefix). Când avem o operație pe prefix vom parcurge "frații stangi", iar când avem o operație pe sufix vom parcurge părinții.</p>
 <table class="imgtable"><tr><td><img class="plain_img" src="../img/AIB_segment_0.png"></td>
 <td><img class="plain_img" src="../img/AIB_segment_3.png"></td></table>
 <p>După cum puteți vedea, vom împrumuta arborele de interogare pe prefix și pentru căutarea binară, dar îl vom parcurge în sens opus. Începând de la cel mai mare, vom căuta primul nod cu capătul stâng al intervalului în 1 astfel încât valoarea acestuia să fie mai mică decât valoarea pe care o căutam. Vom alege nodul ind și vom incrementa suma curentă cu AIB[ind], după care căutam din nou primul nod cu capătul stâng în ind+1 ("frați drepti" pentru ind) astfel încât prin adăugarea valorii sale în sumă nu atingem valoarea dată. Acest proces îl vom repeta pentru fiecare nod găsit, până nu mai avem "frați drepți" care îndeplinesc condiția.<br><br>
-Prin această parcurgere avem acces în O(1) la sumele din frații nodurilor curente, deci avem de căutat în timp constant log<sub>2</sub> nod_curent frați. Am văzut în articolele anterioare faptul că arborele are o înălțime de log<sub>2</sub> n, egal de asemenea cu numărul de frați ai nodului curent. Dacă ne aflăm în nodul r putem alege cel mai mare index instant, iar subarborele acesuita va avea o înaltime mai mare, sau putem alege un frate mai mic după mai multe încercari, dar subarborele acestuia va fi mai mic. Dacă valoarea căutata este foarte mare astfel încât mereu vom lua primul frate, atunci vom avea log n operații. La fel, dacă ne alegem valoarea căutata un număr mic, atunci vom încerca fiecare putere de 2 mai mică ca n până ajungem în nodul 1, ducând tot la log n pași. <br><br>
+Am văzut în articolele anterioare faptul că arborele are o înălțime de log<sub>2</sub> n, egal de asemenea cu numărul de frați ai nodului curent. Prin această parcurgere avem acces în O(1) la sumele din frații nodurilor curente, deci avem de căutat în timp constant log<sub>2</sub>nod_curent frați. Dacă ne aflăm în nodul r putem alege cel mai mare index instant, iar subarborele acestuia va avea o înaltime mai mare, sau putem alege un frate mai mic după mai multe încercari, dar subarborele acestuia va fi mai mic. Dacă valoarea căutata este foarte mare astfel încât mereu vom lua primul frate, atunci vom avea log n operații. La fel, dacă ne alegem valoarea căutata un număr mic, atunci vom încerca fiecare putere de 2 mai mică decât n până ajungem în nodul 1, ducând tot la log n pași. <br><br>
 Ce s-ar întampla dacă drumul o ia prin mijloc? Ei bine, vom căuta (log n)/2 frați până ajungem în nodul nou, care va avea în cel mai rau caz (log n)/2 frați de căutat. Luând mijlocul acestuia rezultă un nou subarbore de înălțime = (log n)/4 = numărul de frați ai rădăcinii, iar numărul de operații până acum este (log n)/2 + (log n)/4. Repetând procesul până ajungem la o frunză va rezulta <span class="groupUp">numărul de operații finale = (log n)/2 + (log n)/4 + ... +(log n)/2<sup>h</sup> ≈ log n.</span> Indiferent de ce valoare primim, algoritmul va vizita mereu maxim log n noduri, făcând funcția să aibă complexitate <span class="s2">O(log n)</span>.</p>
 </p>
 </section><p></p>
@@ -135,7 +135,7 @@ Copiază codul direct
 }</pre>
 
 </td></tr></table>
-<p>Mic detaliu de implementare: 1&lt&lt((int)log2(n)) reprezintă cea mai mare putere de 2 mai mică decât n. Dacă intervalul este initializat cu orice altceva, atunci codul nu va garanta un răspuns corect;</p>
+<p>Mic detaliu de implementare: 1&lt&lt((int)log2(n)) reprezintă cea mai mare putere de 2 mai mică decât n. Dacă intervalul este inițializat cu orice altceva, atunci codul nu va garanta un răspuns corect;</p>
 </section><p></p>
 
 <section>

@@ -18,14 +18,14 @@
   <a href="AIB_introducere.html">Introducere</a>
   <a href="AIB_upd.html">Funcția de actualizare</a>
   <a href="AIB_qry.html">Funcția de interogare</a>
-  <a href="AIB_binsrch.html">Căutare binara eficienta</a>
+  <a href="AIB_binsrch.html">Căutare binară eficientă</a>
   <a href="AIB_2d.html">Generalizare 2D</a>
   </div>
   </li>
   <li><a href="AIB_exercitii.html">Exerciții</a></li>
   <li class="dropdown"><a class="dropbtn">Extra</a>
   <div class="dropdown-content">
-  <a href="AIB_build.html">Functia de construire</a>
+  <a href="AIB_build.html">Funcția de construire</a>
   <a href="AIB_minmax.html">Minim/Maxim?</a><!-- https://share.google/6CUgLof4S5z4bZMFf -->
   <a href="AIB_apl.html">Aplicații</a>
   </div>
@@ -50,9 +50,9 @@
 <p></p>
 <section><div>
 <h1>Funcția de interogare pe prefix</h1>
-<p>Pentru a calcula suma tuturor elementelor din subsecvența [p<sub>1</sub>,p<sub>2</sub>] avem: v[p<sub>1</sub>]+v[p<sub>1</sub>+1]+...+v[p<sub>2</sub>-1]+v[p<sub>2</sub>]=(v[1] + v[2] + ... + v[p<sub>1</sub>-1] + v[p<sub>1</sub>] + v[p<sub>1</sub>+1] + ... + v[p<sub>2</sub>]) - (v[1] + v[2] + ... + v[p<sub>1</sub>-1]) ⇒ <span class="groupUp"> <span class="s2">Σ(p<sub>1</sub>,p<sub>2</sub>) = Σ(1,p<sub>2</sub>) - Σ(1,p<sub>1</sub>-1)</span></span>. După cum sugerează și numele, funcția de interogare va returna pentru un index <span class="s1">p</span> dat suma tuturor elementelor din intervalul [1,<span class="s1">p</span>]. Pentru a efectua interogarea în O(log n) vom vizita anumite noduri ale AIB-ului astfel încât să formăm pas cu pas secvența dorită.</p>
+<p>Pentru a calcula suma tuturor elementelor din subsecvența [p<sub>1</sub>,p<sub>2</sub>] avem: v[p<sub>1</sub>] + v[p<sub>1</sub>+1] + ... + v[p<sub>2</sub>-1] + v[p<sub>2</sub>] = (v[1] + v[2] + ... + v[p<sub>1</sub>-1] + v[p<sub>1</sub>] + v[p<sub>1</sub>+1] + ... + v[p<sub>2</sub>]) - (v[1] + v[2] + ... + v[p<sub>1</sub>-1]) ⇒ <span class="groupUp"> <span class="s2">Σ(p<sub>1</sub>,p<sub>2</sub>) = Σ(1,p<sub>2</sub>) - Σ(1,p<sub>1</sub>-1)</span></span>. După cum sugerează și numele, funcția de interogare va returna pentru un index <span class="s1">p</span> dat suma tuturor elementelor din intervalul [1,<span class="s1">p</span>]. Pentru a efectua interogarea în O(log n) vom vizita anumite noduri ale AIB-ului astfel încât să formăm pas cu pas secvența dorită.</p>
 <h3>Întrebarea rămâne: cum putem identifica nodurile ce trebuie vizitate?</h3>
-<p>Vom reprezenta numarul p în baza 2 și vom șterge treptat fiecare bit setat începând din dreapta, până ajungem la primul. În alte cuvinte, aplicăm în mod repetat operația <span class="s2">x=x-(x&-x)</span>, începând de la x = pos. Vom folosi drept reper <span class="s1">vizualizarea arborelui indexat binar</span> pentru a deduce formula folosită, dupa care îi vom demonstra validitatea matematic. Iată câteva exemple:</p>
+<p>Vom reprezenta numarul p în baza 2 și vom șterge treptat fiecare bit setat începând din dreapta, până ajungem la primul. În alte cuvinte, aplicăm în mod repetat operația <span class="s2">x = x - (x&-x)</span>, începând de la x = pos. Vom folosi drept reper <span class="s1">vizualizarea arborelui indexat binar</span> pentru a deduce formula folosită, după care îi vom demonstra validitatea matematic. Iată câteva exemple:</p>
 <p>Σ(1, 1) = Σ(1, [1]) = AIB[1] = v[1];<br>
 Σ(1, 2) = Σ(1, [10]) = AIB[2] = v[1] + v[2];<br>
 Σ(1, 3) = Σ(1, [11]) = AIB[3] + AIB[2] = v[3] + v[1] + v[2];<br>
@@ -80,16 +80,16 @@
 <div id="arbstyle"><section>
 <h1>Reprezentarea clasică</h1>
 <p>Nodurile arborelui vor avea 2 valori: indexul unic și valoarea propriu-zisă (AIB[index]) pe care o putem ignora când reprezentăm grafic. Când spunem <span class="s1">nodul a</span> ne referim la nodul care are indexul egal cu <span class="s1">a</span>. Definim astfel arborele de interogare pe <span class="s2">prefix</span>:<br>
-Nodul y este părintele nodului x ⇔ <span class="s2">y=x-(x&-x)</span>;<br>
+Nodul y este părintele nodului x ⇔ <span class="s2">y = x - (x&-x)</span>;<br>
 *Rădăcina arborelui va fi nodul imaginar 0, acesta nu corespunde unei subsecvențe din vector și are doar rolul de a uni mulțimile disjuncte create prin ignorarea nodurilor cu index mai mare decât n.</p>
 <table class="imgtable"><tr><td><img class="plain_img" src="../img/AIB_arb_r0_0.png"></td>
 <td><img class="plain_img" src="../img/AIB_arb_r0_1.png"></td></table>
-<p style="text-align:left">Observăm că dacă urcăm din nodul 11 către rădăcină și reunim intervalele nodurilor parcurse vom obține subsecvența [1,11], iar asta este adevărat pentru orice poziție datorită modului în care este definit părintele unui nod oarecare. Așadar, pentru a reconstitui suma elementelor din subsecvența [1,pos] trebuie să vizităm indecșii din șirul (x)<sub>n</sub>, x<sub>0</sub> = pos, x<sub>i+1</sub> = x<sub>i</sub> - (x<sub>i</sub>&-x<sub>i</sub>), singura precizare fiind că trebuie oprită căutarea când ajungem în nodul imaginar 0. Numărul de noduri vizitate este egal cu numărul de biți setați ai poziției căutate, iar aceasta poate avea maxim log<sub>2</sub>n astfel de biți, facând complexitatea funcției O(log n).</p>
+<p style="text-align:left">Observăm că dacă urcăm din nodul 11 către rădăcină și reunim intervalele nodurilor parcurse vom obține subsecvența [1,11], iar asta este adevărat pentru orice poziție datorită modului în care este definit părintele unui nod oarecare. Așadar, pentru a reconstitui suma elementelor din subsecvența [1,pos] trebuie să vizităm indecșii din șirul (x)<sub>n</sub>, x<sub>0</sub> = pos, x<sub>i+1</sub> = x<sub>i</sub> - (x<sub>i</sub>&-x<sub>i</sub>), singura precizare fiind că trebuie oprită căutarea când ajungem în nodul imaginar 0. Numărul de noduri vizitate este egal cu numărul de biți setați ai poziției căutate, iar aceasta poate avea maxim log<sub>2</sub>n astfel de biți, facând complexitatea funcției <span class="groupUp">O(log n).</span></p>
 </section><p></p></div>
 <div id="segstyle"><section>
 <h1>Reprezentarea prin segmente</h1>
-<p>Nodurile arborelui vor avea 2 valori: indexul unic și valoarea propriu-zisă. Când spunem <span class="s1">nodul a</span> ne referim la nodul care are indexul egal cu <span class="s1">a</span>. Spre deosebire de reprezentarea clasica, reprezentarea prin segmente este mai compactă, motiv pentru care am păstrat mai multe informații. Principiul este urmatorul: pe primul nivel se află nodurile care au lungimea intervalului (dr-st+1) egală cu 1, pe al doilea nivel se află nodurile cu lungimea intervalului egală cu 2, ..., pe al k-lea nivel se află nodurile cu lungimea intervalului egală cu 2<sup>k-1</sup>. Definim astfel arborele de interogare pe <span class="s2">prefix</span>:<br>
-Nodul y este "fratele stang" nodului x ⇔ <span class="s2">y=x-(x&-x)</span>.<br>
+<p>Nodurile arborelui vor avea 2 valori: indexul unic și valoarea propriu-zisă. Când spunem <span class="s1">nodul a</span> ne referim la nodul care are indexul egal cu <span class="s1">a</span>. Spre deosebire de reprezentarea clasică, reprezentarea prin segmente este mai compactă, motiv pentru care am păstrat mai multe informații. Principiul este urmatorul: pe primul nivel se află nodurile care au lungimea intervalului (dr-st+1) egală cu 1, pe al doilea nivel se află nodurile cu lungimea intervalului egală cu 2, ..., pe al k-lea nivel se află nodurile cu lungimea intervalului egală cu 2<sup>k-1</sup>. Definim astfel arborele de interogare pe <span class="s2">prefix</span>:<br>
+Nodul y este "fratele stâng" nodului x ⇔ <span class="s2">y = x - (x&-x)</span>.<br>
 Cu toate că nu există conceptul de frați "stângi" sau "drepți" atunci când discutăm despre arbori, ne putem gândi la muchiile arborelui în acest mod pentru a păstra aceeași figură la ambii arbori (de sufix și de prefix). Când avem o operație pe prefix vom parcurge "frații stângi", iar când avem o operație pe sufix vom parcurge părinții.</p>
 <table class="imgtable"><tr><td><img class="plain_img" src="../img/AIB_segment_0.png"></td>
 <td><img class="plain_img" src="../img/AIB_segment_2.png"></td></table>
@@ -119,7 +119,7 @@ sau selectează-l manual:<br><br>
 
 </section><p></p><section>
 <h1 id="logn_proof">De ce O(log n)?</h1>
-<p>Vom relua cele discutate: Funcția de interogare primește un număr x și îi șterge în fiecare iterație ultimul bit setat, până transformăm x în 0. Pentru a calcula complexitatea vrem să aflăm numărul maxim de biți pe care îi poate avea numărul x, așa că vom presupune că toți biții sunt setați. Dacă x are k biți înseamnă că acesta este mai mic decât orice număr care are k+1 biți (la fel cum în baza 10 orice număr de 2 cifre este mai mic decât orice număr de 3 cifre), iar cel mai mic număr de k+1 biți este 2<sup>k+1</sup>. În același timp este adevărat că orice număr de k biți este mai mare sau egal decât 2<sup>k</sup> (la fel cum orice număr de 2 cifre este mai mare sau egal ca 10). Așadar îl putem încadra pe x astfel: 2<sup>k</sup>≤x&lt2<sup>k+1</sup>, inegalitatea se menține dacă logaritmăm în baza 2, ⇒ k≤log<sub>2</sub>x&ltk+1, ⇒ [log<sub>2</sub>x] = k = numărul de biți ai numărului x. Putem conclude astfel că numărul maxim de iterații pentru un input x oarecare este log<sub>2</sub>x.
+<p>Vom relua cele discutate: Funcția de interogare primește un număr x și îi șterge în fiecare iterație ultimul bit setat, până transformăm x în 0. Pentru a calcula complexitatea vrem să aflăm numărul maxim de biți pe care îi poate avea numărul x, așa că vom presupune că toți biții sunt setați. Dacă x are k biți înseamnă că acesta este mai mic decât orice număr care are k+1 biți (la fel cum în baza 10 orice număr de 2 cifre este mai mic decât orice număr de 3 cifre), iar cel mai mic număr de k+1 biți este 2<sup>k+1</sup>. În același timp este adevărat că orice număr de k biți este mai mare sau egal cu 2<sup>k</sup> (la fel cum orice număr de 2 cifre este mai mare sau egal cu 10). Așadar îl putem încadra pe x astfel: 2<sup>k</sup> ≤ x &lt 2<sup>k+1</sup>, inegalitatea se menține dacă logaritmăm în baza 2, ⇒ k ≤ log<sub>2</sub>x &lt k+1, ⇒ [log<sub>2</sub>x] = k = numărul de biți ai numărului x. Putem conclude astfel că numărul maxim de iterații pentru un input x oarecare este log<sub>2</sub>x.
 <h3 id="bonus" style="cursor:pointer" onclick="hhh()">Alte demonstrații🞃</h3><div id="moreproofs">
 <p><span class="s1">Fie f:ℕ<sup>*</sup>→ℕ, f(x) = 2<sup>UB(x)</sup> = (x&-x); f(a1b) = 1b</span>;<br>
 <span class="s1">Fie șirul (x)<sub>n</sub>, x<sub>0</sub> = pos, x<sub>i+1</sub> = x<sub>i</sub> - f(x<sub>i</sub>) </span><br>
@@ -128,8 +128,8 @@ sau selectează-l manual:<br><br>
 <span>Vom demonstra faptul că intr(x<sub>i</sub>) ∪ intr(x<sub>i+1</sub>) = [x<sub>i+1</sub> - f(x<sub>i+1</sub>) +1, x<sub>i</sub>]<br>
 intr(x<sub>i</sub>) = [x<sub>i</sub> - f(x<sub>i</sub>) +1, x<sub>i</sub>] = [x<sub>i+1</sub> +1, x<sub>i</sub>];<br>
 intr(x<sub>i+1</sub>) = [x<sub>i+1</sub> - f(x<sub>i+1</sub>) +1, x<sub>i+1</sub>];<br>
-intr(x<sub>i</sub>) ∪ intr(x<sub>i+1</sub>) = [x<sub>i+1</sub> - f(x<sub>i+1</sub>) +1, x<sub>i+1</sub>] ∪ [x<sub>i+1</sub> - f(x<sub>i+1</sub>) +1, x<sub>i</sub>] = [x<sub>i+1</sub> - f(x<sub>i+1</sub>) +1, x<sub>i</sub>], adevărat deoarece lucram în ℕ ⇒ c.c.t.d.<br>
-Prin inducție se poate demonstra că pentru un oarecare k avem relația: intr(x<sub>0</sub>) ∪ intr(x<sub>1</sub>) ∪... ∪ intr(x<sub>k</sub>) = (notatie) ∪(0,k) = [x<sub>k</sub> - f(x<sub>k</sub>) +1, x<sub>0</sub>]. Știind x<sub>[log<sub>2</sub>n]</sub> = 0, avem ∪(0,[log<sub>2</sub>n]) = [0-0+1,x<sub>0</sub>] = [1,x<sub>0</sub>].
+intr(x<sub>i</sub>) ∪ intr(x<sub>i+1</sub>) = [x<sub>i+1</sub> - f(x<sub>i+1</sub>) +1, x<sub>i+1</sub>] ∪ [x<sub>i+1</sub> - f(x<sub>i+1</sub>) +1, x<sub>i</sub>] = [x<sub>i+1</sub> - f(x<sub>i+1</sub>) +1, x<sub>i</sub>], adevărat deoarece lucrăm în ℕ ⇒ c.c.t.d.<br>
+Prin inducție se poate demonstra că pentru un oarecare k avem relația: intr(x<sub>0</sub>) ∪ intr(x<sub>1</sub>) ∪... ∪ intr(x<sub>k</sub>) = (notație) ∪(0,k) = [x<sub>k</sub> - f(x<sub>k</sub>) +1, x<sub>0</sub>]. Știind x<sub>[log<sub>2</sub>n]</sub> = 0, avem ∪(0,[log<sub>2</sub>n]) = [0-0+1,x<sub>0</sub>] = [1,x<sub>0</sub>].
 </span> 
 </section>
 <p></p><section><p>

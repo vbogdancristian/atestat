@@ -131,7 +131,7 @@ function value_range_tooltip(nr)
 	if(nr==3 || nr==-3)
 	{
 		let tooltip = document.getElementById("idtooltip"+String(3));
-		tooltip.innerHTML = "pos2 ∈ ℕ ∩ [1, n]";
+		tooltip.innerHTML = "pos2 ∈ ℕ ∩ [pos1, n]";
 		return;
 	}
 }		

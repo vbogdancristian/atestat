@@ -16,7 +16,7 @@
   <a href="AIB_introducere.html">Introducere</a>
   <a href="AIB_upd.html">Funcția de actualizare</a>
   <a href="AIB_qry.html">Funcția de interogare</a>
-  <a href="AIB_binsrch.html">Căutare binara eficienta</a>
+  <a href="AIB_binsrch.html">Căutare binară eficientă</a>
   <a href="AIB_2d.html">Generalizare 2D</a>
   </div>
   </li>
@@ -48,9 +48,9 @@
 <p></p>
 <section>
 <h1>Arbori indexați binari și Arbori de intervale</h1>
-<p>Până acum am văzut cum funcționează arborii indexați binari pentru stocarea unei sume, dar pentru ce alte operații i-am putea aplica? Ei bine, dacă vrem să folosim un singur AIB atunci trebuie ca funcția să fie <span class="s2">inversabilă</span>. Atunci când spunem că Σ(st,dr)=Σ(1,dr)-Σ(1,st-1) ne folosim de faptul că primele st-1 elemente se <span class="s1">reduc</span>, am putea scrie în mod asemănător ∏(st,dr)=∏(1,dr)/∏(1,st-1) (pentru numere nenule) sau ⊕(st,dr)=⊕(1,dr)^⊕(1,st-1) (a^a=0, a^0=a, deci funcția inversă lui xor este ea însăși). <span class="s2">NU</span> putem folosi un singur AIB pentru a determina minimul, maximul, cel mai mare divizor comun etc, cel mult putem determina raspunsul la interogari de tip f(st = x-(x&-x)+1, dr = x]. Pentru acest tip de probleme este folosită altă structură de date care poate actualiza și interoga cu aceeași complexitate ca cea studiată, numită arbori de intervale (AInt pe scurt).
+<p>Până acum am văzut cum funcționează arborii indexați binari pentru stocarea unei sume, dar pentru ce alte operații i-am putea aplica? Ei bine, dacă vrem să folosim un singur AIB atunci trebuie ca funcția să fie <span class="s2">inversabilă</span>. Atunci când spunem că Σ(st,dr) = Σ(1,dr) - Σ(1,st-1) ne folosim de faptul că primele st-1 elemente se <span class="s1">reduc</span>, am putea scrie în mod asemănător ∏(st,dr) = ∏(1,dr) / ∏(1,st-1) (pentru numere nenule) sau ⊕(st,dr) = ⊕(1,dr) ^ ⊕(1,st-1) (a ^ a = 0, a ^ 0 = a, deci funcția inversă lui xor este ea însăși). <span class="s2">NU</span> putem folosi un singur AIB pentru a determina minimul, maximul, cel mai mare divizor comun etc, cel mult putem determina răspunsul la interogari de tip f(st = x - (x&-x) + 1, dr = x]. Pentru acest tip de probleme este folosită altă structură de date care poate actualiza și interoga cu aceeași complexitate ca cea studiată, numită arbori de intervale (AInt pe scurt).
 <p>Toate problemele ce pot fi rezolvate prin AIB pot fi rezolvate și prin AInt, dar reciproca nu se aplică. Dacă modificăm problema originală astfel încât în loc de sumă să calculăm minimul/maximul pe o secvență atunci nu vom reuși cu un singur AIB. Dacă nu vrem să folosim AInt se pune următoarea întrebare: <span class="s1">Oare am putea rezolva problema cu două AIB-uri?</span> Da, în O(m log n log n) / O(m log n) amortizat.</p>
-<p>În continuare voi reda soluția gasită de userul <a href="https://stackoverflow.com/users/4490400/bkoodaa">bkoodaa</a> pe <a href="https://stackoverflow.com/questions/31106459/how-to-adapt-fenwick-tree-to-answer-range-minimum-queries/34602284#34602284">stack overflow</a>:</p>
+<p>În continuare voi reda soluția găsită de userul <a href="https://stackoverflow.com/users/4490400/bkoodaa">bkoodaa</a> pe <a href="https://stackoverflow.com/questions/31106459/how-to-adapt-fenwick-tree-to-answer-range-minimum-queries/34602284#34602284">stack overflow</a>:</p>
 </section>
 <p></p>
 <section>
@@ -58,7 +58,7 @@
 <p>Vrem să folosim AIB pentru a rezolva problema specifică arborilor de intervale:<br><br>
 A) Actualizare pe o <span class="s2">singură</span> poziție în O(log<sup>2</sup> n)/O(log n) amortizat<br>
 B) Interogarea maximului din secvența [st,dr] în O(log n)<br><br>
-Vom avea un AIB care actualizează pe sufix, interoghează pe sufix, notat AIB1 și un alt AIB care actualizează pe prefix, interoghează pe sufix, notat AIB2. AIB1[x] va stoca max[x-(x&-x)+1,x], iar AIB2[x] va stoca max[x,x+(x&-x)+1] (secvența oglindită). De asemenea păstrăm vectorul original.</p>
+Vom avea un AIB care actualizează pe sufix, interoghează pe sufix, notat AIB1 și un alt AIB care actualizează pe prefix, interoghează pe sufix, notat AIB2. AIB1[x] va stoca max[x - (x&-x) + 1, x], iar AIB2[x] va stoca max[x, x + (x&-x) + 1] (secvența oglindită). De asemenea păstrăm vectorul original.</p>
 <h3>Funcția de interogare</h3>
 <p>Pentru a determina maximul dintr-o secvența [st,dr] vom interoga ambele structuri de date în intervalul [st,dr] (va avea mai mult sens după ce vedeți codul) și vom returna maximul dintre cele 2. Problema este că aceste 2 parcurgeri se apropie, dar nu ating un singur index din [st,dr], deci vom mai face o verificare la final. Acesta este codul:</p>
 <pre class="codebox">int QUERY(int st, int dr)
@@ -78,7 +78,7 @@ Vom avea un AIB care actualizează pe sufix, interoghează pe sufix, notat AIB1 
 }
 </pre>
 <h3>Funcția de actualizare</h3>
-<p>Este dificil de implementat din cauza faptului că <span class="s2">setăm</span> valoarea unei poziții, nu o înlocuim cu maximul dintre cea veche și inputul nou. Astfel, va trebui să ștergem orice semn că a existat vreodată valoarea respectivă. Vom compara valoarea veche a nodurilor cu cea nouă, iar dacă aceasta este mai mare putem înlocui fară grijă, urcând către rădăcină. Dacă în schimb aceasta nu este mai mare apare o problemă, căci nu putem lasă valoarea pe care vrem să o înlocuim, deci trebuie scanat fiecare fiu (frate dacă ne gândim la reprezentarea prin segmente) și îi vom lua valoarea maximă. Complexitatea devine O(log<sup>2</sup> n), dar pentru mai multe apeluri de funcție cu parametri aleatorii devine O(log n) <span class="s2">amortizat</span>. Acesta este codul:<br>
+<p>Este dificil de implementat din cauza faptului că <span class="s2">setăm</span> valoarea unei poziții, nu o înlocuim cu maximul dintre cea veche și inputul nou. Astfel, va trebui să ștergem orice semn că a existat vreodată valoarea respectivă. Vom compara valoarea veche a nodurilor cu cea nouă, iar dacă aceasta este mai mare putem înlocui fără grijă, urcând către rădăcină. Dacă în schimb aceasta nu este mai mare, apare o problemă, căci nu putem lăsa valoarea pe care vrem să o înlocuim, deci trebuie scanat fiecare fiu (frate dacă ne gândim la reprezentarea prin segmente) și îi vom lua valoarea maximă. Complexitatea devine O(log<sup>2</sup> n), dar pentru mai multe apeluri de funcție cu parametri aleatorii devine O(log n) <span class="s2">amortizat</span>. Acesta este codul:<br>
 <pre class="codebox">void UPDATE(int pos, int val)
 {
     int oldValue=v[pos];
@@ -136,7 +136,7 @@ Cu toate că soluția nu este O((n+m)log n) curat, e de 2 ori mai rapidă decât
 <h1>Ce înseamnă asta?</h1>
 <p>Nimic semnificativ, tot arborii de intervale vor fi folosiți pentru probleme de minim/maxim și actualizări pe interval, tot arborii indexați binari se vor prefera pentru probleme cu funcții inversabile. Scopul articolului este de a vedea cât de tare poate fi împinsă această structură de date peste limita sa.</p>
 <p>Pentru cei interesați, puteți afla mai multe în această lucrare: <a href="http://ioinformatics.org/oi/pdf/v9_2015_39_44.pdf">http://ioinformatics.org/oi/pdf/v9_2015_39_44.pdf</a>;<br>
-Acestea fiind spuse, ați ajuns la finalul ultimii pagini de "teorie". În continuare vă puteți testa cu niște <a href="AIB_apl.html">aplicații simple</a> sau puteți experimenta cu <a href="AIB_gen1.html">generatorul</a>.</p>
+Acestea fiind spuse, ați ajuns la finalul ultimii pagini de "teorie". În continuare vă puteți testa cu niște <a href="AIB_apl.html">aplicații simple</a> sau puteți experimenta cu <a href="AIB_gen1.html">modelatoarele</a> (citiți mai întâi <a href="AIB_genInstruct.html">manualul de utilizare</a>).</p>
 </section>
 <p></p>
 <button class="back_button" onclick="location.href='AIB_build.html'">&ltÎnapoi</button>

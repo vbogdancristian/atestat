@@ -17,7 +17,7 @@
   <a href="AIB_introducere.html">Introducere</a>
   <a href="AIB_upd.html">Funcția de actualizare</a>
   <a href="AIB_qry.html">Funcția de interogare</a>
-  <a href="AIB_binsrch.html">Căutare binara eficienta</a>
+  <a href="AIB_binsrch.html">Căutare binară eficientă</a>
   <a href="AIB_2d.html">Generalizare 2D</a>
   </div>
   </li>
@@ -65,7 +65,7 @@ Restricții:<br>
 </p>
 <h3 class="boxType" id="schi_box" onclick="schi_h()">Descriere soluție🞃</h3>
 <div class="solType" id="schi_sol">
-<p>Notăm v[i] poziția concurentului i la momentul i (inputul) și pos[i] numărul de ordine a concurentului de pe poziția i la finalul concursului (outputul). Observăm faptul că poziția finală a concurentului final este chiar v[n], acesta neavând ocazia să întreacă sau să fie întrecut de altcineva în ultimul moment. Pentru penultimul concurent avem mai multe cazuri: dacă v[n-1] &lt v[n] (are o poziție mai bună decât concurentul n), atunci același argument se aplică. Dacă în schimb v[n-1] ≥ v[n], înseamnă că în momentul n acesta va coborî cu exact o poziție, fiind în urma concurentului n. Ne putem gândi atunci că vom simula procesul de la coadă la cap și vom căuta pentru fiecare concurent x a v[x]-a poziție liberă în clasament, după care vom marca poziția ca fiind ocupată de x. Vom folosi structura de date invățată astfel: la început inițializăm toate pozițiile cu 1, iar pentru a marca o poziție ca fiind indisponibilă facem update(pos,-1). Când căutam binar cel mai mare index mai mic sau egal decat v[x], căutam de fapt care este a v[x]-a poziție neocupată. Pentru fiecare concurent facem o căutare și o actualizare, făcând complexitatea totală O(n*log n).</p>
+<p>Notăm v[i] poziția concurentului i la momentul i (inputul) și pos[i] numărul de ordine a concurentului de pe poziția i la finalul concursului (outputul). Observăm faptul că poziția finală a concurentului final este chiar v[n], acesta neavând ocazia să întreacă sau să fie întrecut de altcineva în ultimul moment. Pentru penultimul concurent avem mai multe cazuri: dacă v[n-1] &lt v[n] (are o poziție mai bună decât concurentul n), atunci același argument se aplică. Dacă în schimb v[n-1] ≥ v[n], înseamnă că în momentul n acesta va coborî cu exact o poziție, fiind în urma concurentului n. Ne putem gândi atunci că vom simula procesul de la coadă la cap și vom căuta pentru fiecare concurent x a v[x]-a poziție liberă în clasament, după care vom marca poziția ca fiind ocupată de x. Vom folosi structura de date invățată astfel: la început inițializăm toate pozițiile cu 1, iar pentru a marca o poziție ca fiind indisponibilă facem update(pos,-1). Când căutam care este a v[x]-a poziție neocupată, de fapt căutăm binar cel mai mare index mai mic sau egal cu v[x]. Pentru fiecare concurent facem o căutare și o actualizare, făcând complexitatea totală O(n*log n).</p>
 <p>Exemplul (n = 8, v = [1, 1, 3, 4, 4, 2, 1, 3]) rezolvat:<br><br>
 inițial, <br>
 <table class="normalTable"><tr class="normaltr">
@@ -143,8 +143,8 @@ Valorile din șir se vor afla în intervalul [1, N]<br>
 <p>Vom sorta subsecvențele date crescător după capătul drept și vom crea vectorul <span class="s1">st[i]</span> = cea mai apropiată poziție mai mică ca i astfel încât v[i] = v[st[i]]. Datorită următoarei precizări va funcționa AIB-ul:<br>
 ...x...x...x...<br>
 ..i1..i2..i3...<br>
-dist(i1,i3)=dist(i1,i2)+dist(i2,i3)<br>
-Vom parcurge vectorul de la 1 la n și vom actualiza la fiecare pas poziția st[i] cu i-st[i] (desigur, dacă există). Cu un al 2-lea index răspundem în vectorul sortat de subsecvențe la toate întrebările la care avem acces (care au dr&lt=i). În cazul unei situații precum v = [1, 1, 1, 2, 1, ...], i=5, funcția de interogare va aduna {st[st[st[5]]]} + {st[st[5]]} + {st[5]} = 1 + 1 + 2. Capătul st fiind mai mic decât dr garantează că putem calcula Σ(st,dr) = Σ(1,dr) - Σ(1,st-1).<br>
+dist(i1, i3) = dist(i1, i2) + dist(i2, i3)<br>
+Vom parcurge vectorul de la 1 la n și vom actualiza la fiecare pas poziția st[i] cu i-st[i] (desigur, dacă există). Cu un al 2-lea index răspundem în vectorul sortat de subsecvențe la toate întrebările la care avem acces (care au dr ≤ i). În cazul unei situații precum v = [1, 1, 1, 2, 1, ...], i=5, funcția de interogare va aduna {st[st[st[5]]]} + {st[st[5]]} + {st[5]} = 1 + 1 + 2. Capătul st fiind mai mic decât dr garantează că putem calcula Σ(st,dr) = Σ(1,dr) - Σ(1,st-1).<br>
 Complexitatea totală este O(nlog n + mlog m), al doilea termen venind de la sortarea inițială.
 </p>
 </div>
@@ -153,12 +153,12 @@ Complexitatea totală este O(nlog n + mlog m), al doilea termen venind de la sor
 <p></p>
 
 <section>
-<h1>Problema <span class="s1">evantai</span> data la ONI in 2005</h1>
+<h1>Problema <span class="s1">evantai</span> dată la ONI în 2005</h1>
 <p>Cerința o mai puteți găsi și <a href="https://www.infoarena.ro/problema/evantai" target="_blank">aici</a>.<br>
-Lui Algorel îi plac mult șirurile de numere naturale cu proprietăți cât mai ciudate. Căutand astfel de ciudățenii ale informaticii, a gasit printr-o carte prăfuită de vreme un nou tip de șir denumit evantai. Un evantai este un șir cu un număr par de termeni, E<sub>1</sub> E<sub>2</sub> ... E<sub>2K</sub>, cu următoarea proprietate:<br>
-E<sub>1</sub> + E<sub>2K</sub> > E<sub>2</sub> + E<sub>2K-1</sub> > ... > E<sub>K</sub> + <sub>EK+1</sub><br>
+Lui Algorel îi plac mult șirurile de numere naturale cu proprietăți cât mai ciudate. Căutând astfel de ciudățenii ale informaticii, a găsit printr-o carte prăfuită de vreme un nou tip de șir denumit evantai. Un evantai este un șir cu un număr par de termeni, E<sub>1</sub> E<sub>2</sub> ... E<sub>2K</sub>, cu următoarea proprietate:<br>
+E<sub>1</sub> + E<sub>2K</sub> > E<sub>2</sub> + E<sub>2K-1</sub> > ... > E<sub>K</sub> + E<sub>K+1</sub><br>
 Cerința:<br>
-Fiind dat un șir de numere naturale distincte A<sub>1</sub> <sub>A2</sub> ... A<sub>N</sub>, Algorel vrea să afle câte subșiruri ale acestuia sunt evantaie.<br>
+Fiind dat un șir de numere naturale distincte A<sub>1</sub> A<sub>2</sub> ... A<sub>N</sub>, Algorel vrea să afle câte subșiruri ale acestuia sunt evantaie.<br>
 Date de intrare:<br>
 Prima linie a fișierului evantai.in conține numărul întreg N, reprezentând numărul de elemente ale șirului. Urmatoarele N linii conțin, în ordine, elementele șirului A.<br>
 Date de ieșire:<br>
@@ -166,16 +166,16 @@ Pe prima linie a fișierului evantai.out se va afla un singur număr întreg C, 
 Restricții și precizări:<br>
 2 ≤ N ≤ 700<br>
 Elementele șirului sunt numere întregi distincte cuprinse între 1 și 1000<br>
-Prin subșir se întelege orice înșiruire de termeni A<sub>i1</sub> A<sub>i2</sub> ... A<sub>ik</sub> astfel incat i<sub>1</sub> &lt i<sub>2</sub> &lt ... &lt i<sub>k</sub> <br>
+Prin subșir se întelege orice înșiruire de termeni A<sub>i<sub>1</sub></sub> A<sub>i<sub>2</sub></sub> ... A<sub>i<sub>k</sub></sub> astfel încât i<sub>1</sub> &lt i<sub>2</sub> &lt ... &lt i<sub>k</sub> <br>
 </p>
 <h3 class="boxType" id="evantai_box" onclick="evantai_h()">Descriere soluție🞃</h3>
 <div class="solType" id="evantai_sol">
-<p>La o primă vedere problema pare a fi de programare dinamică, dar are o rezolvare elegantă doar cu AIB. Considerăm nr[i][j] = numărul de șiruri "evantai" ce putem forma folosind elemente din subșirul [i,j] și având capetele în i și în j. Ultima condiție este importantă, deoarece vrem ca șirul A<sub>i1</sub>, A<sub>i2</sub>, ... , A<sub>ik</sub> să fie tratat separat de șirul A<sub>i1</sub>, A<sub>i2</sub>, ... , A<sub>ik+1</sub>. Vom considera nr[1][5]:<br>
+<p>La o primă vedere problema pare a fi de programare dinamică, dar are o rezolvare elegantă doar cu AIB. Considerăm nr[i][j] = numărul de șiruri "evantai" ce putem forma folosind elemente din subșirul [i,j] și având capetele în i și în j. Ultima condiție este importantă, deoarece vrem ca șirul A<sub>i<sub>1</sub></sub>, A<sub>i<sub>2</sub></sub>, ... , A<sub>i<sub>k</sub></sub> să fie tratat separat de șirul A<sub>i<sub>1</sub></sub>, A<sub>i<sub>2</sub></sub>, ... , A<sub>i<sub>k+1</sub></sub>. Vom considera nr[1][5]:<br>
 <span class="s2">A<sub>1</sub></span>, A<sub>2</sub>, A<sub>3</sub>, A<sub>4</sub>, <span class="s2">A<sub>5</sub></span>;<br>
-Observăm faptul că va exista mereu secvența evantai formata din capetele șirului: A<sub>1</sub>, A<sub>5</sub>. Întrebarea este: cum rămâne cu A<sub>2</sub>, A<sub>3</sub>, A<sub>4</sub> ? În câte moduri putem cupla 2 elemente din șirul [1+1,5-1] astfel încat suma acestora sa nu depaseasca A<sub>1</sub>+A<sub>5</sub>? <br>
-Vom itera prin toate capetele posibile în O(n<sup>2</sup>) cu i si j și vom calcula pentru fiecare nr[i][j]= 1 + #moduri([i+1,j-1],A[i]+A[j]-1), adăugăm rezultatul la numărul total de șiruri, după care transmitem pentru următoarele secvențe mai mari rezultatul. Vom folosi un AIB 2d - prima stare pentru index și a doua stare pentru sumă. Pentru a simplifica lucrurile putem parcurge în ordine inversă (i = <span class="numarNatural">n,1</span>, j = <span class="numarNatural">n,i+1</span>) ceea ce înseamna că în pozitiile (i,j) putem scrie #moduri([i+1,j-1], A[i]+A[j]-1) drept query( j-1 , A[i]+A[j]-1) (pozitiile 1, 2, ..., i nu au fost actualizate, deci raman 0 si nu au efect asupra calculului). Transmiterea informației se face simplu printr-o actualizare de tipul: update(posX = j, posY = A[i] + A[j], val =  nr[i][j]). Rezultatul final va fi nr[1][1] + nr[1][2] + ... + nr[n][n], pe care îl putem calcula pe parcurs, deci putem renunța la matricea nr când implementăm.</p>
-<p>Complexitatea finală este O(n<sup>2</sup>log n log summax), unde summax reprezintă suma maximă a 2 elemente din sir (in problemă summax = 2000, nmax = 700);</p>
-<p>*Observație: dacă nu vrem o parcurgere inversă va trebui să implementăm update pe prefix și query pe sufix. Această variantă AIB funcționeaza pe același principiu în mare, modificările fiind: AIB[x]=[x,x+(x&-x)-1], funcția de actualizare folosește parcurgerea pe prefix (x -> x-(x&-x)), funcția de interogare folosește parcurgerea pe sufix (x -> x+(x&-x)). Am inclus pentru cei curioși codul alternativ la secția de rezolvări mai jos;</p> 
+Observăm faptul că va exista mereu secvența evantai formată din capetele șirului: A<sub>1</sub>, A<sub>5</sub>. Întrebarea este: cum rămâne cu A<sub>2</sub>, A<sub>3</sub>, A<sub>4</sub> ? În câte moduri putem cupla 2 elemente din șirul [1+1,5-1] astfel încât suma acestora să nu depășească A<sub>1</sub>+A<sub>5</sub>? <br>
+Vom itera prin toate capetele posibile în O(n<sup>2</sup>) cu i si j și vom calcula pentru fiecare nr[i][j]= 1 + #moduri([i+1,j-1],A[i]+A[j]-1), adăugăm rezultatul la numărul total de șiruri, după care transmitem pentru următoarele secvențe mai mari rezultatul. Vom folosi un AIB 2d - prima stare pentru index și a doua stare pentru sumă. Pentru a simplifica lucrurile putem parcurge în ordine inversă (i = <span class="numarNatural">n,1</span>, j = <span class="numarNatural">n,i+1</span>) ceea ce înseamna că în pozitiile (i,j) putem scrie #moduri([i+1,j-1], A[i]+A[j]-1) drept query(j-1 , A[i]+A[j]-1) (pozițiile 1, 2, ..., i nu au fost actualizate, deci rămân 0 și nu au efect asupra calculului). Transmiterea informației se face simplu printr-o actualizare de tipul: update(posX = j, posY = A[i] + A[j], val =  nr[i][j]). Rezultatul final va fi nr[1][1] + nr[1][2] + ... + nr[n][n], pe care îl putem calcula pe parcurs, deci putem renunța la matricea nr când implementăm.</p>
+<p>Complexitatea finală este O(n<sup>2</sup>log n log summax), unde summax reprezintă suma maximă a 2 elemente din sir (în problemă summax = 2000, nmax = 700);</p>
+<p>*Observație: dacă nu vrem o parcurgere inversă va trebui să implementăm update pe prefix și query pe sufix. Această variantă AIB funcționeaza pe același principiu în mare, modificările fiind: AIB[x] = [x, x + (x&-x) - 1], funcția de actualizare folosește parcurgerea pe prefix (x -> x - (x&-x)), funcția de interogare folosește parcurgerea pe sufix (x -> x + (x&-x)). Am inclus pentru cei curioși codul alternativ la secția de rezolvări mai jos;</p> 
 </p>
 </div>
 </section>
