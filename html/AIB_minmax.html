@@ -48,7 +48,7 @@
 <p></p>
 <section>
 <h1>Arbori indexați binari și Arbori de intervale</h1>
-<p>Până acum am văzut cum funcționează arborii indexați binari pentru stocarea unei sume, dar pentru ce alte operații i-am putea aplica? Ei bine, dacă vrem să folosim un singur AIB atunci trebuie ca funcția să fie <span class="s2">inversabilă</span>. Atunci când spunem că Σ(st,dr) = Σ(1,dr) - Σ(1,st-1) ne folosim de faptul că primele st-1 elemente se <span class="s1">reduc</span>, am putea scrie în mod asemănător ∏(st,dr) = ∏(1,dr) / ∏(1,st-1) (pentru numere nenule) sau ⊕(st,dr) = ⊕(1,dr) ^ ⊕(1,st-1) (a ^ a = 0, a ^ 0 = a, deci funcția inversă lui xor este ea însăși). <span class="s2">NU</span> putem folosi un singur AIB pentru a determina minimul, maximul, cel mai mare divizor comun etc, cel mult putem determina răspunsul la interogari de tip f(st = x - (x&-x) + 1, dr = x]. Pentru acest tip de probleme este folosită altă structură de date care poate actualiza și interoga cu aceeași complexitate ca cea studiată, numită arbori de intervale (AInt pe scurt).
+<p>Până acum am văzut cum funcționează arborii indexați binari pentru stocarea unei sume, dar pentru ce alte operații i-am putea aplica? Ei bine, dacă vrem să folosim un singur AIB atunci trebuie ca funcția să fie <span class="s2">inversabilă</span>. Atunci când spunem că Σ(st,dr) = Σ(1,dr) - Σ(1,st-1) ne folosim de faptul că primele st-1 elemente se <span class="s1">reduc</span>, am putea scrie în mod asemănător ∏(st,dr) = ∏(1,dr) / ∏(1,st-1) (pentru numere nenule) sau ⊕(st,dr) = ⊕(1,dr) ^ ⊕(1,st-1) (a ^ a = 0, a ^ 0 = a, operație asociativă, deci funcția inversă lui xor este ea însăși). <span class="s2">NU</span> putem folosi un singur AIB pentru a determina minimul, maximul, cel mai mare divizor comun etc, cel mult putem determina răspunsul la interogari de tip f(st = x - (x&-x) + 1, dr = x]. Pentru acest tip de probleme este folosită altă structură de date care poate actualiza și interoga cu aceeași complexitate ca cea studiată, numită arbori de intervale (AInt pe scurt).
 <p>Toate problemele ce pot fi rezolvate prin AIB pot fi rezolvate și prin AInt, dar reciproca nu se aplică. Dacă modificăm problema originală astfel încât în loc de sumă să calculăm minimul/maximul pe o secvență atunci nu vom reuși cu un singur AIB. Dacă nu vrem să folosim AInt se pune următoarea întrebare: <span class="s1">Oare am putea rezolva problema cu două AIB-uri?</span> Da, în O(m log n log n) / O(m log n) amortizat.</p>
 <p>În continuare voi reda soluția găsită de userul <a href="https://stackoverflow.com/users/4490400/bkoodaa">bkoodaa</a> pe <a href="https://stackoverflow.com/questions/31106459/how-to-adapt-fenwick-tree-to-answer-range-minimum-queries/34602284#34602284">stack overflow</a>:</p>
 </section>
@@ -143,7 +143,7 @@ Acestea fiind spuse, ați ajuns la finalul ultimii pagini de "teorie". În conti
 <button class="front_button" onclick="location.href='AIB_apl.html'">Înainte&gt</button>
 <p></p>
 </main>
-<footer>
+<footer >
 Software educațional realizat de Vlad Bogdan Cristian, Colegiul Național Emil Racovița Iași
 </footer>
 </body>
