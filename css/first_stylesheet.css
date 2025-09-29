@@ -30,6 +30,7 @@ ul {
 }
 body {
 	margin:0;
+	height: clamp(100vh, 100vh + (800px - 100vw), 200vh);
 }
 
 
@@ -106,10 +107,11 @@ main {
 	/*padding-left: 0px;*/
 	width:100%;
 	box-sizing: border-box;
+	height:calc(100vh * clamp(100vh, 100vh + (800px - 100vw), 200vh));
 }
 section {
       padding: 20px;
-      background-color: var(--light_lavander);
+      background-color: var(--white);
 	  width:calc(100%-40px);
 	  font-size:18px;
 	  /*float:left;*/
