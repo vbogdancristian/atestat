@@ -57,43 +57,43 @@ A) Adaugă <span class="s1">val</span> la v[<span class="s1">pos</span>]; <span 
 <!-- -> Afiseaza suma elementelor a caror pozitii sunt in intervalul [<span class="s1">pos1</span> ,<span class="s1">pos2</span>] <span class="s2">(query)</span><br><br>-->
 B) Afișeaza suma subsecvenței [<span class="s1">pos1</span>, <span class="s1">pos2</span>] a vectorului; <span class="s2">(Interogare)</span><br><br>
 </p> 
-<p>O soluție constă în crearea unui vector suplimentar de sume parțiale pentru răspuns în O(1) la <span class="s2">interogare</span>. Problema cu această abordare este că prima operație implică actualizarea a n - pos poziții din vectorul de sume parțiale, ceea ce poate duce la O(n), deci o complexitate totală de O(n*m). Tot aceeași complexitate obținem dacă renunțăm la sume parțiale pentru a actualiza în O(1) și răspundem prin iterare în O(n) la a 2-a operație. Pentru o soluție optimă de <span class="s2">O(mlog n)</span> vom putea folosi un AIB.</p>
+<p>O soluție constă în crearea unui vector suplimentar de sume parțiale pentru răspuns în O(1) la <span class="s2">interogare</span>. Problema cu această abordare este că prima operație implică actualizarea a n - pos poziții din vectorul de sume parțiale, ceea ce poate duce la O(n), deci o complexitate totală de O(n*m). Tot aceeași complexitate obținem dacă renunțăm la sume parțiale pentru a actualiza în O(1) și răspundem prin iterare în O(n) la a 2-a operație. <br><br>Pentru o soluție optimă de <span class="s2">O(mlog n)</span> vom putea folosi un AIB.</p>
 </div>
 </section>
 <p></p>
 <section>
 <h1>Ideea din spate</h1><div>
-<p>Un <span class="s1">Arbore Indexat Binar</span> (AIB pe scurt) este o structură de date dinamică, eficientă, ușor de implementat, care ocupă puțin spațiu și implementează în timp logaritmic actualizarea și interogarea pe un prefix/sufix. Acesta funcționeaza după urmatorul principiu:<br><br>
+<p>Un <span class="s1">Arbore Indexat Binar</span> (AIB pe scurt) este o structură de date dinamică, eficientă, ușor de implementat, care ocupă puțin spațiu și implementează în timp logaritmic actualizarea și interogarea pe un prefix/sufix. Acesta funcționeaza după urmatorul principiu:<br><br><div class="math_alert">
 1. AIB[i] = v[i] dacă i = M<sub>1</sub>, i ≠ M<sub>2</sub><br>
 2. AIB[i] = v[i-1] + v[i] dacă i=M<sub>2</sub>, i ≠ M<sub>4</sub><br>
 3. AIB[i] = v[i-3] + v[i-2] + v[i-1] + v[i] dacă i = M<sub>4</sub>, i ≠ M<sub>8</sub><br>
 4. AIB[i] = v[i-7] + v[i-6] + v[i-5] + v[i-4] + v[i-3] + v[i-2] + v[i-1] + v[i] dacă i = M<sub>8</sub>, i ≠ M<sub>16</sub><br>
 ...<br>
-k. AIB[i] = v[i - 2<sup>(k-1)</sup> + 1] + ... + v[i-1] + v[i] dacă i = M<sub>2<sup>(k-1)</sup></sub>, i ≠ M<sub>2<sup>k</sup></sub><br><br>
+k. AIB[i] = v[i - 2<sup>(k-1)</sup> + 1] + ... + v[i-1] + v[i] dacă i = M<sub>2<sup>(k-1)</sup></sub>, i ≠ M<sub>2<sup>k</sup></sub><br><br></div><br>
 Calculați: AIB[<input id="p" name="p" type="number" value="24" autocomplete='off' class="tryit" onchange="send()"></input>] = <span id="result" style="word-wrap: break-word;">Σ(17, 24);</span><br>
 <span id="error_msg"></span><br>
-Cu alte cuvinte, AIB[i] stochează suma subsecvenței [i - 2<sup>UB(i)</sup> + 1, i] a vectorului, unde UB(i) = poziția (indexată din dreapta cu 0) ultimului bit de 1 din reprezentarea binară a numărului i. Pentru a vizualiza mai ușor funcția, acestea sunt câteva valori:<br><br>
+Cu alte cuvinte, AIB[i] stochează suma subsecvenței [i - 2<sup>UB(i)</sup> + 1, i] a vectorului, unde UB(i) = poziția (indexată din dreapta cu 0) ultimului bit de 1 din reprezentarea binară a numărului i. Pentru a vizualiza mai ușor funcția, acestea sunt câteva valori:<br><br><div class="math_alert">
 UB(1) = 0<br>
 UB(2) = UB([10]) = 1<br>
 UB(3) = UB([11]) = 0<br>
 UB(4) = UB([100]) = 2<br>
 UB(6) = UB([110]) = 1<br>
 UB(600) = UB([1001011000]) = 3<br>
-UB(601) = UB([1001011001]) = 0<br><br>
+UB(601) = UB([1001011001]) = 0<br><br></div><br>
 Calculați: UB(<input id="nr" name="nr" type="number" value="24" autocomplete='off' class="tryit" onchange="nr_send()"></input>) = <span id="nr_result" style="word-wrap: break-word;">UB([11000]) = 3</span><br>
 <span id="nr_error_msg"></span><br>
-Se poate vedea ușor că UB(i) poate fi interpretat și ca numărul de zerouri terminale din reprezentarea binară a numărului i. Dacă considerăm reprezentarea binară a numărului <span class="s1">nr</span> drept fiind:<br><br>
+Se poate vedea ușor că UB(i) poate fi interpretat și ca numărul de zerouri terminale din reprezentarea binară a numărului i. Dacă considerăm reprezentarea binară a numărului <span class="s1">nr</span> drept fiind:<br><br><div class="math_alert">
 <span class="numarNatural">bit<sub>k</sub>...bit<sub>1</sub>bit<sub>0</sub></span> = 
 bit<sub>0</sub> * 2<sup>0</sup> + bit<sub>1</sub> * 2<sup>1</sup> + ... + bit<sub>k</sub> * 2<sup>k</sup> = 
 0 + 0 + ... + 1 * 2<sup>UB(<span class="s1">nr</span>)</sup> + bit<sub>UB(<span class="s1">nr</span>) + 1</sub> * 2<sup>UB(<span class="s1">nr</span>) + 1</sup> + ... + bit<sub>k</sub> * 2<sup>k</sup> = 
 2<sup>UB(<span class="s1">nr</span>)</sup> * (1 + bit<sub>UB(<span class="s1">nr</span>) + 1</sub> * 2 + ... +bit<sub>k</sub> * 2<sup>(k - UB(<span class="s1">nr</span>))</sup>) = 
-2<sup>UB(<span class="s1">nr</span>)</sup> * (1 + M<sub>2</sub>), rezultă că <span class="s1">nr</span> este multiplu de 2<sup>UB(<span class="s1">nr</span>)</sup> și nu este multiplu de 2<sup>UB(<span class="s1">nr</span>) + 1</sup>, echivalent cu condiția inițială.
+2<sup>UB(<span class="s1">nr</span>)</sup> * (1 + M<sub>2</sub>)</div><br> rezultă că <span class="s1">nr</span> este multiplu de 2<sup>UB(<span class="s1">nr</span>)</sup> și nu este multiplu de 2<sup>UB(<span class="s1">nr</span>) + 1</sup>, echivalent cu condiția inițială.
 </p><br>
 </div></section>
 <p></p>
 <section><div>
 <h1>Determinarea numărului 2<sup>UB(x)</sup><br></h1>
-<p>Numărul x poate fi scris drept <span class="s1">(a1b)</span>, unde <span class="s1">a</span> este șirul de biți înaintea ultimului bit de 1, iar <span class="s1">b</span> este șirul de zerouri ce vine după ultimul 1 (de exemplu, 600 = (0)1001011000 ⇒ a<sub>600</sub> = 100101, b<sub>600</sub> = 000, iar semnul e pozitiv). Numărul -x va fi egal cu !(a1b) + 1, dar amintim că b este compus numai din zerouri. Astfel: -x = (!a0!b) + 1 = (!a0111...1) + 1 = (!a1000...0) = (!a1b) (de exemplu, -600 = (1)0110101000, iar semnul e negativ). Când aplicăm operatorul de conjuncție pe biți <span class="s1">&</span> asupra celor 2 numere rezultă: x&-x = (a1b)&(!a1b) = 000...01b = 000...01000...0 = 1000...0 = 2<sup>UB(x)</sup>. Așadar, <span class="s2">2<sup>UB(x)</sup> = x&-x</span>, ∀x ∈ ℕ<sup>*</sup><br>
+<p>Numărul x poate fi scris drept <span class="s1">(a1b)</span>, unde <span class="s1">a</span> este șirul de biți înaintea ultimului bit de 1, iar <span class="s1">b</span> este șirul de zerouri ce vine după ultimul 1 (de exemplu, 600 = (0)1001011000 ⇒ a<sub>600</sub> = 100101, b<sub>600</sub> = 000, iar semnul e pozitiv). Numărul -x va fi egal cu !(a1b) + 1, dar amintim că b este compus numai din zerouri. Astfel: <div class="math_alert">-x = (!a0!b) + 1 = (!a0111...1) + 1 = (!a1000...0) = (!a1b) (de exemplu, -600 = (1)0110101000, iar semnul e negativ).</div><br> Când aplicăm operatorul de conjuncție pe biți <span class="s1">&</span> asupra celor 2 numere rezultă: <br><br><div class="math_alert">x&-x = (a1b)&(!a1b) = 000...01b = 000...01000...0 = 1000...0 = 2<sup>UB(x)</sup></div><br> Așadar, <span class="s2">2<sup>UB(x)</sup> = x&-x</span>, ∀x ∈ ℕ<sup>*</sup><br>
 Pe baza acestui număr sunt definite relațiile de rudenie între nodurile arborelui, în funcție de operația efectuată, despre care veți afla în articolele următoare.</p>
 <p>Vom putea trece mai departe la utilizarea structurii pentru actualizare pe sufix și interogare pe prefix:<br>
 A) <span class="s2"><a href="AIB_upd.html">Actualizare</a></span><br>
