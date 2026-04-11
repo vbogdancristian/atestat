@@ -58,7 +58,7 @@
 <p>Vrem să folosim AIB pentru a rezolva problema specifică arborilor de intervale:<br><br>
 A) Actualizare pe o <span class="s2">singură</span> poziție în O(log<sup>2</sup> n)/O(log n) amortizat<br>
 B) Interogarea maximului din secvența [st,dr] în O(log n)<br><br>
-Vom avea un AIB care actualizează pe sufix, interoghează pe sufix, notat AIB1 și un alt AIB care actualizează pe prefix, interoghează pe sufix, notat AIB2. AIB1[x] va stoca max[x - (x&-x) + 1, x], iar AIB2[x] va stoca max[x, x - (x&-x) + 1] (secvența oglindită). De asemenea păstrăm vectorul original.</p>
+Vom avea un AIB care actualizează pe sufix, interoghează pe sufix, notat AIB1 și un alt AIB care actualizează pe prefix, interoghează pe sufix, notat AIB2.<br> AIB1[x] va stoca max[x - (x&-x) + 1, x], iar AIB2[x] va stoca max[x, x + (x&-x) - 1] (secvența oglindită). De asemenea păstrăm vectorul original.</p>
 <h3>Funcția de interogare</h3>
 <p>Pentru a determina maximul dintr-o secvența [st,dr] vom interoga ambele structuri de date în intervalul [st,dr] (va avea mai mult sens după ce vedeți codul) și vom returna maximul dintre cele 2. Problema este că aceste 2 parcurgeri se apropie, dar nu ating un singur index din [st,dr], deci vom mai face o verificare la final. Acesta este codul:</p>
 <pre class="codebox">int QUERY(int st, int dr)
