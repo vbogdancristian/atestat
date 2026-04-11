@@ -93,7 +93,9 @@ Vom avea un AIB care actualizează pe sufix, interoghează pe sufix, notat AIB1 
             if(oldValue==aib1[node])
             {
                 val=max(val,v[node]);
-                for(int i=0;i&lt__builtin_ctz(node);i++)///functia __builtin_ctz(x) returneaza UB(x), este mai rapid si mai sigur decat log2(x&-x)
+				///functia __builtin_ctz(x) returneaza UB(x), este mai rapid si mai sigur decat log2(x&-x)
+				int aux=__builtin_ctz(node);
+                for(int i=0;i&ltaux;i++)
                 {
                     int child=node-(1&lt&lti);
                     val=max(val,aib1[child]);
@@ -115,7 +117,8 @@ Vom avea un AIB care actualizează pe sufix, interoghează pe sufix, notat AIB1 
             if(oldValue==aib2[node])
             {
                 val=max(val,v[node]);
-                for(int i=0;i&lt__builtin_ctz(node);i++)
+				int aux=__builtin_ctz(node);
+                for(int i=0;i&ltaux;i++)
                 {
                     int child=node+(1&lt&lti);
                     val=max(val,aib2[child]);
@@ -129,7 +132,7 @@ Vom avea un AIB care actualizează pe sufix, interoghează pe sufix, notat AIB1 
     }
 
 }</pre>
-Cu toate că soluția nu este O((n+m)log n) curat, e de 2 ori mai rapidă decât implementarea obișnuită cu arbori de intervale. Codul ar deveni mai eficient (ca timp și ca linii de cod) dacă problema originală nu ar fi <span class="s2">setat</span> un element, ci ar fi făcut maximul dintre el și poziția deja-existentă. În acest caz am fi putut face pentru ambele AIB-uri o actualizare simplă, ceea ce ar fi dus la O(log n) complexitate.</p>
+Cu toate că soluția nu este O((n+m)log n) curat, e de 2 ori mai rapidă decât implementarea obișnuită cu arbori de intervale, precum se vede <a href="https://www.infoarena.ro/job_detail/3350692?action=view-source" target="_blank">aici</a>. Codul ar deveni mai eficient (ca timp și ca linii de cod) dacă problema originală nu ar fi <span class="s2">setat</span> un element, ci ar fi făcut maximul dintre el și poziția deja-existentă. În acest caz am fi putut face pentru ambele AIB-uri o actualizare simplă, ceea ce ar fi dus la O(log n) complexitate.</p>
 </section>
 <p></p>
 <section>
