@@ -102,14 +102,14 @@ function qry_send()
 	{
 		posX_obj.value=27;
 		posY_obj.value=20;
-		result_obj.innerHTML="Σ[(1,1),([11011],[10100]) = AIB[27][20] + AIB[27][16] + AIB[26][20] + AIB[26][16] + AIB[24][20] + AIB[24][16] + AIB[16][20] + AIB[16][16];";
+		result_obj.innerHTML="Σ[(1,1),([11011],[10100])] = AIB[27][20] + AIB[27][16] + AIB[26][20] + AIB[26][16] + AIB[24][20] + AIB[24][16] + AIB[16][20] + AIB[16][16];";
 		error_obj.style.display="block";
 		error_obj.innerHTML="*toate valorile date trebuie să fie numere naturale mai mari sau egale cu 1 și mai mici sau egale cu 134217728";
 		return;
 	}
 	error_obj.style.display="none";
 	error_obj.innerHTML="";
-	let s="Σ[(1,1),(["+posX.toString(2)+"],["+posY.toString(2)+"]) = ";
+	let s="Σ[(1,1),(["+posX.toString(2)+"],["+posY.toString(2)+"])] = ";
 	for(let x=posX;x>0;x-=(x&-x))
 	{
 		for(let y=posY;y>0;y-=(y&-y))
