@@ -1,7 +1,7 @@
 # Atestat
 Atestatul meu: generator pentru AIB
 Realizez un site in care sa prezint teoria, generatorul si cateva exercitii, intre timp am aflat ca cineva a facut deja asta: https://visualgo.net/en/fenwicktree doar ca nu au reprezentat aibul prin dreptunghiuri/intervale, posibil sa fie mai usor sau mai greu de inteles pentru unii, depinde de useri. Eu personal am inteles cum functioneaza mai bine de-abia dupa ce am citit articolul acesta: [http://www.topcoder.com/tc?module=Static&d1=tutorials&d2=binaryIndexedTrees](https://www.topcoder.com/thrive/articles/Binary%20Indexed%20Trees). Am implementat de asemenea aib cu xor, dar nu am intentia de a implementa aib2d decat dupa ce dau bacul 
-*aib.cpp nu e folosit pe site, l-am pus doar ca referinta
+*aib.cpp nu e folosit pe site, l-am pus doar ca referinta.///
 *idei:
 1. am observat ca software educational pentru heap are buton pentru vector aleatoriu
 2. tot pe acel site am vazut ca totul e frumos si curat, aici butoanele sunt destul de mari
