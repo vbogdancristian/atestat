@@ -57,7 +57,7 @@ A) Adaugă <span class="s1">val</span> la v[<span class="s1">pos</span>]; <span 
 <!-- -> Afiseaza suma elementelor a caror pozitii sunt in intervalul [<span class="s1">pos1</span> ,<span class="s1">pos2</span>] <span class="s2">(query)</span><br><br>-->
 B) Afișeaza suma subsecvenței [<span class="s1">pos1</span>, <span class="s1">pos2</span>] a vectorului; <span class="s2">(Interogare)</span><br><br>
 </p> 
-<p>O soluție constă în crearea unui vector suplimentar de sume parțiale pentru răspuns în O(1) la <span class="s2">interogare</span>. Problema cu această abordare este că prima operație implică actualizarea a n - pos poziții din vectorul de sume parțiale, ceea ce poate duce la O(n), deci o complexitate totală de O(n*m). Tot aceeași complexitate obținem dacă renunțăm la sume parțiale pentru a actualiza în O(1) și răspundem prin iterare în O(n) la a 2-a operație. Pentru o soluție optimă de <span class="s2">O(mlog n)</span> vom putea folosi un AIB.</p>
+<p>O soluție constă în crearea unui vector suplimentar de sume parțiale pentru răspuns în O(1) la <span class="s2">interogare</span>. Problema cu această abordare este că prima operație implică actualizarea a n&nbsp;-&nbsp;pos poziții din vectorul de sume parțiale, ceea ce poate duce la O(n), deci o complexitate totală de O(n*m). Tot aceeași complexitate obținem dacă renunțăm la sume parțiale pentru a actualiza în O(1) și răspundem prin iterare în O(n) la a 2-a operație. Pentru o soluție optimă de <span class="s2">O(mlog n)</span> vom putea folosi un AIB.</p>
 </div>
 </section>
 <p></p>
